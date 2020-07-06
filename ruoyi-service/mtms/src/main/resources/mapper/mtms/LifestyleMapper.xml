@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.mtms.mapper.LifestyleMapper">
+  <resultMap id="BaseResultMap" type="com.ruoyi.mtms.domain.Lifestyle">
+    <!--@mbg.generated-->
+    <!--@Table mtms_lifestyle-->
+    <id column="lifestyle_id" jdbcType="INTEGER" property="lifestyleId" />
+    <result column="assessment_id" jdbcType="INTEGER" property="assessmentId" />
+    <result column="weight_change_type" jdbcType="TINYINT" property="weightChangeType" />
+    <result column="weight_change_value" jdbcType="DOUBLE" property="weightChangeValue" />
+    <result column="daily_basic_food_amount" jdbcType="INTEGER" property="dailyBasicFoodAmount" />
+    <result column="daily_salt_amount" jdbcType="TINYINT" property="dailySaltAmount" />
+    <result column="daily_fat_amount" jdbcType="TINYINT" property="dailyFatAmount" />
+    <result column="daily_vegetable_fruit_amount" jdbcType="TINYINT" property="dailyVegetableFruitAmount" />
+    <result column="each_exercise_time" jdbcType="VARCHAR" property="eachExerciseTime" />
+    <result column="weekly_exercise_frequency" jdbcType="VARCHAR" property="weeklyExerciseFrequency" />
+    <result column="weekly_exercise_time" jdbcType="VARCHAR" property="weeklyExerciseTime" />
+    <result column="usual_sports" jdbcType="VARCHAR" property="usualSports" />
+    <result column="is_sleep_disorder" jdbcType="TINYINT" property="isSleepDisorder" />
+    <result column="sleep_disorder_amount" jdbcType="VARCHAR" property="sleepDisorderAmount" />
+    <result column="is_fall" jdbcType="TINYINT" property="isFall" />
+    <result column="fall_reason" jdbcType="VARCHAR" property="fallReason" />
+    <result column="before_treatment_monthly_total" jdbcType="DECIMAL" property="beforeTreatmentMonthlyTotal" />
+    <result column="before_treatment_monthly_medical_expenses" jdbcType="DECIMAL" property="beforeTreatmentMonthlyMedicalExpenses" />
+    <result column="after_three_months_treatment_monthly_total" jdbcType="DECIMAL" property="afterThreeMonthsTreatmentMonthlyTotal" />
+    <result column="after_three_months_treatment_monthly_medical_expenses" jdbcType="DECIMAL" property="afterThreeMonthsTreatmentMonthlyMedicalExpenses" />
+    <result column="after_six_months_treatment_monthly_total" jdbcType="DECIMAL" property="afterSixMonthsTreatmentMonthlyTotal" />
+    <result column="after_six_months_treatment_monthly_medical_expenses" jdbcType="DECIMAL" property="afterSixMonthsTreatmentMonthlyMedicalExpenses" />
+    <result column="after_twelve_months_treatment_monthly_total" jdbcType="DECIMAL" property="afterTwelveMonthsTreatmentMonthlyTotal" />
+    <result column="after_twelve_months_treatment_monthly_medical_expenses" jdbcType="DECIMAL" property="afterTwelveMonthsTreatmentMonthlyMedicalExpenses" />
+    <result column="del_flag" jdbcType="BOOLEAN" property="delFlag" />
+    <result column="create_by" jdbcType="VARCHAR" property="createBy" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="update_by" jdbcType="VARCHAR" property="updateBy" />
+    <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    <!--@mbg.generated-->
+    lifestyle_id, assessment_id, weight_change_type, weight_change_value, daily_basic_food_amount, 
+    daily_salt_amount, daily_fat_amount, daily_vegetable_fruit_amount, each_exercise_time, 
+    weekly_exercise_frequency, weekly_exercise_time, usual_sports, is_sleep_disorder, 
+    sleep_disorder_amount, is_fall, fall_reason, before_treatment_monthly_total, before_treatment_monthly_medical_expenses, 
+    after_three_months_treatment_monthly_total, after_three_months_treatment_monthly_medical_expenses, 
+    after_six_months_treatment_monthly_total, after_six_months_treatment_monthly_medical_expenses, 
+    after_twelve_months_treatment_monthly_total, after_twelve_months_treatment_monthly_medical_expenses, 
+    del_flag, create_by, create_time, update_by, update_time
+  </sql>
+</mapper>

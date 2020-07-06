@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.mtms.mapper.SymptomDescriptionMapper">
+  <resultMap id="BaseResultMap" type="com.ruoyi.mtms.domain.SymptomDescription">
+    <!--@mbg.generated-->
+    <!--@Table mtms_symptom_description-->
+    <id column="symptom_description_id" jdbcType="INTEGER" property="symptomDescriptionId" />
+    <result column="assessment_id" jdbcType="INTEGER" property="assessmentId" />
+    <result column="physique" jdbcType="VARCHAR" property="physique" />
+    <result column="physique_other_desc" jdbcType="VARCHAR" property="physiqueOtherDesc" />
+    <result column="facial_features" jdbcType="VARCHAR" property="facialFeatures" />
+    <result column="facial_features_other_desc" jdbcType="VARCHAR" property="facialFeaturesOtherDesc" />
+    <result column="endocrine" jdbcType="VARCHAR" property="endocrine" />
+    <result column="endocrine_other_desc" jdbcType="VARCHAR" property="endocrineOtherDesc" />
+    <result column="respiratory_system" jdbcType="VARCHAR" property="respiratorySystem" />
+    <result column="respiratory_system_other_desc" jdbcType="VARCHAR" property="respiratorySystemOtherDesc" />
+    <result column="cardiovascular" jdbcType="VARCHAR" property="cardiovascular" />
+    <result column="cardiovascular_other_desc" jdbcType="VARCHAR" property="cardiovascularOtherDesc" />
+    <result column="digestive_system" jdbcType="VARCHAR" property="digestiveSystem" />
+    <result column="digestive_system_other_desc" jdbcType="VARCHAR" property="digestiveSystemOtherDesc" />
+    <result column="urogenital_system" jdbcType="VARCHAR" property="urogenitalSystem" />
+    <result column="urogenital_system_other_desc" jdbcType="VARCHAR" property="urogenitalSystemOtherDesc" />
+    <result column="musculoskeletal_system" jdbcType="VARCHAR" property="musculoskeletalSystem" />
+    <result column="musculoskeletal_system_other_desc" jdbcType="VARCHAR" property="musculoskeletalSystemOtherDesc" />
+    <result column="nervous_system" jdbcType="VARCHAR" property="nervousSystem" />
+    <result column="nervous_system_other_desc" jdbcType="VARCHAR" property="nervousSystemOtherDesc" />
+    <result column="hemolymph_system" jdbcType="VARCHAR" property="hemolymphSystem" />
+    <result column="hemolymph_system_other_desc" jdbcType="VARCHAR" property="hemolymphSystemOtherDesc" />
+    <result column="immune_system" jdbcType="VARCHAR" property="immuneSystem" />
+    <result column="immune_system_other_desc" jdbcType="VARCHAR" property="immuneSystemOtherDesc" />
+    <result column="psychological" jdbcType="VARCHAR" property="psychological" />
+    <result column="psychological_other_desc" jdbcType="VARCHAR" property="psychologicalOtherDesc" />
+    <result column="del_flag" jdbcType="BOOLEAN" property="delFlag" />
+    <result column="create_by" jdbcType="VARCHAR" property="createBy" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="update_by" jdbcType="VARCHAR" property="updateBy" />
+    <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    <!--@mbg.generated-->
+    symptom_description_id, assessment_id, physique, physique_other_desc, facial_features, 
+    facial_features_other_desc, endocrine, endocrine_other_desc, respiratory_system, 
+    respiratory_system_other_desc, cardiovascular, cardiovascular_other_desc, digestive_system, 
+    digestive_system_other_desc, urogenital_system, urogenital_system_other_desc, musculoskeletal_system, 
+    musculoskeletal_system_other_desc, nervous_system, nervous_system_other_desc, hemolymph_system, 
+    hemolymph_system_other_desc, immune_system, immune_system_other_desc, psychological, 
+    psychological_other_desc, del_flag, create_by, create_time, update_by, update_time
+  </sql>
+</mapper>

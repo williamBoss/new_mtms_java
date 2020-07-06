@@ -1,0 +1,81 @@
+server:
+  port: 9527
+
+logging:
+  level:
+    com.alibaba.nacos.client.naming: error
+  #    org.springframework.cloud.gateway: debug
+
+spring:
+  application:
+    name: ruoyi-gateway
+  devtools:
+    restart:
+      enabled: true
+  profiles:
+    active: dev
+  cloud:
+    nacos:
+      config:
+        server-addr: 47.100.221.10:8848
+        file-extension: yml
+      discovery:
+        server-addr: 47.100.221.10:8848
+    gateway:
+      discovery:
+        locator:
+          lowerCaseServiceId: true
+          enabled: true
+      routes:
+        # 认证中心
+        - id: ruoyi-auth
+          uri: lb://ruoyi-auth
+          predicates:
+            - Path=/auth/**
+          filters:
+            # 验证码处理
+            - CacheRequest
+            - ImgCodeFilter
+            - StripPrefix=1
+        # dfs
+        - id: ruoyi-dfs
+          uri: lb://ruoyi-dfs
+          predicates:
+            - Path=/dfs/**
+          filters:
+            - StripPrefix=1
+        # dfs
+        - id: ruoyi-mtms
+          uri: lb://ruoyi-mtms
+          predicates:
+            - Path=/mtms/**
+          filters:
+            - StripPrefix=1
+        #system 模块
+        - id: ruoyi-system
+          uri: lb://ruoyi-system
+          predicates:
+            - Path=/system/**
+          filters:
+            - StripPrefix=1
+            # 限流配置
+            - name: RequestRateLimiter
+              args:
+                key-resolver: '#{@remoteAddrKeyResolver}'
+                redis-rate-limiter.replenishRate: 10
+                redis-rate-limiter.burstCapacity: 20
+              # 降级配置
+            - name: Hystrix
+              args:
+                name: fallbackcmd
+                fallbackUri: 'forward:/fallback'
+
+hystrix:
+  command:
+    default:  #default全局有效，service id指定应用有效
+      execution:
+        timeout:
+          enabled: true
+        isolation:
+          thread:
+            timeoutInMilliseconds: 10000 #断路器超时时间，默认1000ms

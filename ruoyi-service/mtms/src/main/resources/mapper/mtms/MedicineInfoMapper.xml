@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.mtms.mapper.MedicineInfoMapper">
+  <resultMap id="BaseResultMap" type="com.ruoyi.mtms.domain.MedicineInfo">
+    <!--@mbg.generated-->
+    <!--@Table mtms_medicine_info-->
+    <id column="med_id" jdbcType="INTEGER" property="medId" />
+    <result column="med_name" jdbcType="VARCHAR" property="medName" />
+    <result column="med_spec" jdbcType="VARCHAR" property="medSpec" />
+    <result column="med_type" jdbcType="VARCHAR" property="medType" />
+    <result column="vendor" jdbcType="VARCHAR" property="vendor" />
+    <result column="package_unit" jdbcType="VARCHAR" property="packageUnit" />
+    <result column="use_unit" jdbcType="VARCHAR" property="useUnit" />
+    <result column="indication" jdbcType="LONGVARCHAR" property="indication" />
+    <result column="usage_standard" jdbcType="LONGVARCHAR" property="usageStandard" />
+    <result column="unit_price" jdbcType="DECIMAL" property="unitPrice" />
+    <result column="untoward_effect" jdbcType="LONGVARCHAR" property="untowardEffect" />
+    <result column="taboo" jdbcType="VARCHAR" property="taboo" />
+    <result column="caution" jdbcType="LONGVARCHAR" property="caution" />
+    <result column="storage_method" jdbcType="LONGVARCHAR" property="storageMethod" />
+    <result column="del_flag" jdbcType="BOOLEAN" property="delFlag" />
+    <result column="create_by" jdbcType="VARCHAR" property="createBy" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="update_by" jdbcType="VARCHAR" property="updateBy" />
+    <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    <!--@mbg.generated-->
+    med_id, med_name, med_spec, med_type, vendor, package_unit, use_unit, indication, 
+    usage_standard, unit_price, untoward_effect, taboo, caution, storage_method, del_flag, 
+    create_by, create_time, update_by, update_time
+  </sql>
+</mapper>
