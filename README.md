@@ -77,14 +77,3 @@ ruoyi-cloud
 
 monitor使用springadmin完成,目前只是最简单的用法,[详戳](http://doc.rycloud.zmrit.com/#/extra?id=%E7%9B%91%E6%8E%A7)
 
-## RuoYi Cloud交流群
-
-QQ群：  [![加入QQ群](https://img.shields.io/badge/755109875-blue.svg)](https://jq.qq.com/?_wv=1027&k=5JGXHPD)  点击按钮入群。
-
-
-欢迎pr或者加入，给个star是最好的鞭策
-
-##  请作者喝杯咖啡或者建设演示服务器
-
-![](http://upload.ouliu.net/i/20191021180958e1ek5.png)
-
