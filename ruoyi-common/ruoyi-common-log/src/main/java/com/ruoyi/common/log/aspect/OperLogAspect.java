@@ -1,14 +1,16 @@
 package com.ruoyi.common.log.aspect;
 
-import java.lang.reflect.Method;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.stream.Collectors;
-
-import javax.servlet.ServletResponse;
-import javax.servlet.http.HttpServletRequest;
-
+import com.alibaba.fastjson.JSON;
+import com.ruoyi.common.constant.Constants;
+import com.ruoyi.common.log.annotation.OperLog;
+import com.ruoyi.common.log.enums.BusinessStatus;
+import com.ruoyi.common.log.event.SysOperLogEvent;
+import com.ruoyi.common.utils.IpUtils;
+import com.ruoyi.common.utils.ServletUtils;
+import com.ruoyi.common.utils.StringUtils;
+import com.ruoyi.common.utils.spring.SpringContextHolder;
+import com.ruoyi.system.domain.SysOperLog;
+import lombok.extern.slf4j.Slf4j;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.Signature;
 import org.aspectj.lang.annotation.AfterReturning;
@@ -18,19 +20,13 @@ import org.aspectj.lang.annotation.Pointcut;
 import org.aspectj.lang.reflect.MethodSignature;
 import org.springframework.stereotype.Component;
 
-import com.alibaba.fastjson.JSON;
-import com.ruoyi.common.constant.Constants;
-import com.ruoyi.common.log.annotation.OperLog;
-import com.ruoyi.common.log.enums.BusinessStatus;
-import com.ruoyi.common.log.event.SysOperLogEvent;
-import com.ruoyi.common.utils.AddressUtils;
-import com.ruoyi.common.utils.IpUtils;
-import com.ruoyi.common.utils.ServletUtils;
-import com.ruoyi.common.utils.StringUtils;
-import com.ruoyi.common.utils.spring.SpringContextHolder;
-import com.ruoyi.system.domain.SysOperLog;
-
-import lombok.extern.slf4j.Slf4j;
+import javax.servlet.ServletResponse;
+import javax.servlet.http.HttpServletRequest;
+import java.lang.reflect.Method;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * 操作日志记录处理
@@ -88,7 +84,7 @@ public class OperLogAspect
             String ip = IpUtils.getIpAddr(request);
             operLog.setOperIp(ip);
             operLog.setOperUrl(request.getRequestURI());
-            operLog.setOperLocation(AddressUtils.getRealAddressByIP(ip));
+            // operLog.setOperLocation(AddressUtils.getRealAddressByIP(ip));
             String username = request.getHeader(Constants.CURRENT_USERNAME);
             operLog.setOperName(username);
             if (e != null)
