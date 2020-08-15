@@ -104,11 +104,15 @@ public class AssessmentVO {
 
     private List<DiseaseVO> diseaseVOS;
 
-    // 诊断
+    /**
+     * 诊断
+     **/
     private Integer[] diseaseIds;
     private String diseaseName;
 
-    // 当前症状描述
+    /**
+     * 当前症状描述
+     **/
     private Integer[] physique;
     private String physiqueOtherDesc;
     private Integer[] facialFeatures;
