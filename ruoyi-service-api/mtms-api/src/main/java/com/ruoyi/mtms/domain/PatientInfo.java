@@ -5,19 +5,15 @@ import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 
-import java.util.Date;
-
-/**
- * @Title: PatientInfo
- * @Package com.ruoyi.mtms.domain
- * @Description: ${TODO}(这里用一句话描述这个类的作用)
- * @author KING
- * @date 2020/5/27 15:36
- * @version V1.0
- */
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 /**
  * 患者信息表
+ *
+ * @author KING
+ * @version V1.0
+ * @date 2020/8/29 9:55
  */
 @ApiModel(value = "com-ruoyi-mtms-domain-PatientInfo")
 @Data
@@ -38,11 +34,18 @@ public class PatientInfo {
     private String patientName;
 
     /**
-     * 年龄
+     * 手机号
      */
-    @TableField(value = "age")
-    @ApiModelProperty(value = "年龄")
-    private Integer age;
+    @TableField(value = "phone")
+    @ApiModelProperty(value = "手机号")
+    private String phone;
+
+    /**
+     * 出生日期
+     */
+    @TableField(value = "birthday")
+    @ApiModelProperty(value = "出生日期")
+    private LocalDate birthday;
 
     /**
      * 性别 0.未知 1.男 2.女
@@ -50,13 +53,6 @@ public class PatientInfo {
     @TableField(value = "gender")
     @ApiModelProperty(value = "性别 0.未知 1.男 2.女")
     private Integer gender;
-
-    /**
-     * 手机号
-     */
-    @TableField(value = "phone")
-    @ApiModelProperty(value = "手机号")
-    private String phone;
 
     /**
      * 患者自定义id
@@ -115,17 +111,10 @@ public class PatientInfo {
     private Integer educationLevel;
 
     /**
-     * 接诊日期
-     */
-    @TableField(value = "consultation_date")
-    @ApiModelProperty(value = "接诊日期")
-    private Date consultationDate;
-
-    /**
-     * 婚姻状况 1.已婚 2.未婚 3.离异
+     * 婚姻状况 1.已婚 2.未婚 3.离异 4.丧偶
      */
     @TableField(value = "marital_status")
-    @ApiModelProperty(value = "婚姻状况 1.已婚 2.未婚 3.离异")
+    @ApiModelProperty(value = "婚姻状况 1.已婚 2.未婚 3.离异 4.丧偶")
     private Integer maritalStatus;
 
     /**
@@ -150,6 +139,13 @@ public class PatientInfo {
     private String company;
 
     /**
+     * 接诊日期
+     */
+    @TableField(value = "consultation_date")
+    @ApiModelProperty(value = "接诊日期")
+    private LocalDateTime consultationDate;
+
+    /**
      * 就诊后一年急诊/输液次数
      */
     @TableField(value = "emergency_infusion_num")
@@ -164,6 +160,20 @@ public class PatientInfo {
     private Integer hospitalizationNum;
 
     /**
+     * 接诊医师
+     */
+    @TableField(value = "physician")
+    @ApiModelProperty(value = "接诊医师")
+    private String physician;
+
+    /**
+     * 接诊医师科室
+     */
+    @TableField(value = "department")
+    @ApiModelProperty(value = "接诊医师科室")
+    private String department;
+
+    /**
      * 删除状态(0-正常,1-已删除)
      */
     @TableLogic
@@ -172,7 +182,7 @@ public class PatientInfo {
     private Boolean delFlag;
 
     /**
-     * 创建人
+     * 创建人(接诊药师)
      */
     @TableField(value = "create_by", fill = FieldFill.INSERT)
     @ApiModelProperty(value = "创建人")
@@ -183,7 +193,7 @@ public class PatientInfo {
      */
     @TableField(value = "create_time", fill = FieldFill.INSERT)
     @ApiModelProperty(value = "创建时间")
-    private Date createTime;
+    private LocalDateTime createTime;
 
     /**
      * 更新人
@@ -197,6 +207,6 @@ public class PatientInfo {
      */
     @TableField(value = "update_time", fill = FieldFill.UPDATE)
     @ApiModelProperty(value = "更新时间")
-    private Date updateTime;
+    private LocalDateTime updateTime;
 
 }

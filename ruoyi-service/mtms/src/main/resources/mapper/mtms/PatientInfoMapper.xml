@@ -6,24 +6,26 @@
     <!--@Table mtms_patient_info-->
     <id column="patient_id" jdbcType="INTEGER" property="patientId" />
     <result column="patient_name" jdbcType="VARCHAR" property="patientName" />
-    <result column="age" jdbcType="INTEGER" property="age" />
-    <result column="gender" jdbcType="TINYINT" property="gender" />
     <result column="phone" jdbcType="VARCHAR" property="phone" />
+    <result column="birthday" jdbcType="DATE" property="birthday" />
+    <result column="gender" jdbcType="TINYINT" property="gender" />
     <result column="patient_self_id" jdbcType="VARCHAR" property="patientSelfId" />
     <result column="height" jdbcType="INTEGER" property="height" />
     <result column="weight" jdbcType="DOUBLE" property="weight" />
-    <result column="BMI" jdbcType="DOUBLE" property="BMI" />
+    <result column="BMI" jdbcType="DOUBLE" property="bmi" />
     <result column="id_card_num" jdbcType="VARCHAR" property="idCardNum" />
     <result column="medicare_type" jdbcType="TINYINT" property="medicareType" />
     <result column="other_medicare_type" jdbcType="VARCHAR" property="otherMedicareType" />
     <result column="education_level" jdbcType="TINYINT" property="educationLevel" />
-    <result column="consultation_date" jdbcType="TIMESTAMP" property="consultationDate" />
     <result column="marital_status" jdbcType="TINYINT" property="maritalStatus" />
     <result column="downtown_address" jdbcType="VARCHAR" property="downtownAddress" />
     <result column="home_address" jdbcType="VARCHAR" property="homeAddress" />
     <result column="company" jdbcType="VARCHAR" property="company" />
+    <result column="consultation_date" jdbcType="TIMESTAMP" property="consultationDate" />
     <result column="emergency_infusion_num" jdbcType="INTEGER" property="emergencyInfusionNum" />
     <result column="hospitalization_num" jdbcType="INTEGER" property="hospitalizationNum" />
+    <result column="physician" jdbcType="VARCHAR" property="physician" />
+    <result column="department" jdbcType="VARCHAR" property="department" />
     <result column="del_flag" jdbcType="BOOLEAN" property="delFlag" />
     <result column="create_by" jdbcType="VARCHAR" property="createBy" />
     <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
@@ -32,9 +34,10 @@
   </resultMap>
   <sql id="Base_Column_List">
     <!--@mbg.generated-->
-    patient_id, patient_name, age, gender, phone, patient_self_id, height, weight, BMI, 
-    id_card_num, medicare_type, other_medicare_type, education_level, consultation_date, 
-    marital_status, downtown_address, home_address, company, emergency_infusion_num, 
-    hospitalization_num, del_flag, create_by, create_time, update_by, update_time
+    patient_id, patient_name, phone, birthday, gender, patient_self_id, height, weight, 
+    BMI, id_card_num, medicare_type, other_medicare_type, education_level, marital_status, 
+    downtown_address, home_address, company, consultation_date, emergency_infusion_num, 
+    hospitalization_num, physician, department, del_flag, create_by, create_time, update_by, 
+    update_time
   </sql>
 </mapper>

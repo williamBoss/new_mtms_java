@@ -4,13 +4,12 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.ruoyi.mtms.domain.PatientInfo;
 
 /**
-* @Title: PatientInfoMapper
-* @Package com.ruoyi.mtms.mapper
-* @Description: ${TODO}(这里用一句话描述这个类的作用)
-* @author KING
-* @date 2020/5/27 15:36
-* @version V1.0
-*/
+ * ${TODO}
+ *
+ * @author KING
+ * @version V1.0
+ * @date 2020/8/29 9:55
+ */
 
 public interface PatientInfoMapper extends BaseMapper<PatientInfo> {
 }
