@@ -5,7 +5,9 @@ import com.ruoyi.common.constant.ResponseConstants;
 import com.ruoyi.common.core.controller.BaseController;
 import com.ruoyi.common.core.domain.R;
 import com.ruoyi.mtms.domain.PatientInfo;
+import com.ruoyi.mtms.domain.PatientTreatmentHistory;
 import com.ruoyi.mtms.service.PatientInfoService;
+import com.ruoyi.mtms.service.PatientTreatmentHistoryService;
 import com.ruoyi.mtms.vo.PatientInfoVO;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -33,6 +35,9 @@ public class PatientController extends BaseController {
 
     @Autowired
     private PatientInfoService patientInfoService;
+
+    @Autowired
+    private PatientTreatmentHistoryService patientTreatmentHistoryService;
 
     @Autowired
     private Mapper dozerMapper;
@@ -71,6 +76,7 @@ public class PatientController extends BaseController {
             PatientInfo patientInfo = dozerMapper.map(patientInfoVO, PatientInfo.class);
             patientInfo.setDowntownAddress(StringUtils.join(patientInfoVO.getDowntownAddressArr(), ","));
             patientInfoService.save(patientInfo);
+            saveTreatmentHistory(patientInfo);
             return R.ok(ResponseConstants.RESPONSE_SUCCESS, "添加成功！");
         } catch (Exception e) {
             log.error(e.getMessage(), e);
@@ -86,11 +92,27 @@ public class PatientController extends BaseController {
             patientInfo.setDowntownAddress(StringUtils.join(patientInfoVO.getDowntownAddressArr(), ","));
             patientInfo.setPatientId(id);
             patientInfoService.updateById(patientInfo);
+            saveTreatmentHistory(patientInfo);
             return R.ok(ResponseConstants.RESPONSE_SUCCESS, "修改成功！");
         } catch (Exception e) {
             log.error(e.getMessage(), e);
             return R.error();
         }
+    }
+
+    /**
+     * 保存患者接诊历史记录
+     *
+     * @param patientInfo
+     */
+    private void saveTreatmentHistory(PatientInfo patientInfo) {
+        PatientTreatmentHistory patientTreatmentHistory = new PatientTreatmentHistory();
+        patientTreatmentHistory.setConsultationDate(patientInfo.getConsultationDate());
+        patientTreatmentHistory.setEmergencyInfusionNum(patientInfo.getEmergencyInfusionNum());
+        patientTreatmentHistory.setHospitalizationNum(patientInfo.getHospitalizationNum());
+        patientTreatmentHistory.setPhysician(patientInfo.getPhysician());
+        patientTreatmentHistory.setDepartment(patientInfo.getDepartment());
+        patientTreatmentHistoryService.save(patientTreatmentHistory);
     }
 
 }

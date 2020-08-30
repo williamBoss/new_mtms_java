@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.mtms.mapper.PatientTreatmentHistoryMapper">
+  <resultMap id="BaseResultMap" type="com.ruoyi.mtms.domain.PatientTreatmentHistory">
+    <!--@mbg.generated-->
+    <!--@Table mtms_patient_treatment_history-->
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="consultation_date" jdbcType="TIMESTAMP" property="consultationDate" />
+    <result column="emergency_infusion_num" jdbcType="INTEGER" property="emergencyInfusionNum" />
+    <result column="hospitalization_num" jdbcType="INTEGER" property="hospitalizationNum" />
+    <result column="physician" jdbcType="VARCHAR" property="physician" />
+    <result column="department" jdbcType="VARCHAR" property="department" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    <!--@mbg.generated-->
+    id, consultation_date, emergency_infusion_num, hospitalization_num, physician, department
+  </sql>
+</mapper>

@@ -1,6 +1,5 @@
 package com.ruoyi.mtms.controller;
 
-import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.ruoyi.common.constant.ResponseConstants;
 import com.ruoyi.common.core.controller.BaseController;
@@ -14,12 +13,10 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang.StringUtils;
-import org.apache.commons.lang3.ArrayUtils;
 import org.dozer.Mapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -83,7 +80,7 @@ public class AssessmentController extends BaseController {
         return R.ok(ResponseConstants.RESPONSE_SUCCESS, "获取成功", assessmentVOList);
     }
 
-    @PostMapping("/")
+    @PostMapping("/saveAssessment")
     @ApiOperation("新增评估记录，获取Id")
     public Result saveAssessment(@RequestBody AssessmentVO assessmentVO) {
         Assessment assessment = dozenMapper.map(assessmentVO, Assessment.class);
@@ -92,19 +89,64 @@ public class AssessmentController extends BaseController {
         return Result.ok().data("assessment", assessment);
     }
 
-    @PutMapping("/")
-    @ApiOperation("新增评估记录")
-    public Result updateAssessment(@RequestBody AssessmentVO assessmentVO) {
+    @PutMapping("/saveFMHistory")
+    @ApiOperation("新增家族史和既往史记录")
+    public Result saveFMHistory(@RequestBody AssessmentVO assessmentVO) {
 
         Integer assessmentId = assessmentVO.getAssessmentId();
+
+        //家族病史
+        for (Integer diseaseId : assessmentVO.getFamilyMedicalHistoryDiseaseIds()) {
+            FamilyMedicalHistory familyMedicalHistory = new FamilyMedicalHistory();
+            familyMedicalHistory.setAssessmentId(assessmentId);
+            familyMedicalHistory.setDiseaseId(diseaseId);
+            familyMedicalHistoryService.save(familyMedicalHistory);
+        }
+
+        //既往病史
+        for (Integer diseaseId : assessmentVO.getPastMedicalHistoryDiseaseIds()) {
+            PastMedicalHistory pastMedicalHistory = new PastMedicalHistory();
+            pastMedicalHistory.setAssessmentId(assessmentId);
+            pastMedicalHistory.setDiseaseId(diseaseId);
+            pastMedicalHistoryService.save(pastMedicalHistory);
+        }
+
+        //既往手术史
+        for (Integer surgicalHistoryId : assessmentVO.getSurgicalHistoryIds()) {
+            PastSurgicalHistory pastSurgicalHistory = new PastSurgicalHistory();
+            pastSurgicalHistory.setAssessmentId(assessmentId);
+            pastSurgicalHistory.setPastSurgicalHistoryId(surgicalHistoryId);
+            pastSurgicalHistoryService.save(pastSurgicalHistory);
+        }
 
         Assessment assessment = dozenMapper.map(assessmentVO, Assessment.class);
         assessmentService.updateById(assessment);
 
+        return Result.ok();
+    }
+
+    @PostMapping("/saveMedicationSideEffect")
+    @ApiOperation("新增药物不良反应记录")
+    public Result saveMedicationSideEffect(@RequestBody MedicationSideEffectVO medicationSideEffectVO) {
+        MedicationSideEffect medicationSideEffect = dozenMapper.map(medicationSideEffectVO, MedicationSideEffect.class);
+        medicationSideEffectService.save(medicationSideEffect);
+        return Result.ok();
+    }
+
+    @GetMapping("/getMedicationSideEffectList")
+    @ApiOperation("获取药物不良反应记录列表")
+    public Result getMedicationSideEffect() {
+        return Result.ok().data("list", medicationSideEffectService.list());
+    }
+
+    @PutMapping("/saveExistSymptoms")
+    @ApiOperation("新增现有症状记录")
+    public Result updateExistSymptoms(@RequestBody AssessmentVO assessmentVO) {
+        Integer assessmentId = assessmentVO.getAssessmentId();
+        Assessment assessment = dozenMapper.map(assessmentVO, Assessment.class);
+        assessmentService.updateById(assessment);
         //评估诊断关系
-        Integer[] diseaseIds =
-            ArrayUtils.addAll(assessmentVO.getDiseaseIds(), saveDisease(assessmentVO.getDiseaseName()));
-        for (Integer diseaseId : diseaseIds) {
+        for (Integer diseaseId : assessmentVO.getDiseaseIds()) {
             AssessmentDiagnosis assessmentDiagnosis = new AssessmentDiagnosis();
             assessmentDiagnosis.setAssessmentId(assessmentId);
             assessmentDiagnosis.setDiseaseId(diseaseId);
@@ -116,92 +158,16 @@ public class AssessmentController extends BaseController {
         symptomDescription.setAssessmentId(assessmentId);
         symptomDescriptionService.save(symptomDescription);
 
-        //既往病史
-        Integer[] pastMedicalHistoryDiseaseIds = ArrayUtils.addAll(assessmentVO.getPastMedicalHistoryDiseaseIds(),
-            saveDisease(assessmentVO.getPastMedicalHistoryDiseaseName()));
-        for (Integer diseaseId : pastMedicalHistoryDiseaseIds) {
-            PastMedicalHistory pastMedicalHistory = new PastMedicalHistory();
-            pastMedicalHistory.setAssessmentId(assessmentId);
-            pastMedicalHistory.setDiseaseId(diseaseId);
-            pastMedicalHistoryService.save(pastMedicalHistory);
-        }
-
-        //家族病史
-        Integer[] familyMedicalDiseaseIds = ArrayUtils.addAll(assessmentVO.getFamilyMedicalHistoryDiseaseIds(),
-            saveDisease(assessmentVO.getFamilyMedicalHistoryDiseaseName()));
-        for (Integer diseaseId : familyMedicalDiseaseIds) {
-            FamilyMedicalHistory familyMedicalHistory = new FamilyMedicalHistory();
-            familyMedicalHistory.setAssessmentId(assessmentId);
-            familyMedicalHistory.setDiseaseId(diseaseId);
-            familyMedicalHistoryService.save(familyMedicalHistory);
-        }
-
-        //既往手术史
-        Integer[] surgicalHistoryIds =
-            ArrayUtils.addAll(assessmentVO.getSurgicalHistoryIds(), saveSurgicalHistory(assessmentVO.getSurgeryName()));
-        for (Integer surgicalHistoryId : surgicalHistoryIds) {
-            PastSurgicalHistory pastSurgicalHistory = new PastSurgicalHistory();
-            pastSurgicalHistory.setAssessmentId(assessmentId);
-            pastSurgicalHistory.setPastSurgicalHistoryId(surgicalHistoryId);
-            pastSurgicalHistoryService.save(pastSurgicalHistory);
-        }
-
         return Result.ok();
     }
 
-    @PostMapping("saveMedicationSideEffect")
-    @ApiOperation("新增药物不良反应记录")
-    public Result saveMedicationSideEffect(@RequestBody MedicationSideEffectVO medicationSideEffectVO) {
-        MedicationSideEffect medicationSideEffect = dozenMapper.map(medicationSideEffectVO, MedicationSideEffect.class);
-        medicationSideEffectService.save(medicationSideEffect);
-        return Result.ok();
-    }
+    //生活方式
 
-    public Integer[] saveDisease(String diseaseNames) {
-        List<Integer> diseaseIds = new ArrayList<>();
-        if (StringUtils.isNotBlank(diseaseNames)) {
-            String[] diseaseNameArr = diseaseNames.split(",");
-            for (String diseaseName : diseaseNameArr) {
-                // 查询该病种是否已经保存过
-                if (StringUtils.isNotEmpty(diseaseName)) {
-                    LambdaQueryWrapper<Disease> queryWrapper = new LambdaQueryWrapper<>();
-                    queryWrapper.select(Disease::getDiseaseId);
-                    queryWrapper.like(Disease::getDiseaseName, diseaseName);
-                    queryWrapper.eq(Disease::getDelFlag, 0);
-                    Disease disease = diseaseService.getOne(queryWrapper);
-                    if (disease == null) {
-                        disease.setDiseaseName(diseaseName);
-                        diseaseService.save(disease);
-                    }
-                    diseaseIds.add(disease.getDiseaseId());
-                }
 
-            }
-        }
-        return diseaseIds.toArray(new Integer[0]);
-    }
 
-    public Integer[] saveSurgicalHistory(String surgeryNames) {
-        List<Integer> surgicalHistoryId = new ArrayList<>();
-        if (StringUtils.isNotBlank(surgeryNames)) {
-            String[] surgeryNameArr = surgeryNames.split(",");
-            for (String surgeryName : surgeryNameArr) {
-                // 查询该病种是否已经保存过
-                if (StringUtils.isNotEmpty(surgeryName)) {
-                    LambdaQueryWrapper<SurgicalHistory> queryWrapper = new LambdaQueryWrapper<>();
-                    queryWrapper.select(SurgicalHistory::getSurgicalHistoryId);
-                    queryWrapper.like(SurgicalHistory::getSurgeryName, surgeryName);
-                    queryWrapper.eq(SurgicalHistory::getDelFlag, 0);
-                    SurgicalHistory surgicalHistory = surgicalHistoryService.getOne(queryWrapper);
-                    if (surgicalHistory == null) {
-                        surgicalHistory.setSurgeryName(surgeryName);
-                        surgicalHistoryService.save(surgicalHistory);
-                    }
-                    surgicalHistoryId.add(surgicalHistory.getSurgicalHistoryId());
-                }
-            }
-        }
-        return surgicalHistoryId.toArray(new Integer[0]);
-    }
+
+
+
+
 
 }
