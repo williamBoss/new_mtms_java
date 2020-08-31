@@ -7,7 +7,6 @@ import com.ruoyi.common.core.domain.R;
 import com.ruoyi.common.core.domain.Result;
 import com.ruoyi.mtms.domain.*;
 import com.ruoyi.mtms.service.*;
-import com.ruoyi.mtms.transefer.LifeStyleMapper;
 import com.ruoyi.mtms.vo.AssessmentVO;
 import com.ruoyi.mtms.vo.LifestyleVO;
 import com.ruoyi.mtms.vo.MedicationSideEffectVO;
@@ -71,9 +70,6 @@ public class AssessmentController extends BaseController {
 
     @Autowired
     private Mapper dozenMapper;
-
-    @Autowired
-    private LifeStyleMapper lifeStyleMapper;
 
     @GetMapping("/")
     @ApiOperation("患者评估列表")
@@ -177,7 +173,7 @@ public class AssessmentController extends BaseController {
     @PostMapping("/saveLifestyle")
     @ApiOperation("新增生活方式记录")
     public Result saveLifestyle(@RequestBody LifestyleVO lifestyleVO) {
-        Lifestyle lifeStyle = lifeStyleMapper.lifeStyleVOToLifestyle(lifestyleVO);
+        Lifestyle lifeStyle = dozenMapper.map(lifestyleVO, Lifestyle.class);
         lifestyleService.save(lifeStyle);
         return Result.ok();
     }
