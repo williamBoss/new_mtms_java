@@ -3,8 +3,10 @@ package com.ruoyi.mtms.mapper;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.ruoyi.mtms.domain.Assessment;
+import com.ruoyi.mtms.domain.UseMedRecord;
 import com.ruoyi.mtms.dto.AssessmentDTO;
 import com.ruoyi.mtms.vo.AssessmentVO;
+import com.ruoyi.mtms.vo.UseMedRecordVO;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
@@ -38,5 +40,14 @@ public interface AssessmentMapper extends BaseMapper<Assessment> {
      * @return
      */
     List<AssessmentVO> selectAssessmentByPatientId(@Param("patientId") Integer patientId);
+
+    /**
+     * 用药计划
+     *
+     * @param page
+     * @param useMedRecord
+     * @return
+     */
+    List<UseMedRecordVO> selectUseMedRecordList(Page page, @Param("useMedRecord") UseMedRecord useMedRecord);
 
 }

@@ -30,7 +30,7 @@
         <association property="patientInfoVO" javaType="com.ruoyi.mtms.vo.PatientInfoVO">
             <id column="patient_id" jdbcType="INTEGER" property="patientId"/>
             <result column="patient_name" jdbcType="VARCHAR" property="patientName"/>
-            <result column="age" jdbcType="INTEGER" property="age"/>
+            <result column="birthday" jdbcType="INTEGER" property="age"/>
             <result column="gender" jdbcType="TINYINT" property="gender"/>
             <result column="phone" jdbcType="VARCHAR" property="phone"/>
             <result column="id_card_num" jdbcType="VARCHAR" property="idCardNum"/>
@@ -43,7 +43,7 @@
     </resultMap>
     <sql id="Base_Column_List">
         <!--@mbg.generated-->
-        assessment_id, fill_date, main_consult, liver_damage, liver_damage_desc, kidney_damage,
+        assessment_id, patient_id, fill_date, main_consult, liver_damage, liver_damage_desc, kidney_damage,
         kidney_damage_desc, allergy_history, allergy_symptoms, allergy_datetime, medication_side_effect,
         del_flag, create_by, create_time, update_by, update_time
     </sql>
@@ -52,7 +52,7 @@
                ma.fill_date,
                mpi.patient_id,
                mpi.patient_name,
-               mpi.age,
+               mpi.birthday,
                mpi.gender,
                mpi.phone,
                mpi.id_card_num,
@@ -103,5 +103,28 @@
         where ma.del_flag = 0
           and ma.patient_id = #{patientId}
         order by ma.fill_date desc
+    </select>
+
+    <select id="selectUseMedRecordList" resultType="com.ruoyi.mtms.vo.UseMedRecordVO">
+        select umr.use_start_tIme,
+               umr.use_end_time,
+               umr.med_id,
+               mmi.med_id,
+               mmi.med_name,
+               mmi.med_spec,
+               mmi.med_type,
+               mmi.vendor,
+               mmi.package_unit,
+               mmi.use_unit,
+               mmi.indication,
+               mmi.usage_standard,
+               mmi.unit_price,
+               mmi.untoward_effect,
+               mmi.taboo,
+               mmi.caution,
+               mmi.storage_method
+        from mtms_use_med_record umr
+                     left join mtms_medicine_info mmi on umr.med_id = mmi.med_id
+        where patient_id = #{useMedRecord.patientId}
     </select>
 </mapper>

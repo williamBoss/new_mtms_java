@@ -7,8 +7,11 @@ import com.ruoyi.common.core.domain.R;
 import com.ruoyi.common.core.domain.Result;
 import com.ruoyi.mtms.domain.*;
 import com.ruoyi.mtms.service.*;
+import com.ruoyi.mtms.transefer.LifeStyleMapper;
 import com.ruoyi.mtms.vo.AssessmentVO;
+import com.ruoyi.mtms.vo.LifestyleVO;
 import com.ruoyi.mtms.vo.MedicationSideEffectVO;
+import com.ruoyi.mtms.vo.UseMedRecordVO;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
@@ -40,9 +43,6 @@ public class AssessmentController extends BaseController {
     private AssessmentDiagnosisService assessmentDiagnosisService;
 
     @Autowired
-    private DiseaseService diseaseService;
-
-    @Autowired
     private FamilyMedicalHistoryService familyMedicalHistoryService;
 
     @Autowired
@@ -61,7 +61,19 @@ public class AssessmentController extends BaseController {
     private MedicationSideEffectService medicationSideEffectService;
 
     @Autowired
+    private LifestyleService lifestyleService;
+
+    @Autowired
+    private UseMedRecordService useMedRecordService;
+
+    @Autowired
+    private MedicineInfoService medicineInfoService;
+
+    @Autowired
     private Mapper dozenMapper;
+
+    @Autowired
+    private LifeStyleMapper lifeStyleMapper;
 
     @GetMapping("/")
     @ApiOperation("患者评估列表")
@@ -89,7 +101,7 @@ public class AssessmentController extends BaseController {
         return Result.ok().data("assessment", assessment);
     }
 
-    @PutMapping("/saveFMHistory")
+    @PostMapping("/saveFMHistory")
     @ApiOperation("新增家族史和既往史记录")
     public Result saveFMHistory(@RequestBody AssessmentVO assessmentVO) {
 
@@ -112,6 +124,7 @@ public class AssessmentController extends BaseController {
         }
 
         //既往手术史
+        // TODO: 2020/8/31 需要提供curd接口
         for (Integer surgicalHistoryId : assessmentVO.getSurgicalHistoryIds()) {
             PastSurgicalHistory pastSurgicalHistory = new PastSurgicalHistory();
             pastSurgicalHistory.setAssessmentId(assessmentId);
@@ -139,7 +152,7 @@ public class AssessmentController extends BaseController {
         return Result.ok().data("list", medicationSideEffectService.list());
     }
 
-    @PutMapping("/saveExistSymptoms")
+    @PostMapping("/saveExistSymptoms")
     @ApiOperation("新增现有症状记录")
     public Result updateExistSymptoms(@RequestBody AssessmentVO assessmentVO) {
         Integer assessmentId = assessmentVO.getAssessmentId();
@@ -161,13 +174,34 @@ public class AssessmentController extends BaseController {
         return Result.ok();
     }
 
-    //生活方式
+    @PostMapping("/saveLifestyle")
+    @ApiOperation("新增生活方式记录")
+    public Result saveLifestyle(@RequestBody LifestyleVO lifestyleVO) {
+        Lifestyle lifeStyle = lifeStyleMapper.lifeStyleVOToLifestyle(lifestyleVO);
+        lifestyleService.save(lifeStyle);
+        return Result.ok();
+    }
 
+    @PostMapping("/getUseMedRecordList")
+    @ApiOperation("获取用药记录列表")
+    public R getUseMedRecordList(@RequestBody UseMedRecordVO useMedRecordVO,
+        @RequestParam(name = "pageNum", defaultValue = "1") Integer pageNo,
+        @RequestParam(name = "pageSize", defaultValue = "10") Integer pageSize) {
+        Page<UseMedRecordVO> useMedRecordList = assessmentService.useMedRecordList(pageNo, pageSize, useMedRecordVO);
+        return result(pageNo, useMedRecordList, null);
+    }
 
-
-
-
-
-
+    @PostMapping("/saveUseMedRecord")
+    @ApiOperation("新增用药记录")
+    public Result saveUseMedRecordVO(@RequestBody UseMedRecordVO useMedRecordVO) {
+        UseMedRecord useMedRecord = dozenMapper.map(useMedRecordVO, UseMedRecord.class);
+        if (useMedRecordVO.getMedId() == null) {
+            MedicineInfo medicineInfo = dozenMapper.map(useMedRecordVO, MedicineInfo.class);
+            medicineInfoService.save(medicineInfo);
+            useMedRecord.setMedId(medicineInfo.getMedId());
+        }
+        useMedRecordService.save(useMedRecord);
+        return Result.ok();
+    }
 
 }

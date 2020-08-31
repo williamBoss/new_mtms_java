@@ -3,6 +3,7 @@ package com.ruoyi.mtms.service.Impl;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.ruoyi.mtms.domain.Assessment;
+import com.ruoyi.mtms.domain.UseMedRecord;
 import com.ruoyi.mtms.dto.AssessmentDTO;
 import com.ruoyi.mtms.mapper.AssessmentDiagnosisMapper;
 import com.ruoyi.mtms.mapper.AssessmentMapper;
@@ -10,6 +11,7 @@ import com.ruoyi.mtms.mapper.DiseaseMapper;
 import com.ruoyi.mtms.mapper.PatientInfoMapper;
 import com.ruoyi.mtms.service.AssessmentService;
 import com.ruoyi.mtms.vo.AssessmentVO;
+import com.ruoyi.mtms.vo.UseMedRecordVO;
 import org.dozer.Mapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -56,6 +58,15 @@ public class AssessmentServiceImpl extends ServiceImpl<AssessmentMapper, Assessm
     @Override
     public List<AssessmentVO> selectAssessmentByPatientId(Integer patientId) {
         return assessmentMapper.selectAssessmentByPatientId(patientId);
+    }
+
+    @Override
+    public Page<UseMedRecordVO> useMedRecordList(Integer pageNo, Integer pageSize, UseMedRecordVO useMedRecordVO) {
+        UseMedRecord useMedRecord = dozerBeanMapper.map(useMedRecordVO, UseMedRecord.class);
+        Page<UseMedRecordVO> page = new Page<>(pageNo, pageSize);
+        List<UseMedRecordVO> useMedRecordVOList = assessmentMapper.selectUseMedRecordList(page, useMedRecord);
+        page.setRecords(useMedRecordVOList);
+        return page;
     }
 
 }
