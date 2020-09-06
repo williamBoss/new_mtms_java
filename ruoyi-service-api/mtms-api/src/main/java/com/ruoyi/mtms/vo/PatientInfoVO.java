@@ -135,11 +135,5 @@ public class PatientInfoVO {
     @ApiModelProperty(value = "就诊后一年住院次数")
     private Integer hospitalizationNum;
 
-    /**
-     * 删除状态(0-正常,1-已删除)
-     */
-    @ApiModelProperty(value = "删除状态(0-正常,1-已删除)")
-    private Boolean delFlag;
-
 }
 

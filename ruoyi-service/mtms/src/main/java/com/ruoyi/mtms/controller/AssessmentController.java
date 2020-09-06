@@ -12,6 +12,7 @@ import com.ruoyi.mtms.vo.LifestyleVO;
 import com.ruoyi.mtms.vo.MedicationSideEffectVO;
 import com.ruoyi.mtms.vo.UseMedRecordVO;
 import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang.StringUtils;
@@ -90,9 +91,11 @@ public class AssessmentController extends BaseController {
 
     @PostMapping("/saveAssessment")
     @ApiOperation("新增评估记录，获取Id")
-    public Result saveAssessment(@RequestBody AssessmentVO assessmentVO) {
-        Assessment assessment = dozenMapper.map(assessmentVO, Assessment.class);
+    @ApiImplicitParam(name = "patientId", value = "患者id", required = true)
+    public Result saveAssessment(Integer patientId) {
         //评估记录
+        Assessment assessment = new Assessment();
+        assessment.setPatientId(patientId);
         assessmentService.save(assessment);
         return Result.ok().data("assessment", assessment);
     }

@@ -5,7 +5,6 @@ import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 
 import java.math.BigDecimal;
-import java.util.Date;
 
 /**
  * @Title: MedicineInfo
@@ -106,34 +105,5 @@ public class MedicineInfoVO {
     @ApiModelProperty(value = "存储方式")
     private String storageMethod;
 
-    /**
-     * 删除状态(0-正常,1-已删除)
-     */
-    @ApiModelProperty(value = "删除状态(0-正常,1-已删除)")
-    private Boolean delFlag;
-
-    /**
-     * 创建人
-     */
-    @ApiModelProperty(value = "创建人")
-    private String createBy;
-
-    /**
-     * 创建时间
-     */
-    @ApiModelProperty(value = "创建时间")
-    private Date createTime;
-
-    /**
-     * 更新人
-     */
-    @ApiModelProperty(value = "更新人")
-    private String updateBy;
-
-    /**
-     * 更新时间
-     */
-    @ApiModelProperty(value = "更新时间")
-    private Date updateTime;
 
 }

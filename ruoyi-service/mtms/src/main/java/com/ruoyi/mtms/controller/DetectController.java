@@ -427,7 +427,7 @@ public class DetectController extends BaseController {
             detectHeartRateService.list((Wrapper<DetectHeartRate>)getQueryDate(startDate, endDate));
         data.put("detectBloodPressureList", detectBloodPressureList);
         data.put("detectHeartRateList", detectHeartRateList);
-        return Result.ok();
+        return Result.ok().data(data);
     }
 
     /**
