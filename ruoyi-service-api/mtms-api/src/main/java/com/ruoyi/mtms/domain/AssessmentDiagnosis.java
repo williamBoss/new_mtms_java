@@ -1,12 +1,14 @@
 package com.ruoyi.mtms.domain;
 
-import com.baomidou.mybatisplus.annotation.*;
+import com.baomidou.mybatisplus.annotation.IdType;
+import com.baomidou.mybatisplus.annotation.TableField;
+import com.baomidou.mybatisplus.annotation.TableId;
+import com.baomidou.mybatisplus.annotation.TableName;
+import com.ruoyi.mtms.base.BaseEntity;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
-
-import java.time.LocalDateTime;
-import java.util.Date;
+import lombok.EqualsAndHashCode;
 
 /**
  * 评估诊断关系表
@@ -15,9 +17,9 @@ import java.util.Date;
  */
 @ApiModel(value = "com-ruoyi-mtms-domain-AssessmentDiagnosis")
 @Data
+@EqualsAndHashCode(callSuper = true)
 @TableName(value = "mtms_assessment_diagnosis")
-public class AssessmentDiagnosis {
-
+public class AssessmentDiagnosis extends BaseEntity {
     /**
      * 诊断id
      */
@@ -38,41 +40,4 @@ public class AssessmentDiagnosis {
     @TableField(value = "disease_id")
     @ApiModelProperty(value = "诊断病种id")
     private Integer diseaseId;
-
-    /**
-     * 删除状态(0-正常,1-已删除)
-     */
-    @TableLogic
-    @TableField(value = "del_flag", fill = FieldFill.INSERT)
-    @ApiModelProperty(value = "删除状态(0-正常,1-已删除)")
-    private Boolean delFlag;
-
-    /**
-     * 创建人
-     */
-    @TableField(value = "create_by", fill = FieldFill.INSERT)
-    @ApiModelProperty(value = "创建人")
-    private String createBy;
-
-    /**
-     * 创建时间
-     */
-    @TableField(value = "create_time", fill = FieldFill.INSERT)
-    @ApiModelProperty(value = "创建时间")
-    private LocalDateTime createTime;
-
-    /**
-     * 更新人
-     */
-    @TableField(value = "update_by", fill = FieldFill.UPDATE)
-    @ApiModelProperty(value = "更新人")
-    private String updateBy;
-
-    /**
-     * 更新时间
-     */
-    @TableField(value = "update_time", fill = FieldFill.UPDATE)
-    @ApiModelProperty(value = "更新时间")
-    private Date updateTime;
-
 }

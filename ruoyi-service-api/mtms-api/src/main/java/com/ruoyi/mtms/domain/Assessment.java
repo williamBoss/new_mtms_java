@@ -1,12 +1,16 @@
 package com.ruoyi.mtms.domain;
 
-import com.baomidou.mybatisplus.annotation.*;
+import com.baomidou.mybatisplus.annotation.IdType;
+import com.baomidou.mybatisplus.annotation.TableField;
+import com.baomidou.mybatisplus.annotation.TableId;
+import com.baomidou.mybatisplus.annotation.TableName;
+import com.ruoyi.mtms.base.BaseEntity;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 import java.time.LocalDateTime;
-import java.util.Date;
 
 /**
  * 患者评估记录表
@@ -15,9 +19,9 @@ import java.util.Date;
  */
 @ApiModel(value = "com-ruoyi-mtms-domain-Assessment")
 @Data
+@EqualsAndHashCode(callSuper = true)
 @TableName(value = "mtms_assessment")
-public class Assessment {
-
+public class Assessment extends BaseEntity {
     /**
      * 评估id
      */
@@ -26,10 +30,10 @@ public class Assessment {
     private Integer assessmentId;
 
     /**
-     * 患者id
+     * 评估患者id
      */
     @TableField(value = "patient_id")
-    @ApiModelProperty(value = "患者id")
+    @ApiModelProperty(value = "评估患者id")
     private Integer patientId;
 
     /**
@@ -37,7 +41,7 @@ public class Assessment {
      */
     @TableField(value = "fill_date")
     @ApiModelProperty(value = "评估填写时间")
-    private Date fillDate;
+    private LocalDateTime fillDate;
 
     /**
      * 本次评估主诉
@@ -93,7 +97,7 @@ public class Assessment {
      */
     @TableField(value = "allergy_datetime")
     @ApiModelProperty(value = "过敏发生时间")
-    private Date allergyDatetime;
+    private LocalDateTime allergyDatetime;
 
     /**
      * 药物不良反应史 0.无 1.有
@@ -101,41 +105,4 @@ public class Assessment {
     @TableField(value = "medication_side_effect")
     @ApiModelProperty(value = "药物不良反应史 0.无 1.有")
     private Boolean medicationSideEffect;
-
-    /**
-     * 删除状态(0-正常,1-已删除)
-     */
-    @TableLogic
-    @TableField(value = "del_flag", fill = FieldFill.INSERT)
-    @ApiModelProperty(value = "删除状态(0-正常,1-已删除)")
-    private Boolean delFlag;
-
-    /**
-     * 创建人
-     */
-    @TableField(value = "create_by", fill = FieldFill.INSERT)
-    @ApiModelProperty(value = "创建人")
-    private String createBy;
-
-    /**
-     * 创建时间
-     */
-    @TableField(value = "create_time", fill = FieldFill.INSERT)
-    @ApiModelProperty(value = "创建时间")
-    private LocalDateTime createTime;
-
-    /**
-     * 更新人
-     */
-    @TableField(value = "update_by", fill = FieldFill.UPDATE)
-    @ApiModelProperty(value = "更新人")
-    private String updateBy;
-
-    /**
-     * 更新时间
-     */
-    @TableField(value = "update_time", fill = FieldFill.UPDATE)
-    @ApiModelProperty(value = "更新时间")
-    private Date updateTime;
-
 }

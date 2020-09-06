@@ -7,16 +7,18 @@ import com.baomidou.mybatisplus.annotation.TableName;
 import com.ruoyi.mtms.base.BaseEntity;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
-import java.time.LocalDateTime;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
+import java.time.LocalDateTime;
+
 /**
-* ${TODO}
-* @author KING
-* @date 2020/9/5 16:32
-* @version V1.0
-*/
+ * ${TODO}
+ *
+ * @author KING
+ * @date 2020/9/6 19:52
+ * @version V1.0
+ */
 
 /**
  * 肾功能检测检验
@@ -26,20 +28,7 @@ import lombok.EqualsAndHashCode;
 @EqualsAndHashCode(callSuper = true)
 @TableName(value = "mtms_detect_kidney_function")
 public class DetectKidneyFunction extends BaseEntity {
-    public static final String COL_ID = "id";
-    public static final String COL_ASSESSMENT_ID = "assessment_id";
-    public static final String COL_PATIENT_ID = "patient_id";
-    public static final String COL_DETECT_DATE = "detect_date";
-    public static final String COL_SERUM_CREATININE = "serum_creatinine";
-    public static final String COL_TWENTY_FOUR_HOUR_URINE_PROTEIN = "twenty_four_hour_urine_protein";
-    public static final String COL_GLOMERULAR_FILTRATION_RATE = "glomerular_filtration_rate";
-    public static final String COL_CREATININE_CLEARANCE_RATE = "creatinine_clearance_rate";
-    public static final String COL_CREATINE_KINASE = "creatine_kinase";
-    public static final String COL_DEL_FLAG = "del_flag";
-    public static final String COL_CREATE_BY = "create_by";
-    public static final String COL_CREATE_TIME = "create_time";
-    public static final String COL_UPDATE_BY = "update_by";
-    public static final String COL_UPDATE_TIME = "update_time";
+
     /**
      * 主键id
      */

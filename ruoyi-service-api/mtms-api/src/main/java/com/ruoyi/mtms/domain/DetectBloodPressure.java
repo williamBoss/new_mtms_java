@@ -13,24 +13,15 @@ import lombok.EqualsAndHashCode;
 import java.time.LocalDateTime;
 
 /**
- * ${TODO}
- *
- * @author KING
- * @date 2020/9/5 16:32
- * @version V1.0
- */
-
-/**
  * 血压检测检验
  *
  * @author KING
  */
+@ApiModel(value = "com-ruoyi-mtms-domain-DetectBloodPressure")
 @Data
-@ApiModel(value = "DetectBloodPressure")
 @EqualsAndHashCode(callSuper = true)
 @TableName(value = "mtms_detect_blood_pressure")
 public class DetectBloodPressure extends BaseEntity {
-
     /**
      * 主键id
      */
@@ -79,5 +70,4 @@ public class DetectBloodPressure extends BaseEntity {
     @TableField(value = "night_value")
     @ApiModelProperty(value = "晚上血压值")
     private String nightValue;
-
 }

@@ -1,66 +1,48 @@
 package com.ruoyi.mtms.domain;
 
-import com.baomidou.mybatisplus.annotation.*;
+import com.baomidou.mybatisplus.annotation.IdType;
+import com.baomidou.mybatisplus.annotation.TableField;
+import com.baomidou.mybatisplus.annotation.TableId;
+import com.baomidou.mybatisplus.annotation.TableName;
+import com.ruoyi.mtms.base.BaseEntity;
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 
-import java.time.LocalDateTime;
-import java.util.Date;
+/**
+* ${TODO}
+* @author KING
+* @date 2020/9/6 19:52
+* @version V1.0
+*/
 
 /**
  * 病种表
- *
- * @author KING
  */
+@ApiModel(value = "com-ruoyi-mtms-domain-Disease")
 @Data
+@EqualsAndHashCode(callSuper = true)
 @TableName(value = "mtms_disease")
-public class Disease {
+public class Disease extends BaseEntity {
     /**
      * 病种id
      */
     @TableId(value = "disease_id", type = IdType.AUTO)
+    @ApiModelProperty(value = "病种id")
     private Integer diseaseId;
 
     /**
      * 病种名称
      */
     @TableField(value = "disease_name")
+    @ApiModelProperty(value = "病种名称")
     private String diseaseName;
 
     /**
      * 病种编码
      */
     @TableField(value = "disease_key")
+    @ApiModelProperty(value = "病种编码")
     private String diseaseKey;
-
-    /**
-     * 删除状态(0-正常,1-已删除)
-     */
-    @TableLogic
-    @TableField(value = "del_flag", fill = FieldFill.INSERT)
-    private Boolean delFlag;
-
-    /**
-     * 创建人
-     */
-    @TableField(value = "create_by", fill = FieldFill.INSERT)
-    private String createBy;
-
-    /**
-     * 创建时间
-     */
-    @TableField(value = "create_time", fill = FieldFill.INSERT)
-    private LocalDateTime createTime;
-
-    /**
-     * 更新人
-     */
-    @TableField(value = "update_by", fill = FieldFill.UPDATE)
-    private String updateBy;
-
-    /**
-     * 更新时间
-     */
-    @TableField(value = "update_time", fill = FieldFill.UPDATE)
-    private Date updateTime;
-
 }

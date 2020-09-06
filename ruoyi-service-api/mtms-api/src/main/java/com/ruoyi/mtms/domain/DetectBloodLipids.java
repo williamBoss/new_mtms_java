@@ -13,13 +13,6 @@ import lombok.EqualsAndHashCode;
 import java.time.LocalDateTime;
 
 /**
-* ${TODO}
-* @author KING
-* @date 2020/9/5 16:32
-* @version V1.0
-*/
-
-/**
  * 血脂检测检验
  */
 @ApiModel(value = "com-ruoyi-mtms-domain-DetectBloodLipids")

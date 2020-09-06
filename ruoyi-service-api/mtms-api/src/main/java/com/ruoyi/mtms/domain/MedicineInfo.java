@@ -1,31 +1,32 @@
 package com.ruoyi.mtms.domain;
 
-import com.baomidou.mybatisplus.annotation.*;
+import com.baomidou.mybatisplus.annotation.IdType;
+import com.baomidou.mybatisplus.annotation.TableField;
+import com.baomidou.mybatisplus.annotation.TableId;
+import com.baomidou.mybatisplus.annotation.TableName;
+import com.ruoyi.mtms.base.BaseEntity;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 import java.math.BigDecimal;
-import java.time.LocalDateTime;
-import java.util.Date;
 
 /**
- * @Title: MedicineInfo
- * @Package com.ruoyi.mtms.domain
- * @Description: ${TODO}(这里用一句话描述这个类的作用)
- * @author KING
- * @date 2020/5/27 15:36
- * @version V1.0
- */
+* ${TODO}
+* @author KING
+* @date 2020/9/6 19:52
+* @version V1.0
+*/
 
 /**
  * 药品目录表
  */
 @ApiModel(value = "com-ruoyi-mtms-domain-MedicineInfo")
 @Data
+@EqualsAndHashCode(callSuper = true)
 @TableName(value = "mtms_medicine_info")
-public class MedicineInfo {
-
+public class MedicineInfo extends BaseEntity {
     /**
      * 药品主键
      */
@@ -123,41 +124,4 @@ public class MedicineInfo {
     @TableField(value = "storage_method")
     @ApiModelProperty(value = "存储方式")
     private String storageMethod;
-
-    /**
-     * 删除状态(0-正常,1-已删除)
-     */
-    @TableLogic
-    @TableField(value = "del_flag", fill = FieldFill.INSERT)
-    @ApiModelProperty(value = "删除状态(0-正常,1-已删除)")
-    private Boolean delFlag;
-
-    /**
-     * 创建人
-     */
-    @TableField(value = "create_by", fill = FieldFill.INSERT)
-    @ApiModelProperty(value = "创建人")
-    private String createBy;
-
-    /**
-     * 创建时间
-     */
-    @TableField(value = "create_time", fill = FieldFill.INSERT)
-    @ApiModelProperty(value = "创建时间")
-    private LocalDateTime createTime;
-
-    /**
-     * 更新人
-     */
-    @TableField(value = "update_by", fill = FieldFill.UPDATE)
-    @ApiModelProperty(value = "更新人")
-    private String updateBy;
-
-    /**
-     * 更新时间
-     */
-    @TableField(value = "update_time", fill = FieldFill.UPDATE)
-    @ApiModelProperty(value = "更新时间")
-    private Date updateTime;
-
 }
