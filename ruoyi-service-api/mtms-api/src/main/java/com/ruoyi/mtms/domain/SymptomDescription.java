@@ -6,8 +6,10 @@ import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
-import java.util.Date;
 import lombok.Data;
+
+import java.time.LocalDateTime;
+import java.util.Date;
 
 /**
 * @Title: SymptomDescription
@@ -226,7 +228,7 @@ public class SymptomDescription {
      */
     @TableField(value = "create_time")
     @ApiModelProperty(value="创建时间")
-    private Date createTime;
+    private LocalDateTime createTime;
 
     /**
      * 更新人
