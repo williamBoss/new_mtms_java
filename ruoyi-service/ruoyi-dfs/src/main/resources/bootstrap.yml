@@ -28,8 +28,10 @@ spring:
       config:
         server-addr: 47.100.221.10:8848
         file-extension: yml
+        namespace: 8432354d-07ff-4e47-b47c-44f85b3eabfe
       discovery:
         server-addr: 47.100.221.10:8848
+        namespace: 8432354d-07ff-4e47-b47c-44f85b3eabfe
   
 feign: 
   hystrix: 

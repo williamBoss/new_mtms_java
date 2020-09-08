@@ -1,15 +1,17 @@
 package com.ruoyi.mtms.service;
 
-import com.ruoyi.mtms.domain.PatientTreatmentHistory;
 import com.baomidou.mybatisplus.extension.service.IService;
-    /**
-* ${TODO}
-* @author KING
-* @date 2020/8/29 10:03
-* @version V1.0
-*/
+import com.ruoyi.mtms.domain.PatientTreatmentHistory;
 
-public interface PatientTreatmentHistoryService extends IService<PatientTreatmentHistory>{
+/**
+ * ${TODO}
+ *
+ * @author KING
+ * @version V1.0
+ * @date 2020/8/29 10:03
+ */
 
+public interface PatientTreatmentHistoryService extends IService<PatientTreatmentHistory> {
 
 }
+

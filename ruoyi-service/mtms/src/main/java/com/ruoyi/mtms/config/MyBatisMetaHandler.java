@@ -7,8 +7,6 @@ import org.apache.ibatis.reflection.MetaObject;
 import org.springframework.stereotype.Component;
 
 import java.time.LocalDateTime;
-import java.time.ZoneOffset;
-import java.util.Date;
 
 /**
  * @author KING
@@ -24,16 +22,14 @@ public class MyBatisMetaHandler implements MetaObjectHandler {
     @Override
     public void insertFill(MetaObject metaObject) {
         this.fillStrategy(metaObject, "delFlag", false);
-        this.fillStrategy(metaObject, "createTime",
-            Date.from(LocalDateTime.now().atZone(ZoneOffset.ofHours(8)).toInstant()));
+        this.fillStrategy(metaObject, "createTime", LocalDateTime.now());
         String userId = ServletUtils.getRequest().getHeader(Constants.CURRENT_ID);
         this.fillStrategy(metaObject, "createBy", userId);
     }
 
     @Override
     public void updateFill(MetaObject metaObject) {
-        this.fillStrategy(metaObject, "updateTime",
-            Date.from(LocalDateTime.now().atZone(ZoneOffset.ofHours(8)).toInstant()));
+        this.fillStrategy(metaObject, "updateTime", LocalDateTime.now());
         String userId = ServletUtils.getRequest().getHeader(Constants.CURRENT_ID);
         this.fillStrategy(metaObject, "updateBy", userId);
     }
