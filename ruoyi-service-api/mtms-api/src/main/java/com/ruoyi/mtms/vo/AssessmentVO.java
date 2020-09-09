@@ -4,7 +4,7 @@ import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 
-import java.util.Date;
+import java.time.LocalDateTime;
 import java.util.List;
 
 /**
@@ -20,16 +20,16 @@ public class AssessmentVO {
     private Integer assessmentId;
 
     /**
-     * 患者id
+     * 评估患者id
      */
-    @ApiModelProperty(value = "患者id")
+    @ApiModelProperty(value = "评估患者id")
     private Integer patientId;
 
     /**
      * 评估填写时间
      */
     @ApiModelProperty(value = "评估填写时间")
-    private Date fillDate;
+    private LocalDateTime fillDate;
 
     /**
      * 本次评估主诉
@@ -66,21 +66,6 @@ public class AssessmentVO {
      */
     @ApiModelProperty(value = "过敏史 0.无 1.有")
     private Boolean allergyHistory;
-
-    /**
-     * 过敏症状
-     */
-    @ApiModelProperty(value = "过敏症状")
-    private String allergySymptoms;
-
-    /**
-     * 过敏发生时间
-     */
-    @ApiModelProperty(value = "过敏发生时间")
-    private Date allergyDatetime;
-
-    @ApiModelProperty(value = "记录医师")
-    private String userName;
 
     /**
      * 药物不良反应史 0.无 1.有

@@ -86,20 +86,6 @@ public class Assessment extends BaseEntity {
     private Boolean allergyHistory;
 
     /**
-     * 过敏症状
-     */
-    @TableField(value = "allergy_symptoms")
-    @ApiModelProperty(value = "过敏症状")
-    private String allergySymptoms;
-
-    /**
-     * 过敏发生时间
-     */
-    @TableField(value = "allergy_datetime")
-    @ApiModelProperty(value = "过敏发生时间")
-    private LocalDateTime allergyDatetime;
-
-    /**
      * 药物不良反应史 0.无 1.有
      */
     @TableField(value = "medication_side_effect")

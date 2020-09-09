@@ -22,7 +22,7 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/evaluation_scale")
 public class EvaluationScaleController {
 
-    // TODO: 2020/9/9 各评估问卷的列表 保存 保存的时候删除之前的记录（逻辑删除）
+    // TODO: 2020/9/9 缺少sf36问卷
 
     @Autowired
     private MoriskyService moriskyService;
