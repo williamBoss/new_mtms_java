@@ -1,6 +1,7 @@
 package com.ruoyi.mtms.controller;
 
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.github.dozermapper.core.Mapper;
 import com.ruoyi.common.core.domain.BaseResult;
 import com.ruoyi.common.core.domain.DataResult;
 import com.ruoyi.common.core.domain.PageResult;
@@ -10,7 +11,6 @@ import com.ruoyi.mtms.vo.MedicationProblemsVO;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
-import org.dozer.Mapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
