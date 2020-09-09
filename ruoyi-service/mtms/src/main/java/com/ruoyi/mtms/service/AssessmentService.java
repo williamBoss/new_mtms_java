@@ -5,7 +5,6 @@ import com.baomidou.mybatisplus.extension.service.IService;
 import com.ruoyi.mtms.domain.Assessment;
 import com.ruoyi.mtms.vo.AssessmentVO;
 import com.ruoyi.mtms.vo.UseMedRecordVO;
-import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
@@ -37,7 +36,7 @@ public interface AssessmentService extends IService<Assessment> {
      * @param patientId
      * @return
      */
-    List<AssessmentVO> selectAssessmentByPatientId(@Param("patientId") Integer patientId);
+    List<AssessmentVO> selectAssessmentByPatientId(Integer patientId);
 
     /**
      * 用药记录列表

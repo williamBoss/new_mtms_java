@@ -10,10 +10,7 @@ import com.ruoyi.common.core.domain.R;
 import com.ruoyi.common.core.domain.Result;
 import com.ruoyi.mtms.domain.*;
 import com.ruoyi.mtms.service.*;
-import com.ruoyi.mtms.vo.AssessmentVO;
-import com.ruoyi.mtms.vo.LifestyleVO;
-import com.ruoyi.mtms.vo.MedicationSideEffectVO;
-import com.ruoyi.mtms.vo.UseMedRecordVO;
+import com.ruoyi.mtms.vo.*;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiOperation;
@@ -103,7 +100,64 @@ public class AssessmentController extends BaseController {
         return Result.ok().data("assessment", assessment);
     }
 
-    @PostMapping("/saveFMHistory")
+    // TODO: 2020/9/9 拆分为单个保存 查询接口
+    @PostMapping("/save_family_medical_history")
+    @ApiOperation("新增家族史记录")
+    public BaseResult<FamilyMedicalHistoryVO> saveFamilyMedicalHistory(
+        @RequestBody FamilyMedicalHistoryVO familyMedicalHistoryVO) {
+        //家族病史
+        for (Integer diseaseId : familyMedicalHistoryVO.getFamilyMedicalHistoryDiseaseIds()) {
+            FamilyMedicalHistory familyMedicalHistory = new FamilyMedicalHistory();
+            familyMedicalHistory.setAssessmentId(familyMedicalHistoryVO.getAssessmentId());
+            familyMedicalHistory.setDiseaseId(diseaseId);
+            familyMedicalHistoryService.save(familyMedicalHistory);
+        }
+        return BaseResult.success();
+    }
+
+    @GetMapping("/get_family_medical_history")
+    @ApiOperation("获取家族史记录")
+    public BaseResult<List<FamilyMedicalHistoryVO>> getFamilyMedicalHistory(
+        @ApiParam(value = "评估Id") @RequestParam Integer assessmentId,
+        @ApiParam(value = "患者Id") @RequestParam Integer patientId) {
+        //家族病史
+        List<FamilyMedicalHistoryVO> list =
+            familyMedicalHistoryService.selectFamilyMedicalHistory(patientId, assessmentId);
+        return BaseResult.<List<FamilyMedicalHistoryVO>>success().data(list);
+    }
+
+    //     既往病史
+    //         getPastMedicalHistoryDiseaseIds
+    @PostMapping("/save_past_medical_history")
+    @ApiOperation("新增既往病史记录")
+    public BaseResult<PastMedicalHistoryVO> savePastMedicalHistory(
+        @RequestBody PastMedicalHistoryVO pastMedicalHistoryVO) {
+        for (Integer diseaseId : pastMedicalHistoryVO.getPastMedicalHistoryDiseaseIds()) {
+            PastMedicalHistory pastMedicalHistory = new PastMedicalHistory();
+            pastMedicalHistory.setAssessmentId(pastMedicalHistoryVO.getAssessmentId());
+            pastMedicalHistory.setDiseaseId(diseaseId);
+            pastMedicalHistoryService.save(pastMedicalHistory);
+        }
+        return BaseResult.success();
+    }
+
+    @GetMapping("/get_past_medical_history")
+    @ApiOperation("获取既往病史记录")
+    public BaseResult<List<PastMedicalHistoryVO>> getPastMedicalHistory(
+        @ApiParam(value = "评估Id") @RequestParam Integer assessmentId,
+        @ApiParam(value = "患者Id") @RequestParam Integer patientId) {
+        //家族病史
+        List<PastMedicalHistoryVO> list = pastMedicalHistoryService.selectPastMedicalHistory(patientId, assessmentId);
+        return BaseResult.<List<PastMedicalHistoryVO>>success().data(list);
+    }
+    // 既往手术史
+    //     getSurgicalHistoryIds
+    //     过敏史
+    // 肝损害
+    //     肾损害
+
+
+    /*@PostMapping("/saveFMHistory")
     @ApiOperation("新增家族史和既往史记录")
     public Result saveFMHistory(@RequestBody AssessmentVO assessmentVO) {
 
@@ -138,7 +192,7 @@ public class AssessmentController extends BaseController {
         assessmentService.updateById(assessment);
 
         return Result.ok();
-    }
+    }*/
 
     @PostMapping("/saveMedicationSideEffect")
     @ApiOperation("新增药物不良反应记录")
@@ -192,6 +246,18 @@ public class AssessmentController extends BaseController {
         Lifestyle lifeStyle = dozenMapper.map(lifestyleVO, Lifestyle.class);
         lifestyleService.save(lifeStyle);
         return Result.ok();
+    }
+
+    @PutMapping("/save_lifestyle_summary")
+    @ApiOperation("补充生活方式评估记录总评")
+    public BaseResult<LifestyleVO> saveLifestyleSummary(@ApiParam(value = "总评") @RequestParam String lifestyleSummary,
+        @RequestParam Integer assessmentId) {
+        Lifestyle lifeStyle = new Lifestyle();
+        lifeStyle.setLifestyleSummary(lifestyleSummary);
+        LambdaQueryWrapper<Lifestyle> updateWrapper = new LambdaQueryWrapper<>();
+        updateWrapper.eq(Lifestyle::getAssessmentId, assessmentId);
+        lifestyleService.update(lifeStyle, updateWrapper);
+        return BaseResult.success();
     }
 
     @PostMapping("/getUseMedRecordList")

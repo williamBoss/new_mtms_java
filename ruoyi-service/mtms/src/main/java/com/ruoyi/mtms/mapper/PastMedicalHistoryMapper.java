@@ -2,15 +2,27 @@ package com.ruoyi.mtms.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.ruoyi.mtms.domain.PastMedicalHistory;
+import com.ruoyi.mtms.vo.PastMedicalHistoryVO;
+import org.apache.ibatis.annotations.Param;
+
+import java.util.List;
 
 /**
-* @Title: PastMedicalHistoryMapper
-* @Package com.ruoyi.mtms.mapper
-* @Description: ${TODO}(这里用一句话描述这个类的作用)
-* @author KING
-* @date 2020/5/27 15:36
-* @version V1.0
-*/
-
+ * ${TODO}
+ *
+ * @author KING
+ * @version V1.0
+ * @date 2020/9/9 21:19
+ */
 public interface PastMedicalHistoryMapper extends BaseMapper<PastMedicalHistory> {
+
+    /**
+     * 既往病史
+     *
+     * @param patientId
+     * @param assessmentId
+     * @return
+     */
+    List<PastMedicalHistoryVO> selectPastMedicalHistory(@Param("patientId") Integer patientId,
+        @Param("assessmentId") Integer assessmentId);
 }

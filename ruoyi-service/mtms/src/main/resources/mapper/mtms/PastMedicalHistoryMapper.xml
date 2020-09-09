@@ -1,21 +1,35 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.ruoyi.mtms.mapper.PastMedicalHistoryMapper">
-  <resultMap id="BaseResultMap" type="com.ruoyi.mtms.domain.PastMedicalHistory">
-    <!--@mbg.generated-->
-    <!--@Table mtms_past_medical_history-->
-    <id column="history_id" jdbcType="INTEGER" property="historyId" />
-    <result column="assessment_id" jdbcType="INTEGER" property="assessmentId" />
-    <result column="disease_id" jdbcType="INTEGER" property="diseaseId" />
-    <result column="del_flag" jdbcType="BOOLEAN" property="delFlag" />
-    <result column="create_by" jdbcType="VARCHAR" property="createBy" />
-    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
-    <result column="update_by" jdbcType="VARCHAR" property="updateBy" />
-    <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
-  </resultMap>
-  <sql id="Base_Column_List">
-    <!--@mbg.generated-->
-    history_id, assessment_id, disease_id, del_flag, create_by, create_time, update_by, 
-    update_time
-  </sql>
+    <resultMap id="BaseResultMap" type="com.ruoyi.mtms.domain.PastMedicalHistory">
+        <!--@mbg.generated-->
+        <!--@Table mtms_past_medical_history-->
+        <id column="history_id" jdbcType="INTEGER" property="historyId"/>
+        <result column="assessment_id" jdbcType="INTEGER" property="assessmentId"/>
+        <result column="patient_id" jdbcType="INTEGER" property="patientId"/>
+        <result column="disease_id" jdbcType="INTEGER" property="diseaseId"/>
+        <result column="del_flag" jdbcType="BOOLEAN" property="delFlag"/>
+        <result column="create_by" jdbcType="VARCHAR" property="createBy"/>
+        <result column="create_time" jdbcType="TIMESTAMP" property="createTime"/>
+        <result column="update_by" jdbcType="VARCHAR" property="updateBy"/>
+        <result column="update_time" jdbcType="TIMESTAMP" property="updateTime"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+        <!--@mbg.generated-->
+        history_id, assessment_id, patient_id, disease_id, del_flag, create_by, create_time,
+        update_by, update_time
+    </sql>
+
+    <select id="selectPastMedicalHistory" resultType="com.ruoyi.mtms.vo.PastMedicalHistoryVO">
+        select pmh.history_id, pmh.assessment_id, pmh.patient_id, pmh.disease_id, md.disease_name, md.disease_key
+        from mtms_past_medical_history pmh
+                     left join mtms_disease md on pmh.disease_id = md.disease_id
+                where pmh.del_flag = 0
+        <if test="assessmentId != null">
+            and pmh.assessment_id = #{assessmentId,jdbcType=INTEGER}
+        </if>
+        <if test="patientId != null">
+            and pmh.patient_id = #{patientId,jdbcType=INTEGER}
+        </if>
+    </select>
 </mapper>

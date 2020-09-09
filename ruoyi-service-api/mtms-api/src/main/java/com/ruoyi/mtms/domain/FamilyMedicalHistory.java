@@ -13,7 +13,7 @@ import lombok.EqualsAndHashCode;
 /**
 * ${TODO}
 * @author KING
-* @date 2020/9/6 19:52
+* @date 2020/9/9 20:50
 * @version V1.0
 */
 
@@ -38,6 +38,13 @@ public class FamilyMedicalHistory extends BaseEntity {
     @TableField(value = "assessment_id")
     @ApiModelProperty(value = "评估id")
     private Integer assessmentId;
+
+    /**
+     * 患者id
+     */
+    @TableField(value = "patient_id")
+    @ApiModelProperty(value = "患者id")
+    private Integer patientId;
 
     /**
      * 家族病史病种id
