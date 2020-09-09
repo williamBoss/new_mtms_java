@@ -4,6 +4,7 @@ import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.ruoyi.common.constant.ResponseConstants;
 import com.ruoyi.common.core.controller.BaseController;
+import com.ruoyi.common.core.domain.BaseResult;
 import com.ruoyi.common.core.domain.R;
 import com.ruoyi.common.utils.StringUtils;
 import com.ruoyi.mtms.domain.MedicineInfo;
@@ -77,13 +78,13 @@ public class MedController extends BaseController {
 
     @GetMapping(value = "/allMed")
     @ApiOperation(value = "获取所有药品")
-    public R queryAllMed() {
+    public BaseResult<List<MedicineInfoVO>> queryAllMed() {
         List<MedicineInfo> list = medicineInfoService.list();
         List<MedicineInfoVO> medicineInfoVOList = new ArrayList<>();
         list.forEach(item -> {
             medicineInfoVOList.add(dozerMapper.map(item, MedicineInfoVO.class));
         });
-        return R.data(medicineInfoVOList);
+        return BaseResult.<List<MedicineInfoVO>>success().data(medicineInfoVOList);
     }
 
     @GetMapping(value = "/{id}")
