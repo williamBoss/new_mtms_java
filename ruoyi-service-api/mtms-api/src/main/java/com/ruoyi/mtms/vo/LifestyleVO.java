@@ -140,7 +140,7 @@ public class LifestyleVO {
      * 是否有睡眠障碍 1.没有 2.入睡困难 3.早醒 4.多梦
      */
     @ApiModelProperty(value = "是否有睡眠障碍 1.没有 2.入睡困难 3.早醒 4.多梦")
-    private Integer isSleepDisorder;
+    private String isSleepDisorder;
 
     /**
      * 睡眠障碍发生的频率 次/周
@@ -207,6 +207,12 @@ public class LifestyleVO {
      */
     @ApiModelProperty(value = "就诊12个月后每月药费")
     private BigDecimal afterTwelveMonthsTreatmentMonthlyMedicalExpenses;
+
+    /**
+     * 生活方式 评估报告 总结
+     */
+    @ApiModelProperty(value = "生活方式 评估报告 总结")
+    private String lifestyleSummary;
 
 }
 

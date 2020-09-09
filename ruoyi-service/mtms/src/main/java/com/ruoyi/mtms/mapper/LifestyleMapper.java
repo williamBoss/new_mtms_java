@@ -8,7 +8,7 @@ import com.ruoyi.mtms.domain.Lifestyle;
  *
  * @author KING
  * @version V1.0
- * @date 2020/9/9 16:00
+ * @date 2020/9/9 19:39
  */
 public interface LifestyleMapper extends BaseMapper<Lifestyle> {
 }
