@@ -63,7 +63,7 @@ public class BaseEntity implements Serializable {
      * 备注
      */
     @ApiModelProperty(value = "备注")
-    private String remark;
+    private transient String remark;
 
     /**
      * 搜索值
