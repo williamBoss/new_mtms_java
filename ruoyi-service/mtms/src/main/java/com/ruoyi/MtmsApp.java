@@ -20,7 +20,6 @@ import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 @MapperScan("com.ruoyi.*.mapper")
 @SpringBootApplication(exclude = {DataSourceAutoConfiguration.class})
 public class MtmsApp {
-
     public static void main(String[] args) {
         SpringApplication.run(MtmsApp.class, args);
     }

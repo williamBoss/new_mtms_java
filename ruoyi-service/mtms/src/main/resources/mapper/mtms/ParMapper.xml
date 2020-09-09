@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.mtms.mapper.ParMapper">
+  <resultMap id="BaseResultMap" type="com.ruoyi.mtms.domain.Par">
+    <!--@mbg.generated-->
+    <!--@Table mtms_par-->
+    <id column="par_id" jdbcType="INTEGER" property="parId" />
+    <result column="assessment_id" jdbcType="INTEGER" property="assessmentId" />
+    <result column="pat_id" jdbcType="INTEGER" property="patId" />
+    <result column="risk_ten_year" jdbcType="VARCHAR" property="riskTenYear" />
+    <result column="risk_ten_year_level" jdbcType="BOOLEAN" property="riskTenYearLevel" />
+    <result column="estimated_risk_ten_year" jdbcType="VARCHAR" property="estimatedRiskTenYear" />
+    <result column="risk_lifetime" jdbcType="VARCHAR" property="riskLifetime" />
+    <result column="risk_lifetime_level" jdbcType="BOOLEAN" property="riskLifetimeLevel" />
+    <result column="estimated_risk_lifetime" jdbcType="VARCHAR" property="estimatedRiskLifetime" />
+    <result column="del_flag" jdbcType="BOOLEAN" property="delFlag" />
+    <result column="create_by" jdbcType="VARCHAR" property="createBy" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="update_by" jdbcType="VARCHAR" property="updateBy" />
+    <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    <!--@mbg.generated-->
+    par_id, assessment_id, pat_id, risk_ten_year, risk_ten_year_level, estimated_risk_ten_year, 
+    risk_lifetime, risk_lifetime_level, estimated_risk_lifetime, del_flag, create_by, 
+    create_time, update_by, update_time
+  </sql>
+</mapper>

@@ -1,8 +1,10 @@
 package com.ruoyi.mtms.controller;
 
+import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.ruoyi.common.constant.ResponseConstants;
 import com.ruoyi.common.core.controller.BaseController;
+import com.ruoyi.common.core.domain.BaseResult;
 import com.ruoyi.common.core.domain.R;
 import com.ruoyi.common.core.domain.Result;
 import com.ruoyi.mtms.domain.*;
@@ -14,6 +16,7 @@ import com.ruoyi.mtms.vo.UseMedRecordVO;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiParam;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang.StringUtils;
 import org.dozer.Mapper;
@@ -141,14 +144,24 @@ public class AssessmentController extends BaseController {
     @ApiOperation("新增药物不良反应记录")
     public Result saveMedicationSideEffect(@RequestBody MedicationSideEffectVO medicationSideEffectVO) {
         MedicationSideEffect medicationSideEffect = dozenMapper.map(medicationSideEffectVO, MedicationSideEffect.class);
+        if (medicationSideEffectVO.getMedId() == null) {
+            MedicineInfo medicineInfo = new MedicineInfo();
+            medicineInfo.setMedName(medicationSideEffectVO.getMedName());
+            medicineInfoService.save(medicineInfo);
+            medicationSideEffect.setMedId(medicineInfo.getMedId());
+        }
         medicationSideEffectService.save(medicationSideEffect);
         return Result.ok();
     }
 
     @GetMapping("/getMedicationSideEffectList")
     @ApiOperation("获取药物不良反应记录列表")
-    public Result getMedicationSideEffect() {
-        return Result.ok().data("list", medicationSideEffectService.list());
+    public BaseResult<List<MedicationSideEffect>> getMedicationSideEffect(
+        @ApiParam(value = "患者Id") @RequestParam Integer patientId) {
+        LambdaQueryWrapper<MedicationSideEffect> queryWrapper = new LambdaQueryWrapper<>();
+        queryWrapper.eq(MedicationSideEffect::getPatientId, patientId);
+        List<MedicationSideEffect> list = medicationSideEffectService.list(queryWrapper);
+        return BaseResult.<List<MedicationSideEffect>>success().data(list);
     }
 
     @PostMapping("/saveExistSymptoms")

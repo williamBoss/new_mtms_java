@@ -15,7 +15,7 @@ import java.math.BigDecimal;
 /**
 * ${TODO}
 * @author KING
-* @date 2020/9/6 19:52
+* @date 2020/9/9 16:00
 * @version V1.0
 */
 
@@ -40,6 +40,13 @@ public class Lifestyle extends BaseEntity {
     @TableField(value = "assessment_id")
     @ApiModelProperty(value = "评估id")
     private Integer assessmentId;
+
+    /**
+     * 患者id
+     */
+    @TableField(value = "patient_id")
+    @ApiModelProperty(value = "患者id")
+    private Integer patientId;
 
     /**
      * 体重变化类型 1.增加 2.减少

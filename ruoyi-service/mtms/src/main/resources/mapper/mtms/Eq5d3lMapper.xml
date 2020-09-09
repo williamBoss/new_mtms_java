@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.mtms.mapper.Eq5d3lMapper">
+  <resultMap id="BaseResultMap" type="com.ruoyi.mtms.domain.Eq5d3l">
+    <!--@mbg.generated-->
+    <!--@Table mtms_eq5d3l-->
+    <id column="eq_5d_3l_id" jdbcType="INTEGER" property="eq5d3lId" />
+    <result column="assessment_id" jdbcType="INTEGER" property="assessmentId" />
+    <result column="pat_id" jdbcType="INTEGER" property="patId" />
+    <result column="action_q" jdbcType="TINYINT" property="actionQ" />
+    <result column="look_after_self_q" jdbcType="TINYINT" property="lookAfterSelfQ" />
+    <result column="daily_act_q" jdbcType="TINYINT" property="dailyActQ" />
+    <result column="pain_q" jdbcType="TINYINT" property="painQ" />
+    <result column="anxiety_q" jdbcType="TINYINT" property="anxietyQ" />
+    <result column="eq5d3l_score" jdbcType="VARCHAR" property="eq5d3lScore" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+    <result column="del_flag" jdbcType="BOOLEAN" property="delFlag" />
+    <result column="create_user" jdbcType="INTEGER" property="createUser" />
+    <result column="update_user" jdbcType="INTEGER" property="updateUser" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    <!--@mbg.generated-->
+    eq_5d_3l_id, assessment_id, pat_id, action_q, look_after_self_q, daily_act_q, pain_q, 
+    anxiety_q, eq5d3l_score, create_time, update_time, del_flag, create_user, update_user
+  </sql>
+</mapper>

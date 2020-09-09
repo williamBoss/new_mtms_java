@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.mtms.mapper.SdsMapper">
+  <resultMap id="BaseResultMap" type="com.ruoyi.mtms.domain.Sds">
+    <!--@mbg.generated-->
+    <!--@Table mtms_sds-->
+    <id column="sds_id" jdbcType="INTEGER" property="sdsId" />
+    <result column="assessment_id" jdbcType="INTEGER" property="assessmentId" />
+    <result column="pat_id" jdbcType="INTEGER" property="patId" />
+    <result column="sds_q_1" jdbcType="TINYINT" property="sdsQ1" />
+    <result column="sds_q_2" jdbcType="TINYINT" property="sdsQ2" />
+    <result column="sds_q_3" jdbcType="TINYINT" property="sdsQ3" />
+    <result column="sds_q_4" jdbcType="TINYINT" property="sdsQ4" />
+    <result column="sds_q_5" jdbcType="TINYINT" property="sdsQ5" />
+    <result column="sds_q_6" jdbcType="TINYINT" property="sdsQ6" />
+    <result column="sds_q_7" jdbcType="TINYINT" property="sdsQ7" />
+    <result column="sds_q_8" jdbcType="TINYINT" property="sdsQ8" />
+    <result column="sds_q_9" jdbcType="TINYINT" property="sdsQ9" />
+    <result column="sds_q_1_0" jdbcType="TINYINT" property="sdsQ10" />
+    <result column="sds_q_1_1" jdbcType="TINYINT" property="sdsQ11" />
+    <result column="sds_q_1_2" jdbcType="TINYINT" property="sdsQ12" />
+    <result column="sds_q_1_3" jdbcType="TINYINT" property="sdsQ13" />
+    <result column="sds_q_1_4" jdbcType="TINYINT" property="sdsQ14" />
+    <result column="sds_q_1_5" jdbcType="TINYINT" property="sdsQ15" />
+    <result column="sds_q_1_6" jdbcType="TINYINT" property="sdsQ16" />
+    <result column="sds_q_1_7" jdbcType="TINYINT" property="sdsQ17" />
+    <result column="sds_q_1_8" jdbcType="TINYINT" property="sdsQ18" />
+    <result column="sds_q_1_9" jdbcType="TINYINT" property="sdsQ19" />
+    <result column="sds_q_2_0" jdbcType="TINYINT" property="sdsQ20" />
+    <result column="sds_score" jdbcType="VARCHAR" property="sdsScore" />
+    <result column="del_flag" jdbcType="BOOLEAN" property="delFlag" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+    <result column="create_user" jdbcType="INTEGER" property="createUser" />
+    <result column="update_user" jdbcType="INTEGER" property="updateUser" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    <!--@mbg.generated-->
+    sds_id, assessment_id, pat_id, sds_q_1, sds_q_2, sds_q_3, sds_q_4, sds_q_5, sds_q_6, 
+    sds_q_7, sds_q_8, sds_q_9, sds_q_1_0, sds_q_1_1, sds_q_1_2, sds_q_1_3, sds_q_1_4, 
+    sds_q_1_5, sds_q_1_6, sds_q_1_7, sds_q_1_8, sds_q_1_9, sds_q_2_0, sds_score, del_flag, 
+    create_time, update_time, create_user, update_user
+  </sql>
+</mapper>

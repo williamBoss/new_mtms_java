@@ -26,7 +26,7 @@ public class Result {
     public static Result ok() {
         Result r = new Result();
         r.setSuccess(true);
-        r.setCode(0);
+        r.setCode(ResponseConstants.RESPONSE_SUCCESS);
         r.setMsg("成功");
         return r;
     }

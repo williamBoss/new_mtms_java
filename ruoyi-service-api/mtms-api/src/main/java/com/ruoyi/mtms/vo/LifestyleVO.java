@@ -6,17 +6,6 @@ import lombok.Data;
 
 import java.math.BigDecimal;
 
-/**
- * ${TODO}
- *
- * @author KING
- * @date 2020/8/30 22:03
- * @version V1.0
- */
-
-/**
- * 生活方式与评估表
- */
 @Data
 @ApiModel(value = "LifestyleVO")
 public class LifestyleVO {
@@ -32,6 +21,12 @@ public class LifestyleVO {
      */
     @ApiModelProperty(value = "评估id")
     private Integer assessmentId;
+
+    /**
+     * 患者id
+     */
+    @ApiModelProperty(value = "患者id")
+    private Integer patientId;
 
     /**
      * 体重变化类型 1.增加 2.减少
@@ -214,3 +209,4 @@ public class LifestyleVO {
     private BigDecimal afterTwelveMonthsTreatmentMonthlyMedicalExpenses;
 
 }
+

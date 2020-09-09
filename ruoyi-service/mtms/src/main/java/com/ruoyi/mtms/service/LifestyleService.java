@@ -16,3 +16,4 @@ public interface LifestyleService extends IService<Lifestyle> {
 
 }
 
+

@@ -13,7 +13,7 @@ import java.util.Date;
  * @author KING
  */
 @Data
-@ApiModel(value = "药物不良反应史t")
+@ApiModel(value = "药物不良反应史")
 @TableName(value = "mtms_medication_side_effect")
 public class MedicationSideEffectVO {
 
@@ -34,6 +34,12 @@ public class MedicationSideEffectVO {
      */
     @ApiModelProperty(value = "药物id")
     private Integer medId;
+
+    /**
+     * 药品名称
+     */
+    @ApiModelProperty(value = "药品名称")
+    private String medName;
 
     /**
      * 不良反应症状

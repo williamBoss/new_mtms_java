@@ -20,3 +20,4 @@ public class LifestyleServiceImpl extends ServiceImpl<LifestyleMapper, Lifestyle
 
 }
 
+
