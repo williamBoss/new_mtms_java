@@ -11,12 +11,11 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 
 /**
- * ${TODO}
- *
- * @author KING
- * @date 2020/9/6 19:52
- * @version V1.0
- */
+* ${TODO}
+* @author KING
+* @date 2020/9/10 20:56
+* @version V1.0
+*/
 
 /**
  * 既往手术史与评估关系表
@@ -39,6 +38,13 @@ public class PastSurgicalHistory extends BaseEntity {
     @TableField(value = "assessment_id")
     @ApiModelProperty(value = "评估id")
     private Integer assessmentId;
+
+    /**
+     * 患者id
+     */
+    @TableField(value = "patient_id")
+    @ApiModelProperty(value = "患者id")
+    private Integer patientId;
 
     /**
      * 手术名称id

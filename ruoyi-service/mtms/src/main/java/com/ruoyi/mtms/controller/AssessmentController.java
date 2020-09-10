@@ -20,6 +20,8 @@ import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -68,6 +70,9 @@ public class AssessmentController extends BaseController {
 
     @Autowired
     private MedicineInfoService medicineInfoService;
+
+    @Autowired
+    private AllergyHistoryService allergyHistoryService;
 
     @Autowired
     private Mapper dozenMapper;
@@ -126,8 +131,6 @@ public class AssessmentController extends BaseController {
         return BaseResult.<List<FamilyMedicalHistoryVO>>success().data(list);
     }
 
-    //     既往病史
-    //         getPastMedicalHistoryDiseaseIds
     @PostMapping("/save_past_medical_history")
     @ApiOperation("新增既往病史记录")
     public BaseResult<PastMedicalHistoryVO> savePastMedicalHistory(
@@ -150,49 +153,43 @@ public class AssessmentController extends BaseController {
         List<PastMedicalHistoryVO> list = pastMedicalHistoryService.selectPastMedicalHistory(patientId, assessmentId);
         return BaseResult.<List<PastMedicalHistoryVO>>success().data(list);
     }
-    // 既往手术史
-    //     getSurgicalHistoryIds
-    //     过敏史
-    // 肝损害
-    //     肾损害
 
-
-    /*@PostMapping("/saveFMHistory")
-    @ApiOperation("新增家族史和既往史记录")
-    public Result saveFMHistory(@RequestBody AssessmentVO assessmentVO) {
-
-        Integer assessmentId = assessmentVO.getAssessmentId();
-
-        //家族病史
-        for (Integer diseaseId : assessmentVO.getFamilyMedicalHistoryDiseaseIds()) {
-            FamilyMedicalHistory familyMedicalHistory = new FamilyMedicalHistory();
-            familyMedicalHistory.setAssessmentId(assessmentId);
-            familyMedicalHistory.setDiseaseId(diseaseId);
-            familyMedicalHistoryService.save(familyMedicalHistory);
+    @ApiOperation("保存既往手术史记录、肝损害、肾损害、过敏史、药物不良反应史选项")
+    @PostMapping("/save_damage")
+    public BaseResult<AssessmentInfoVO> saveLiverDamageAndKidneyDamage(@RequestBody AssessmentInfoVO assessmentInfoVO) {
+        Assessment assessment = dozenMapper.map(assessmentInfoVO, Assessment.class);
+        List<PastSurgicalHistory> pastSurgicalHistories = new ArrayList<>();
+        //保存既往手术史记录
+        PastSurgicalHistory pastSurgicalHistory = new PastSurgicalHistory();
+        pastSurgicalHistory.setAssessmentId(assessment.getAssessmentId());
+        pastSurgicalHistory.setPatientId(assessment.getPatientId());
+        Arrays.stream(assessmentInfoVO.getSurgicalIds()).forEach(v -> {
+            pastSurgicalHistory.setSurgicalHistoryId(v);
+            pastSurgicalHistories.add(pastSurgicalHistory);
+        });
+        Arrays.stream(assessmentInfoVO.getSurgeryName().split("、")).forEach(v -> {
+            SurgicalHistory surgicalHistory = new SurgicalHistory();
+            surgicalHistory.setSurgeryName(v);
+            surgicalHistoryService.save(surgicalHistory);
+            pastSurgicalHistory.setSurgicalHistoryId(surgicalHistory.getSurgicalHistoryId());
+            pastSurgicalHistories.add(pastSurgicalHistory);
+        });
+        pastSurgicalHistoryService.saveBatch(pastSurgicalHistories);
+        //保存过敏史
+        if (!assessment.getAllergyHistory()) {
+            assessmentInfoVO.getAllergyHistories().forEach(v -> {
+                AllergyHistory allergyHistory = new AllergyHistory();
+                allergyHistory.setAssessmentId(assessment.getAssessmentId());
+                allergyHistory.setPatientId(assessment.getPatientId());
+                allergyHistory.setAllergen(v.getAllergen());
+                allergyHistory.setAllergySymptoms(v.getAllergySymptoms());
+                allergyHistory.setAllergyDatetime(v.getAllergyDatetime());
+                allergyHistoryService.save(allergyHistory);
+            });
         }
-
-        //既往病史
-        for (Integer diseaseId : assessmentVO.getPastMedicalHistoryDiseaseIds()) {
-            PastMedicalHistory pastMedicalHistory = new PastMedicalHistory();
-            pastMedicalHistory.setAssessmentId(assessmentId);
-            pastMedicalHistory.setDiseaseId(diseaseId);
-            pastMedicalHistoryService.save(pastMedicalHistory);
-        }
-
-        //既往手术史
-        // TODO: 2020/8/31 需要提供curd接口
-        for (Integer surgicalHistoryId : assessmentVO.getSurgicalHistoryIds()) {
-            PastSurgicalHistory pastSurgicalHistory = new PastSurgicalHistory();
-            pastSurgicalHistory.setAssessmentId(assessmentId);
-            pastSurgicalHistory.setPastSurgicalHistoryId(surgicalHistoryId);
-            pastSurgicalHistoryService.save(pastSurgicalHistory);
-        }
-
-        Assessment assessment = dozenMapper.map(assessmentVO, Assessment.class);
         assessmentService.updateById(assessment);
-
-        return Result.ok();
-    }*/
+        return BaseResult.success();
+    }
 
     @PostMapping("/saveMedicationSideEffect")
     @ApiOperation("新增药物不良反应记录")
@@ -218,6 +215,7 @@ public class AssessmentController extends BaseController {
         return BaseResult.<List<MedicationSideEffect>>success().data(list);
     }
 
+    //todo
     @PostMapping("/saveExistSymptoms")
     @ApiOperation("新增现有症状记录")
     public Result updateExistSymptoms(@RequestBody AssessmentVO assessmentVO) {

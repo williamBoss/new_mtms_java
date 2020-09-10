@@ -6,6 +6,7 @@
     <!--@Table mtms_past_surgical_history-->
     <id column="past_surgical_history_id" jdbcType="INTEGER" property="pastSurgicalHistoryId" />
     <result column="assessment_id" jdbcType="INTEGER" property="assessmentId" />
+    <result column="patient_id" jdbcType="INTEGER" property="patientId" />
     <result column="surgical_history_id" jdbcType="INTEGER" property="surgicalHistoryId" />
     <result column="del_flag" jdbcType="BOOLEAN" property="delFlag" />
     <result column="create_by" jdbcType="VARCHAR" property="createBy" />
@@ -15,7 +16,7 @@
   </resultMap>
   <sql id="Base_Column_List">
     <!--@mbg.generated-->
-    past_surgical_history_id, assessment_id, surgical_history_id, del_flag, create_by, 
-    create_time, update_by, update_time
+    past_surgical_history_id, assessment_id, patient_id, surgical_history_id, del_flag, 
+    create_by, create_time, update_by, update_time
   </sql>
 </mapper>

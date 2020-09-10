@@ -6,8 +6,8 @@ import lombok.Data;
 
 import java.time.LocalDateTime;
 
-@ApiModel(value = "com-ruoyi-mtms-vo-AllergyHistoryVO")
 @Data
+@ApiModel(value = "AllergyHistoryVO")
 public class AllergyHistoryVO {
     /**
      * 主键id
@@ -45,34 +45,5 @@ public class AllergyHistoryVO {
     @ApiModelProperty(value = "过敏发生时间")
     private LocalDateTime allergyDatetime;
 
-    /**
-     * 删除状态(0-正常,1-已删除)
-     */
-    @ApiModelProperty(value = "删除状态(0-正常,1-已删除)")
-    private Boolean delFlag;
-
-    /**
-     * 创建人
-     */
-    @ApiModelProperty(value = "创建人")
-    private String createBy;
-
-    /**
-     * 创建时间
-     */
-    @ApiModelProperty(value = "创建时间")
-    private LocalDateTime createTime;
-
-    /**
-     * 更新人
-     */
-    @ApiModelProperty(value = "更新人")
-    private String updateBy;
-
-    /**
-     * 更新时间
-     */
-    @ApiModelProperty(value = "更新时间")
-    private LocalDateTime updateTime;
 }
 
