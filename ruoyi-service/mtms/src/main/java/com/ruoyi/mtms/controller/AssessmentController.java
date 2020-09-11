@@ -106,7 +106,6 @@ public class AssessmentController extends BaseController {
         return Result.ok().data("assessment", assessment);
     }
 
-    // TODO: 2020/9/9 拆分为单个保存 查询接口
     @PostMapping("/save_family_medical_history")
     @ApiOperation("新增家族史记录")
     public BaseResult<FamilyMedicalHistoryVO> saveFamilyMedicalHistory(
