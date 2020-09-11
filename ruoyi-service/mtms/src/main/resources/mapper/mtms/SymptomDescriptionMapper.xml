@@ -6,6 +6,7 @@
     <!--@Table mtms_symptom_description-->
     <id column="symptom_description_id" jdbcType="INTEGER" property="symptomDescriptionId" />
     <result column="assessment_id" jdbcType="INTEGER" property="assessmentId" />
+    <result column="patient_id" jdbcType="INTEGER" property="patientId" />
     <result column="physique" jdbcType="VARCHAR" property="physique" />
     <result column="physique_other_desc" jdbcType="VARCHAR" property="physiqueOtherDesc" />
     <result column="facial_features" jdbcType="VARCHAR" property="facialFeatures" />
@@ -38,8 +39,8 @@
   </resultMap>
   <sql id="Base_Column_List">
     <!--@mbg.generated-->
-    symptom_description_id, assessment_id, physique, physique_other_desc, facial_features, 
-    facial_features_other_desc, endocrine, endocrine_other_desc, respiratory_system, 
+    symptom_description_id, assessment_id, patient_id, physique, physique_other_desc, 
+    facial_features, facial_features_other_desc, endocrine, endocrine_other_desc, respiratory_system, 
     respiratory_system_other_desc, cardiovascular, cardiovascular_other_desc, digestive_system, 
     digestive_system_other_desc, urogenital_system, urogenital_system_other_desc, musculoskeletal_system, 
     musculoskeletal_system_other_desc, nervous_system, nervous_system_other_desc, hemolymph_system, 

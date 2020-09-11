@@ -20,9 +20,20 @@ public class AssessmentDiagnosisVO {
     private Integer assessmentId;
 
     /**
+     * 评估患者id
+     */
+    @ApiModelProperty(value = "评估患者id")
+    private Integer patientId;
+
+    /**
      * 诊断病种id
      */
     @ApiModelProperty(value = "诊断病种id")
     private Integer diseaseId;
 
+    @ApiModelProperty(value = "诊断病种ids")
+    private Integer[] diagnosisDiseaseIds;
+
+    @ApiModelProperty(value = "诊断病种名称")
+    private Integer diseaseName;
 }

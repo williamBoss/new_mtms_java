@@ -1,6 +1,9 @@
 package com.ruoyi.mtms.vo;
 
-import com.baomidou.mybatisplus.annotation.*;
+import com.baomidou.mybatisplus.annotation.IdType;
+import com.baomidou.mybatisplus.annotation.TableField;
+import com.baomidou.mybatisplus.annotation.TableId;
+import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.Data;
 
 /**
@@ -29,12 +32,5 @@ public class DiseaseVO {
      */
     @TableField(value = "disease_key")
     private String diseaseKey;
-
-    /**
-     * 删除状态(0-正常,1-已删除)
-     */
-    @TableLogic
-    @TableField(value = "del_flag")
-    private Boolean delFlag;
 
 }

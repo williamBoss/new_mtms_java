@@ -35,6 +35,13 @@ public class AssessmentDiagnosis extends BaseEntity {
     private Integer assessmentId;
 
     /**
+     * 评估患者id
+     */
+    @TableField(value = "patient_id")
+    @ApiModelProperty(value = "评估患者id")
+    private Integer patientId;
+
+    /**
      * 诊断病种id
      */
     @TableField(value = "disease_id")

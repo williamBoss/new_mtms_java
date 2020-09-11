@@ -1,6 +1,7 @@
 package com.ruoyi.mtms.controller;
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
+import com.baomidou.mybatisplus.core.conditions.update.LambdaUpdateWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.github.dozermapper.core.Mapper;
 import com.ruoyi.common.constant.ResponseConstants;
@@ -215,27 +216,56 @@ public class AssessmentController extends BaseController {
         return BaseResult.<List<MedicationSideEffect>>success().data(list);
     }
 
-    //todo
-    @PostMapping("/saveExistSymptoms")
-    @ApiOperation("新增现有症状记录")
-    public Result updateExistSymptoms(@RequestBody AssessmentVO assessmentVO) {
-        Integer assessmentId = assessmentVO.getAssessmentId();
-        Assessment assessment = dozenMapper.map(assessmentVO, Assessment.class);
-        assessmentService.updateById(assessment);
-        //评估诊断关系
-        for (Integer diseaseId : assessmentVO.getDiseaseIds()) {
+    @PostMapping("/save_diagnosis")
+    @ApiOperation("新增现有症状-诊断记录")
+    public BaseResult<AssessmentDiagnosisVO> saveDiagnosis(@RequestBody AssessmentDiagnosisVO assessmentDiagnosisVO) {
+        Arrays.stream(assessmentDiagnosisVO.getDiagnosisDiseaseIds()).forEach(v -> {
             AssessmentDiagnosis assessmentDiagnosis = new AssessmentDiagnosis();
-            assessmentDiagnosis.setAssessmentId(assessmentId);
-            assessmentDiagnosis.setDiseaseId(diseaseId);
+            assessmentDiagnosis.setAssessmentId(assessmentDiagnosisVO.getAssessmentId());
+            assessmentDiagnosis.setPatientId(assessmentDiagnosisVO.getPatientId());
+            assessmentDiagnosis.setDiseaseId(v);
             assessmentDiagnosisService.save(assessmentDiagnosis);
-        }
+        });
+        return BaseResult.success();
+    }
 
+    @PostMapping("/get_diagnosis")
+    @ApiOperation("获取现有症状-诊断记录")
+    public BaseResult<List<AssessmentDiagnosisVO>> getDiagnosis(
+        @ApiParam(value = "评估Id") @RequestParam Integer assessmentId,
+        @ApiParam(value = "患者Id") @RequestParam Integer patientId) {
+        List<AssessmentDiagnosisVO> list =
+            assessmentDiagnosisService.selectAssessmentDiagnosis(patientId, assessmentId);
+        return BaseResult.<List<AssessmentDiagnosisVO>>success().data(list);
+    }
+
+    @PostMapping("/save_exist_symptoms")
+    @ApiOperation("新增现有症状记录")
+    public BaseResult<ExistSymptomsVO> updateExistSymptoms(@RequestBody ExistSymptomsVO existSymptomsVO) {
+        //保存主诉
+        Assessment assessment = dozenMapper.map(existSymptomsVO, Assessment.class);
+        assessmentService.updateById(assessment);
         //当前症状描述
-        SymptomDescription symptomDescription = dozenMapper.map(assessmentVO, SymptomDescription.class);
-        symptomDescription.setAssessmentId(assessmentId);
-        symptomDescriptionService.save(symptomDescription);
+        SymptomDescription symptomDescription = dozenMapper.map(existSymptomsVO, SymptomDescription.class);
+        symptomDescription.setPhysique(String.join("、", existSymptomsVO.getPhysiques()));
+        symptomDescription.setFacialFeatures(String.join("、", existSymptomsVO.getFacialFeaturess()));
+        symptomDescription.setEndocrine(String.join("、", existSymptomsVO.getEndocrines()));
+        symptomDescription.setRespiratorySystem(String.join("、", existSymptomsVO.getRespiratorySystems()));
+        symptomDescription.setCardiovascular(String.join("、", existSymptomsVO.getCardiovasculars()));
+        symptomDescription.setDigestiveSystem(String.join("、", existSymptomsVO.getDigestiveSystems()));
+        symptomDescription.setUrogenitalSystem(String.join("、", existSymptomsVO.getUrogenitalSystems()));
+        symptomDescription.setMusculoskeletalSystem(String.join("、", existSymptomsVO.getMusculoskeletalSystems()));
+        symptomDescription.setNervousSystem(String.join("、", existSymptomsVO.getNervousSystems()));
+        symptomDescription.setHemolymphSystem(String.join("、", existSymptomsVO.getHemolymphSystems()));
+        symptomDescription.setImmuneSystem(String.join("、", existSymptomsVO.getImmuneSystems()));
+        symptomDescription.setPsychological(String.join("、", existSymptomsVO.getPsychologicals()));
 
-        return Result.ok();
+        LambdaUpdateWrapper<SymptomDescription> updateWrapper = new LambdaUpdateWrapper<>();
+        updateWrapper.eq(SymptomDescription::getAssessmentId, existSymptomsVO.getAssessmentId());
+        symptomDescriptionService.remove(updateWrapper);
+
+        symptomDescriptionService.save(symptomDescription);
+        return BaseResult.success();
     }
 
     @PostMapping("/saveLifestyle")

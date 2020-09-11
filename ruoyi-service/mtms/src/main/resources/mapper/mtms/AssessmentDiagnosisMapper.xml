@@ -6,6 +6,7 @@
         <!--@Table mtms_assessment_diagnosis-->
         <id column="diagnosis_id" jdbcType="INTEGER" property="diagnosisId"/>
         <result column="assessment_id" jdbcType="INTEGER" property="assessmentId"/>
+        <result column="patient_id" jdbcType="INTEGER" property="patientId"/>
         <result column="disease_id" jdbcType="INTEGER" property="diseaseId"/>
         <result column="del_flag" jdbcType="BOOLEAN" property="delFlag"/>
         <result column="create_by" jdbcType="VARCHAR" property="createBy"/>
@@ -15,8 +16,8 @@
     </resultMap>
     <sql id="Base_Column_List">
         <!--@mbg.generated-->
-        diagnosis_id, assessment_id, disease_id, del_flag, create_by, create_time, update_by,
-        update_time
+        diagnosis_id, assessment_id, patient_id, disease_id, del_flag, create_by, create_time,
+        update_by, update_time
     </sql>
     <select id="getDiseaseNameById" resultType="com.ruoyi.mtms.vo.DiseaseVO">
         select md.disease_id, md.disease_name, md.disease_name
@@ -26,5 +27,17 @@
         <where>
             ${ew.customSqlSegment}
         </where>
+    </select>
+    <select id="selectAssessmentDiagnosis" resultType="com.ruoyi.mtms.vo.AssessmentDiagnosisVO">
+        select mad.diagnosis_id, mad.assessment_id, mad.patient_id, mad.disease_id, md.disease_name, md.disease_key
+        from mtms_assessment_diagnosis mad
+                     left join mtms_disease md on mad.disease_id = md.disease_id
+                where mad.del_flag = 0
+        <if test="assessmentId != null">
+            and mad.assessment_id = #{assessmentId,jdbcType=INTEGER}
+        </if>
+        <if test="patientId != null">
+            and mad.patient_id = #{patientId,jdbcType=INTEGER}
+        </if>
     </select>
 </mapper>
