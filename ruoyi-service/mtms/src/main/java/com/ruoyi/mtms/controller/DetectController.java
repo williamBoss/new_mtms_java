@@ -5,11 +5,15 @@ import com.baomidou.mybatisplus.core.conditions.Wrapper;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.github.dozermapper.core.Mapper;
 import com.ruoyi.common.core.controller.BaseController;
-import com.ruoyi.common.core.domain.R;
+import com.ruoyi.common.core.domain.BaseResult;
+import com.ruoyi.common.core.domain.DataResult;
+import com.ruoyi.common.core.domain.PageResult;
 import com.ruoyi.common.core.domain.Result;
 import com.ruoyi.mtms.domain.*;
 import com.ruoyi.mtms.service.*;
+import com.ruoyi.mtms.vo.*;
 import io.swagger.annotations.*;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -62,9 +66,13 @@ public class DetectController extends BaseController {
     @Autowired
     private DetectOtherService detectOtherService;
 
+    @Autowired
+    private Mapper dozenMapper;
+
     @ApiOperation("查询血压检测检验")
     @GetMapping("/getDetectBloodPressureList")
-    public R getDetectBloodPressure(@RequestParam(name = "pageNum", defaultValue = "1") Integer pageNo,
+    public BaseResult<PageResult<DetectBloodPressure>> getDetectBloodPressure(
+        @RequestParam(name = "pageNum", defaultValue = "1") Integer pageNo,
         @RequestParam(name = "pageSize", defaultValue = "10") Integer pageSize,
         @ApiParam(value = "患者id") @RequestParam Integer patientId) {
         //设置当前页和页容量
@@ -73,34 +81,39 @@ public class DetectController extends BaseController {
         queryWrapper.eq(DetectBloodPressure::getPatientId, patientId);
         queryWrapper.orderByDesc(DetectBloodPressure::getDetectDate);
         Page<DetectBloodPressure> list = detectBloodPressureService.page(page, queryWrapper);
-        return result(list.getRecords());
+        return DataResult.result(page, list.getRecords());
     }
 
     @ApiOperation("保存血压检验检测")
     @PostMapping("/saveDetectBloodPressure")
-    public Result saveDetectBloodPressure(@RequestBody DetectBloodPressure detectBloodPressure) {
+    public Result saveDetectBloodPressure(@RequestBody DetectBloodPressureVO detectBloodPressureVO) {
+        DetectBloodPressure detectBloodPressure = dozenMapper.map(detectBloodPressureVO, DetectBloodPressure.class);
         try {
-            detectBloodPressureService.updateById(detectBloodPressure);
+            detectBloodPressureService.save(detectBloodPressure);
+            return Result.ok();
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return Result.ok();
+        return Result.error();
     }
 
     @ApiOperation("修改血压检测检验")
     @PutMapping("/updateDetectBloodPressure")
-    public Result updateDetectBloodPressure(@RequestBody DetectBloodPressure detectBloodPressure) {
+    public Result updateDetectBloodPressure(@RequestBody DetectBloodPressureVO detectBloodPressureVO) {
+        DetectBloodPressure detectBloodPressure = dozenMapper.map(detectBloodPressureVO, DetectBloodPressure.class);
         try {
-            detectBloodPressureService.save(detectBloodPressure);
+            detectBloodPressureService.updateById(detectBloodPressure);
+            return Result.ok();
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return Result.ok();
+        return Result.error();
     }
 
     @ApiOperation("查询心率检测检验")
     @GetMapping("/getDetectHeartRateList")
-    public R getDetectHeartRate(@RequestParam(name = "pageNum", defaultValue = "1") Integer pageNo,
+    public BaseResult<PageResult<DetectHeartRate>> getDetectHeartRate(
+        @RequestParam(name = "pageNum", defaultValue = "1") Integer pageNo,
         @RequestParam(name = "pageSize", defaultValue = "10") Integer pageSize,
         @ApiParam(value = "患者id") @RequestParam Integer patientId) {
         //设置当前页和页容量
@@ -109,34 +122,39 @@ public class DetectController extends BaseController {
         queryWrapper.eq(DetectHeartRate::getPatientId, patientId);
         queryWrapper.orderByDesc(DetectHeartRate::getDetectDate);
         Page<DetectHeartRate> list = detectHeartRateService.page(page, queryWrapper);
-        return result(list.getRecords());
+        return DataResult.result(page, list.getRecords());
     }
 
     @ApiOperation("保存心率检验检测")
     @PostMapping("/saveDetectHeartRate")
-    public Result saveDetectHeartRate(@RequestBody DetectHeartRate detectHeartRate) {
+    public Result saveDetectHeartRate(@RequestBody DetectHeartRateVO detectHeartRateVO) {
+        DetectHeartRate detectHeartRate = dozenMapper.map(detectHeartRateVO, DetectHeartRate.class);
         try {
-            detectHeartRateService.updateById(detectHeartRate);
+            detectHeartRateService.save(detectHeartRate);
+            return Result.ok();
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return Result.ok();
+        return Result.error();
     }
 
     @ApiOperation("修改心率检测检验")
     @PutMapping("/updateDetectHeartRate")
-    public Result updateDetectHeartRate(@RequestBody DetectHeartRate detectHeartRate) {
+    public Result updateDetectHeartRate(@RequestBody DetectHeartRateVO detectHeartRateVO) {
+        DetectHeartRate detectHeartRate = dozenMapper.map(detectHeartRateVO, DetectHeartRate.class);
         try {
-            detectHeartRateService.save(detectHeartRate);
+            detectHeartRateService.updateById(detectHeartRate);
+            return Result.ok();
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return Result.ok();
+        return Result.error();
     }
 
     @ApiOperation("查询血脂检测检验")
     @GetMapping("/getDetectBloodLipidsList")
-    public R getDetectBloodLipids(@RequestParam(name = "pageNum", defaultValue = "1") Integer pageNo,
+    public BaseResult<PageResult<DetectBloodLipids>> getDetectBloodLipids(
+        @RequestParam(name = "pageNum", defaultValue = "1") Integer pageNo,
         @RequestParam(name = "pageSize", defaultValue = "10") Integer pageSize,
         @ApiParam(value = "患者id") @RequestParam Integer patientId) {
         //设置当前页和页容量
@@ -145,23 +163,13 @@ public class DetectController extends BaseController {
         queryWrapper.eq(DetectBloodLipids::getPatientId, patientId);
         queryWrapper.orderByDesc(DetectBloodLipids::getDetectDate);
         Page<DetectBloodLipids> list = detectBloodLipidsService.page(page, queryWrapper);
-        return result(list.getRecords());
+        return DataResult.result(page, list.getRecords());
     }
 
     @ApiOperation("保存血脂检验检测")
     @PostMapping("/saveDetectBloodLipids")
-    public Result saveDetectBloodLipids(@RequestBody DetectBloodLipids detectBloodLipids) {
-        try {
-            detectBloodLipidsService.updateById(detectBloodLipids);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return Result.ok();
-    }
-
-    @ApiOperation("修改血脂检测检验")
-    @PutMapping("/updateDetectBloodLipids")
-    public Result updateDetectBloodLipids(@RequestBody DetectBloodLipids detectBloodLipids) {
+    public Result saveDetectBloodLipids(@RequestBody DetectBloodLipidsVO detectBloodLipidsVO) {
+        DetectBloodLipids detectBloodLipids = dozenMapper.map(detectBloodLipidsVO, DetectBloodLipids.class);
         try {
             detectBloodLipidsService.save(detectBloodLipids);
         } catch (Exception e) {
@@ -170,9 +178,23 @@ public class DetectController extends BaseController {
         return Result.ok();
     }
 
+    @ApiOperation("修改血脂检测检验")
+    @PutMapping("/updateDetectBloodLipids")
+    public Result updateDetectBloodLipids(@RequestBody DetectBloodLipidsVO detectBloodLipidsVO) {
+        DetectBloodLipids detectBloodLipids = dozenMapper.map(detectBloodLipidsVO, DetectBloodLipids.class);
+        try {
+            detectBloodLipidsService.updateById(detectBloodLipids);
+            return Result.ok();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return Result.error();
+    }
+
     @ApiOperation("查询血糖检测检验")
     @GetMapping("/getDetectBloodSugarList")
-    public R getDetectBloodSugar(@RequestParam(name = "pageNum", defaultValue = "1") Integer pageNo,
+    public BaseResult<PageResult<DetectBloodSugar>> getDetectBloodSugar(
+        @RequestParam(name = "pageNum", defaultValue = "1") Integer pageNo,
         @RequestParam(name = "pageSize", defaultValue = "10") Integer pageSize,
         @ApiParam(value = "患者id") @RequestParam Integer patientId) {
         //设置当前页和页容量
@@ -181,23 +203,13 @@ public class DetectController extends BaseController {
         queryWrapper.eq(DetectBloodSugar::getPatientId, patientId);
         queryWrapper.orderByDesc(DetectBloodSugar::getDetectDate);
         Page<DetectBloodSugar> list = detectBloodSugarService.page(page, queryWrapper);
-        return result(list.getRecords());
+        return DataResult.result(page, list.getRecords());
     }
 
     @ApiOperation("保存血糖检验检测")
     @PostMapping("/saveDetectBloodSugar")
-    public Result saveDetectBloodSugar(@RequestBody DetectBloodSugar detectBloodSugar) {
-        try {
-            detectBloodSugarService.updateById(detectBloodSugar);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return Result.ok();
-    }
-
-    @ApiOperation("修改血糖检测检验")
-    @PutMapping("/updateDetectBloodSugar")
-    public Result updateDetectBloodSugar(@RequestBody DetectBloodSugar detectBloodSugar) {
+    public Result saveDetectBloodSugar(@RequestBody DetectBloodSugarVO detectBloodSugarVO) {
+        DetectBloodSugar detectBloodSugar = dozenMapper.map(detectBloodSugarVO, DetectBloodSugar.class);
         try {
             detectBloodSugarService.save(detectBloodSugar);
         } catch (Exception e) {
@@ -206,9 +218,22 @@ public class DetectController extends BaseController {
         return Result.ok();
     }
 
+    @ApiOperation("修改血糖检测检验")
+    @PutMapping("/updateDetectBloodSugar")
+    public Result updateDetectBloodSugar(@RequestBody DetectBloodSugarVO detectBloodSugarVO) {
+        DetectBloodSugar detectBloodSugar = dozenMapper.map(detectBloodSugarVO, DetectBloodSugar.class);
+        try {
+            detectBloodSugarService.updateById(detectBloodSugar);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return Result.ok();
+    }
+
     @ApiOperation("查询同型半胱氨酸检测检验")
     @GetMapping("/getDetectHomocysteineList")
-    public R getDetectHomocysteine(@RequestParam(name = "pageNum", defaultValue = "1") Integer pageNo,
+    public BaseResult<PageResult<DetectHomocysteine>> getDetectHomocysteine(
+        @RequestParam(name = "pageNum", defaultValue = "1") Integer pageNo,
         @RequestParam(name = "pageSize", defaultValue = "10") Integer pageSize,
         @ApiParam(value = "患者id") @RequestParam Integer patientId) {
         //设置当前页和页容量
@@ -217,23 +242,13 @@ public class DetectController extends BaseController {
         queryWrapper.eq(DetectHomocysteine::getPatientId, patientId);
         queryWrapper.orderByDesc(DetectHomocysteine::getDetectDate);
         Page<DetectHomocysteine> list = detectHomocysteineService.page(page, queryWrapper);
-        return result(list.getRecords());
+        return DataResult.result(page, list.getRecords());
     }
 
     @ApiOperation("保存同型半胱氨酸检验检测")
     @PostMapping("/saveDetectHomocysteine")
-    public Result saveDetectHomocysteine(@RequestBody DetectHomocysteine detectHomocysteine) {
-        try {
-            detectHomocysteineService.updateById(detectHomocysteine);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return Result.ok();
-    }
-
-    @ApiOperation("修改同型半胱氨酸检测检验")
-    @PutMapping("/updateDetectHomocysteine")
-    public Result updateDetectHomocysteine(@RequestBody DetectHomocysteine detectHomocysteine) {
+    public Result saveDetectHomocysteine(@RequestBody DetectHomocysteineVO detectHomocysteineVO) {
+        DetectHomocysteine detectHomocysteine = dozenMapper.map(detectHomocysteineVO, DetectHomocysteine.class);
         try {
             detectHomocysteineService.save(detectHomocysteine);
         } catch (Exception e) {
@@ -242,9 +257,22 @@ public class DetectController extends BaseController {
         return Result.ok();
     }
 
+    @ApiOperation("修改同型半胱氨酸检测检验")
+    @PutMapping("/updateDetectHomocysteine")
+    public Result updateDetectHomocysteine(@RequestBody DetectHomocysteineVO detectHomocysteineVO) {
+        DetectHomocysteine detectHomocysteine = dozenMapper.map(detectHomocysteineVO, DetectHomocysteine.class);
+        try {
+            detectHomocysteineService.updateById(detectHomocysteine);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return Result.ok();
+    }
+
     @ApiOperation("查询血尿酸检测检验")
     @GetMapping("/getDetectBloodUricAcidList")
-    public R getDetectBloodUricAcid(@RequestParam(name = "pageNum", defaultValue = "1") Integer pageNo,
+    public BaseResult<PageResult<DetectBloodUricAcid>> getDetectBloodUricAcid(
+        @RequestParam(name = "pageNum", defaultValue = "1") Integer pageNo,
         @RequestParam(name = "pageSize", defaultValue = "10") Integer pageSize,
         @ApiParam(value = "患者id") @RequestParam Integer patientId) {
         //设置当前页和页容量
@@ -253,23 +281,13 @@ public class DetectController extends BaseController {
         queryWrapper.eq(DetectBloodUricAcid::getPatientId, patientId);
         queryWrapper.orderByDesc(DetectBloodUricAcid::getDetectDate);
         Page<DetectBloodUricAcid> list = detectBloodUricAcidService.page(page, queryWrapper);
-        return result(list.getRecords());
+        return DataResult.result(page, list.getRecords());
     }
 
     @ApiOperation("保存血尿酸检验检测")
     @PostMapping("/saveDetectBloodUricAcid")
-    public Result saveDetectBloodUricAcid(@RequestBody DetectBloodUricAcid detectBloodUricAcid) {
-        try {
-            detectBloodUricAcidService.updateById(detectBloodUricAcid);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return Result.ok();
-    }
-
-    @ApiOperation("修改血尿酸检测检验")
-    @PutMapping("/updateDetectBloodUricAcid")
-    public Result updateDetectBloodUricAcid(@RequestBody DetectBloodUricAcid detectBloodUricAcid) {
+    public Result saveDetectBloodUricAcid(@RequestBody DetectBloodUricAcidVO detectBloodUricAcidVO) {
+        DetectBloodUricAcid detectBloodUricAcid = dozenMapper.map(detectBloodUricAcidVO, DetectBloodUricAcid.class);
         try {
             detectBloodUricAcidService.save(detectBloodUricAcid);
         } catch (Exception e) {
@@ -278,9 +296,22 @@ public class DetectController extends BaseController {
         return Result.ok();
     }
 
+    @ApiOperation("修改血尿酸检测检验")
+    @PutMapping("/updateDetectBloodUricAcid")
+    public Result updateDetectBloodUricAcid(@RequestBody DetectBloodUricAcidVO detectBloodUricAcidVO) {
+        DetectBloodUricAcid detectBloodUricAcid = dozenMapper.map(detectBloodUricAcidVO, DetectBloodUricAcid.class);
+        try {
+            detectBloodUricAcidService.updateById(detectBloodUricAcid);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return Result.ok();
+    }
+
     @ApiOperation("查询肝功能检测检验")
     @GetMapping("/getDetectLiverFunctionList")
-    public R getDetectLiverFunction(@RequestParam(name = "pageNum", defaultValue = "1") Integer pageNo,
+    public BaseResult<PageResult<DetectLiverFunction>> getDetectLiverFunction(
+        @RequestParam(name = "pageNum", defaultValue = "1") Integer pageNo,
         @RequestParam(name = "pageSize", defaultValue = "10") Integer pageSize,
         @ApiParam(value = "患者id") @RequestParam Integer patientId) {
         //设置当前页和页容量
@@ -289,23 +320,13 @@ public class DetectController extends BaseController {
         queryWrapper.eq(DetectLiverFunction::getPatientId, patientId);
         queryWrapper.orderByDesc(DetectLiverFunction::getDetectDate);
         Page<DetectLiverFunction> list = detectLiverFunctionService.page(page, queryWrapper);
-        return result(list.getRecords());
+        return DataResult.result(page, list.getRecords());
     }
 
     @ApiOperation("保存肝功能检验检测")
     @PostMapping("/saveDetectLiverFunction")
-    public Result saveDetectLiverFunction(@RequestBody DetectLiverFunction detectLiverFunction) {
-        try {
-            detectLiverFunctionService.updateById(detectLiverFunction);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return Result.ok();
-    }
-
-    @ApiOperation("修改肝功能检测检验")
-    @PutMapping("/updateDetectLiverFunction")
-    public Result updateDetectLiverFunction(@RequestBody DetectLiverFunction detectLiverFunction) {
+    public Result saveDetectLiverFunction(@RequestBody DetectLiverFunctionVO detectLiverFunctionVO) {
+        DetectLiverFunction detectLiverFunction = dozenMapper.map(detectLiverFunctionVO, DetectLiverFunction.class);
         try {
             detectLiverFunctionService.save(detectLiverFunction);
         } catch (Exception e) {
@@ -314,9 +335,22 @@ public class DetectController extends BaseController {
         return Result.ok();
     }
 
+    @ApiOperation("修改肝功能检测检验")
+    @PutMapping("/updateDetectLiverFunction")
+    public Result updateDetectLiverFunction(@RequestBody DetectLiverFunctionVO detectLiverFunctionVO) {
+        DetectLiverFunction detectLiverFunction = dozenMapper.map(detectLiverFunctionVO, DetectLiverFunction.class);
+        try {
+            detectLiverFunctionService.updateById(detectLiverFunction);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return Result.ok();
+    }
+
     @ApiOperation("查询肾功能检测检验")
     @GetMapping("/getDetectKidneyFunctionList")
-    public R getDetectKidneyFunction(@RequestParam(name = "pageNum", defaultValue = "1") Integer pageNo,
+    public BaseResult<PageResult<DetectKidneyFunction>> getDetectKidneyFunction(
+        @RequestParam(name = "pageNum", defaultValue = "1") Integer pageNo,
         @RequestParam(name = "pageSize", defaultValue = "10") Integer pageSize,
         @ApiParam(value = "患者id") @RequestParam Integer patientId) {
         //设置当前页和页容量
@@ -325,23 +359,13 @@ public class DetectController extends BaseController {
         queryWrapper.eq(DetectKidneyFunction::getPatientId, patientId);
         queryWrapper.orderByDesc(DetectKidneyFunction::getDetectDate);
         Page<DetectKidneyFunction> list = detectKidneyFunctionService.page(page, queryWrapper);
-        return result(list.getRecords());
+        return DataResult.result(page, list.getRecords());
     }
 
     @ApiOperation("保存肾功能检验检测")
     @PostMapping("/saveDetectKidneyFunction")
-    public Result saveDetectKidneyFunction(@RequestBody DetectKidneyFunction detectKidneyFunction) {
-        try {
-            detectKidneyFunctionService.updateById(detectKidneyFunction);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return Result.ok();
-    }
-
-    @ApiOperation("修改肾功能检测检验")
-    @PutMapping("/updateDetectKidneyFunction")
-    public Result updateDetectKidneyFunction(@RequestBody DetectKidneyFunction detectKidneyFunction) {
+    public Result saveDetectKidneyFunction(@RequestBody DetectKidneyFunctionVO detectKidneyFunctionVO) {
+        DetectKidneyFunction detectKidneyFunction = dozenMapper.map(detectKidneyFunctionVO, DetectKidneyFunction.class);
         try {
             detectKidneyFunctionService.save(detectKidneyFunction);
         } catch (Exception e) {
@@ -350,9 +374,22 @@ public class DetectController extends BaseController {
         return Result.ok();
     }
 
+    @ApiOperation("修改肾功能检测检验")
+    @PutMapping("/updateDetectKidneyFunction")
+    public Result updateDetectKidneyFunction(@RequestBody DetectKidneyFunctionVO detectKidneyFunctionVO) {
+        DetectKidneyFunction detectKidneyFunction = dozenMapper.map(detectKidneyFunctionVO, DetectKidneyFunction.class);
+        try {
+            detectKidneyFunctionService.updateById(detectKidneyFunction);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return Result.ok();
+    }
+
     @ApiOperation("查询电解质检测检验")
     @GetMapping("/getDetectElectrolyteList")
-    public R getDetectElectrolyte(@RequestParam(name = "pageNum", defaultValue = "1") Integer pageNo,
+    public BaseResult<PageResult<DetectElectrolyte>> getDetectElectrolyte(
+        @RequestParam(name = "pageNum", defaultValue = "1") Integer pageNo,
         @RequestParam(name = "pageSize", defaultValue = "10") Integer pageSize,
         @ApiParam(value = "患者id") @RequestParam Integer patientId) {
         //设置当前页和页容量
@@ -361,23 +398,13 @@ public class DetectController extends BaseController {
         queryWrapper.eq(DetectElectrolyte::getPatientId, patientId);
         queryWrapper.orderByDesc(DetectElectrolyte::getDetectDate);
         Page<DetectElectrolyte> list = detectElectrolyteService.page(page, queryWrapper);
-        return result(list.getRecords());
+        return DataResult.result(page, list.getRecords());
     }
 
     @ApiOperation("保存电解质检验检测")
     @PostMapping("/saveDetectElectrolyte")
-    public Result saveDetectElectrolyte(@RequestBody DetectElectrolyte detectElectrolyte) {
-        try {
-            detectElectrolyteService.updateById(detectElectrolyte);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return Result.ok();
-    }
-
-    @ApiOperation("修改电解质检测检验")
-    @PutMapping("/updateDetectElectrolyte")
-    public Result updateDetectElectrolyte(@RequestBody DetectElectrolyte detectElectrolyte) {
+    public Result saveDetectElectrolyte(@RequestBody DetectElectrolyteVO detectElectrolyteVO) {
+        DetectElectrolyte detectElectrolyte = dozenMapper.map(detectElectrolyteVO, DetectElectrolyte.class);
         try {
             detectElectrolyteService.save(detectElectrolyte);
         } catch (Exception e) {
@@ -386,9 +413,22 @@ public class DetectController extends BaseController {
         return Result.ok();
     }
 
+    @ApiOperation("修改电解质检测检验")
+    @PutMapping("/updateDetectElectrolyte")
+    public Result updateDetectElectrolyte(@RequestBody DetectElectrolyteVO detectElectrolyteVO) {
+        DetectElectrolyte detectElectrolyte = dozenMapper.map(detectElectrolyteVO, DetectElectrolyte.class);
+        try {
+            detectElectrolyteService.updateById(detectElectrolyte);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return Result.ok();
+    }
+
     @ApiOperation("查询其他检测检验")
     @GetMapping("/getDetectOtherList")
-    public R getDetectOther(@RequestParam(name = "pageNum", defaultValue = "1") Integer pageNo,
+    public BaseResult<PageResult<DetectOther>> getDetectOther(
+        @RequestParam(name = "pageNum", defaultValue = "1") Integer pageNo,
         @RequestParam(name = "pageSize", defaultValue = "10") Integer pageSize,
         @ApiParam(value = "患者id") @RequestParam Integer patientId) {
         //设置当前页和页容量
@@ -397,14 +437,15 @@ public class DetectController extends BaseController {
         queryWrapper.eq(DetectOther::getPatientId, patientId);
         queryWrapper.orderByDesc(DetectOther::getDetectDate);
         Page<DetectOther> list = detectOtherService.page(page, queryWrapper);
-        return result(list.getRecords());
+        return DataResult.result(page, list.getRecords());
     }
 
     @ApiOperation("保存其他检验检测")
     @PostMapping("/saveDetectOther")
-    public Result saveDetectOther(@RequestBody DetectOther detectOther) {
+    public Result saveDetectOther(@RequestBody DetectOtherVO detectOtherVO) {
+        DetectOther detectOther = dozenMapper.map(detectOtherVO, DetectOther.class);
         try {
-            detectOtherService.updateById(detectOther);
+            detectOtherService.save(detectOther);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -413,9 +454,10 @@ public class DetectController extends BaseController {
 
     @ApiOperation("修改其他检测检验")
     @PutMapping("/updateDetectOther")
-    public Result updateDetectOther(@RequestBody DetectOther detectOther) {
+    public Result updateDetectOther(@RequestBody DetectOtherVO detectOtherVO) {
+        DetectOther detectOther = dozenMapper.map(detectOtherVO, DetectOther.class);
         try {
-            detectOtherService.save(detectOther);
+            detectOtherService.updateById(detectOther);
         } catch (Exception e) {
             e.printStackTrace();
         }
