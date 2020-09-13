@@ -1,12 +1,10 @@
 package com.ruoyi.mtms.service.Impl;
 
-import org.springframework.stereotype.Service;
-import javax.annotation.Resource;
-import java.util.List;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import com.ruoyi.mtms.mapper.DetectBloodUricAcidMapper;
 import com.ruoyi.mtms.domain.DetectBloodUricAcid;
+import com.ruoyi.mtms.mapper.DetectBloodUricAcidMapper;
 import com.ruoyi.mtms.service.DetectBloodUricAcidService;
+import org.springframework.stereotype.Service;
 
 /**
  * ${TODO}
@@ -20,4 +18,5 @@ public class DetectBloodUricAcidServiceImpl extends ServiceImpl<DetectBloodUricA
     implements DetectBloodUricAcidService {
 
 }
+
 

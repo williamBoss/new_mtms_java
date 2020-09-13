@@ -7,7 +7,7 @@
     <id column="id" jdbcType="INTEGER" property="id" />
     <result column="assessment_id" jdbcType="INTEGER" property="assessmentId" />
     <result column="patient_id" jdbcType="INTEGER" property="patientId" />
-    <result column="detect_date" jdbcType="TIMESTAMP" property="detectDate" />
+    <result column="detect_date" jdbcType="DATE" property="detectDate" />
     <result column="detect_name" jdbcType="VARCHAR" property="detectName" />
     <result column="detect_unit" jdbcType="VARCHAR" property="detectUnit" />
     <result column="detect_value" jdbcType="VARCHAR" property="detectValue" />

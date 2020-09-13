@@ -1,12 +1,10 @@
 package com.ruoyi.mtms.service.Impl;
 
-import org.springframework.stereotype.Service;
-import javax.annotation.Resource;
-import java.util.List;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.ruoyi.mtms.domain.DetectElectrolyte;
 import com.ruoyi.mtms.mapper.DetectElectrolyteMapper;
 import com.ruoyi.mtms.service.DetectElectrolyteService;
+import org.springframework.stereotype.Service;
 
 /**
  * ${TODO}
@@ -20,4 +18,5 @@ public class DetectElectrolyteServiceImpl extends ServiceImpl<DetectElectrolyteM
     implements DetectElectrolyteService {
 
 }
+
 

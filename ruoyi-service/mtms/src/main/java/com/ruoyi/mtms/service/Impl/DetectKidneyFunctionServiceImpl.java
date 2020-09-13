@@ -1,12 +1,10 @@
 package com.ruoyi.mtms.service.Impl;
 
-import org.springframework.stereotype.Service;
-import javax.annotation.Resource;
-import java.util.List;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import com.ruoyi.mtms.mapper.DetectKidneyFunctionMapper;
 import com.ruoyi.mtms.domain.DetectKidneyFunction;
+import com.ruoyi.mtms.mapper.DetectKidneyFunctionMapper;
 import com.ruoyi.mtms.service.DetectKidneyFunctionService;
+import org.springframework.stereotype.Service;
 
 /**
  * ${TODO}
@@ -20,4 +18,5 @@ public class DetectKidneyFunctionServiceImpl extends ServiceImpl<DetectKidneyFun
     implements DetectKidneyFunctionService {
 
 }
+
 

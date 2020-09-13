@@ -11,35 +11,25 @@ import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 
 /**
-* ${TODO}
-* @author KING
-* @date 2020/9/6 19:52
-* @version V1.0
-*/
+ * ${TODO}
+ *
+ * @author KING
+ * @date 2020/9/13 18:37
+ * @version V1.0
+ */
 
 /**
  * 心率检测检验
+ * @author KING
  */
 @ApiModel(value = "com-ruoyi-mtms-domain-DetectHeartRate")
 @Data
 @EqualsAndHashCode(callSuper = true)
 @TableName(value = "mtms_detect_heart_rate")
 public class DetectHeartRate extends BaseEntity {
-    public static final String COL_ID = "id";
-    public static final String COL_ASSESSMENT_ID = "assessment_id";
-    public static final String COL_PATIENT_ID = "patient_id";
-    public static final String COL_DETECT_DATE = "detect_date";
-    public static final String COL_MORNING_VALUE = "morning_value";
-    public static final String COL_NOON_VALUE = "noon_value";
-    public static final String COL_NIGHT_VALUE = "night_value";
-    public static final String COL_DEL_FLAG = "del_flag";
-    public static final String COL_CREATE_BY = "create_by";
-    public static final String COL_CREATE_TIME = "create_time";
-    public static final String COL_UPDATE_BY = "update_by";
-    public static final String COL_UPDATE_TIME = "update_time";
     /**
      * 主键id
      */
@@ -66,8 +56,8 @@ public class DetectHeartRate extends BaseEntity {
      */
     @TableField(value = "detect_date")
     @ApiModelProperty(value = "检测日期")
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy/MM/dd HH:mm:ss", timezone = "GMT+8")
-    private LocalDateTime detectDate;
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy/MM/dd", timezone = "GMT+8")
+    private LocalDate detectDate;
 
     /**
      * 早上心率值

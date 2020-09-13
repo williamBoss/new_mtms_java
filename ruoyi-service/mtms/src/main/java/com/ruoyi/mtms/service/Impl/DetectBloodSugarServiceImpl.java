@@ -1,12 +1,10 @@
 package com.ruoyi.mtms.service.Impl;
 
-import org.springframework.stereotype.Service;
-import javax.annotation.Resource;
-import java.util.List;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import com.ruoyi.mtms.mapper.DetectBloodSugarMapper;
 import com.ruoyi.mtms.domain.DetectBloodSugar;
+import com.ruoyi.mtms.mapper.DetectBloodSugarMapper;
 import com.ruoyi.mtms.service.DetectBloodSugarService;
+import org.springframework.stereotype.Service;
 
 /**
  * ${TODO}
@@ -20,4 +18,5 @@ public class DetectBloodSugarServiceImpl extends ServiceImpl<DetectBloodSugarMap
     implements DetectBloodSugarService {
 
 }
+
 

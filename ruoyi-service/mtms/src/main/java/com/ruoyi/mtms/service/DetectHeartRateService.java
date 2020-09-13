@@ -14,3 +14,4 @@ public interface DetectHeartRateService extends IService<DetectHeartRate> {
 
 }
 
+

@@ -7,7 +7,7 @@
     <id column="id" jdbcType="INTEGER" property="id" />
     <result column="assessment_id" jdbcType="INTEGER" property="assessmentId" />
     <result column="patient_id" jdbcType="INTEGER" property="patientId" />
-    <result column="detect_date" jdbcType="TIMESTAMP" property="detectDate" />
+    <result column="detect_date" jdbcType="DATE" property="detectDate" />
     <result column="TC" jdbcType="VARCHAR" property="tc" />
     <result column="LDL" jdbcType="VARCHAR" property="ldl" />
     <result column="TG" jdbcType="VARCHAR" property="tg" />
@@ -22,7 +22,7 @@
   </resultMap>
   <sql id="Base_Column_List">
     <!--@mbg.generated-->
-    id, assessment_id, patient_id, detect_date, TC, LDL, TG, LP_A, HDL_C, LDL_C, del_flag,
+    id, assessment_id, patient_id, detect_date, TC, LDL, TG, LP_A, HDL_C, LDL_C, del_flag, 
     create_by, create_time, update_by, update_time
   </sql>
 </mapper>

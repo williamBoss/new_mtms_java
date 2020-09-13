@@ -7,7 +7,7 @@
     <id column="id" jdbcType="INTEGER" property="id" />
     <result column="assessment_id" jdbcType="INTEGER" property="assessmentId" />
     <result column="patient_id" jdbcType="INTEGER" property="patientId" />
-    <result column="detect_date" jdbcType="TIMESTAMP" property="detectDate" />
+    <result column="detect_date" jdbcType="DATE" property="detectDate" />
     <result column="homocysteine_value" jdbcType="VARCHAR" property="homocysteineValue" />
     <result column="del_flag" jdbcType="BOOLEAN" property="delFlag" />
     <result column="create_by" jdbcType="VARCHAR" property="createBy" />

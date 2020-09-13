@@ -14,3 +14,4 @@ public interface DetectKidneyFunctionService extends IService<DetectKidneyFuncti
 
 }
 
+

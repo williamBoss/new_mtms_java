@@ -11,25 +11,25 @@ import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 
 /**
  * ${TODO}
  *
  * @author KING
- * @date 2020/9/6 19:52
+ * @date 2020/9/13 18:37
  * @version V1.0
  */
 
 /**
  * 肾功能检测检验
+ * @author KING
  */
 @ApiModel(value = "com-ruoyi-mtms-domain-DetectKidneyFunction")
 @Data
 @EqualsAndHashCode(callSuper = true)
 @TableName(value = "mtms_detect_kidney_function")
 public class DetectKidneyFunction extends BaseEntity {
-
     /**
      * 主键id
      */
@@ -56,8 +56,8 @@ public class DetectKidneyFunction extends BaseEntity {
      */
     @TableField(value = "detect_date")
     @ApiModelProperty(value = "检测日期")
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy/MM/dd HH:mm:ss", timezone = "GMT+8")
-    private LocalDateTime detectDate;
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy/MM/dd", timezone = "GMT+8")
+    private LocalDate detectDate;
 
     /**
      * 血肌酐Cr（umol/L）

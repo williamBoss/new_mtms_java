@@ -8,7 +8,7 @@ import com.ruoyi.mtms.domain.DetectBloodPressure;
  *
  * @author KING
  * @version V1.0
- * @date 2020/9/5 16:32
+ * @date 2020/9/13 18:37
  */
 public interface DetectBloodPressureMapper extends BaseMapper<DetectBloodPressure> {
 }

@@ -7,7 +7,7 @@
     <id column="id" jdbcType="INTEGER" property="id" />
     <result column="assessment_id" jdbcType="INTEGER" property="assessmentId" />
     <result column="patient_id" jdbcType="INTEGER" property="patientId" />
-    <result column="detect_date" jdbcType="TIMESTAMP" property="detectDate" />
+    <result column="detect_date" jdbcType="DATE" property="detectDate" />
     <result column="fasting_blood_glucose" jdbcType="VARCHAR" property="fastingBloodGlucose" />
     <result column="glycated_hemoglobin" jdbcType="VARCHAR" property="glycatedHemoglobin" />
     <result column="two_hours_postprandial" jdbcType="VARCHAR" property="twoHoursPostprandial" />

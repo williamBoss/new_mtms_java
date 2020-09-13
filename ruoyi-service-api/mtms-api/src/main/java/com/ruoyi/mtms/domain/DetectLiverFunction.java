@@ -11,18 +11,19 @@ import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 
 /**
  * ${TODO}
  *
  * @author KING
- * @date 2020/9/6 19:52
+ * @date 2020/9/13 18:37
  * @version V1.0
  */
 
 /**
  * 肝功能检测检验
+ * @author KING
  */
 @ApiModel(value = "com-ruoyi-mtms-domain-DetectLiverFunction")
 @Data
@@ -55,8 +56,8 @@ public class DetectLiverFunction extends BaseEntity {
      */
     @TableField(value = "detect_date")
     @ApiModelProperty(value = "检测日期")
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy/MM/dd HH:mm:ss", timezone = "GMT+8")
-    private LocalDateTime detectDate;
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy/MM/dd", timezone = "GMT+8")
+    private LocalDate detectDate;
 
     /**
      * 谷丙转氨酶

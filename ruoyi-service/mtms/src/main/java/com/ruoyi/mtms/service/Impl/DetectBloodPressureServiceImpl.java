@@ -1,12 +1,10 @@
 package com.ruoyi.mtms.service.Impl;
 
-import org.springframework.stereotype.Service;
-import javax.annotation.Resource;
-import java.util.List;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import com.ruoyi.mtms.mapper.DetectBloodPressureMapper;
 import com.ruoyi.mtms.domain.DetectBloodPressure;
+import com.ruoyi.mtms.mapper.DetectBloodPressureMapper;
 import com.ruoyi.mtms.service.DetectBloodPressureService;
+import org.springframework.stereotype.Service;
 
 /**
  * ${TODO}
@@ -20,4 +18,5 @@ public class DetectBloodPressureServiceImpl extends ServiceImpl<DetectBloodPress
     implements DetectBloodPressureService {
 
 }
+
 

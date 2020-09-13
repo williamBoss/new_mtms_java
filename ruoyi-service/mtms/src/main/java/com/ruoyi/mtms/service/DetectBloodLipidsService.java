@@ -14,3 +14,4 @@ public interface DetectBloodLipidsService extends IService<DetectBloodLipids> {
 
 }
 
+
