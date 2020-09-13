@@ -10,10 +10,7 @@ import com.ruoyi.common.core.domain.R;
 import com.ruoyi.common.core.domain.Result;
 import com.ruoyi.mtms.domain.*;
 import com.ruoyi.mtms.service.*;
-import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiImplicitParam;
-import io.swagger.annotations.ApiImplicitParams;
-import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.*;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -68,11 +65,12 @@ public class DetectController extends BaseController {
     @ApiOperation("查询血压检测检验")
     @GetMapping("/getDetectBloodPressureList")
     public R getDetectBloodPressure(@RequestParam(name = "pageNum", defaultValue = "1") Integer pageNo,
-        @RequestParam(name = "pageSize", defaultValue = "10") Integer pageSize) {
+        @RequestParam(name = "pageSize", defaultValue = "10") Integer pageSize,
+        @ApiParam(value = "患者id") @RequestParam Integer patientId) {
         //设置当前页和页容量
         Page<DetectBloodPressure> page = new Page<>(pageNo, pageSize);
         LambdaQueryWrapper<DetectBloodPressure> queryWrapper = new LambdaQueryWrapper<>();
-        queryWrapper.eq(DetectBloodPressure::getPatientId, getCurrentUserId());
+        queryWrapper.eq(DetectBloodPressure::getPatientId, patientId);
         queryWrapper.orderByDesc(DetectBloodPressure::getDetectDate);
         Page<DetectBloodPressure> list = detectBloodPressureService.page(page, queryWrapper);
         return result(list.getRecords());
@@ -103,11 +101,12 @@ public class DetectController extends BaseController {
     @ApiOperation("查询心率检测检验")
     @GetMapping("/getDetectHeartRateList")
     public R getDetectHeartRate(@RequestParam(name = "pageNum", defaultValue = "1") Integer pageNo,
-        @RequestParam(name = "pageSize", defaultValue = "10") Integer pageSize) {
+        @RequestParam(name = "pageSize", defaultValue = "10") Integer pageSize,
+        @ApiParam(value = "患者id") @RequestParam Integer patientId) {
         //设置当前页和页容量
         Page<DetectHeartRate> page = new Page<>(pageNo, pageSize);
         LambdaQueryWrapper<DetectHeartRate> queryWrapper = new LambdaQueryWrapper<>();
-        queryWrapper.eq(DetectHeartRate::getPatientId, getCurrentUserId());
+        queryWrapper.eq(DetectHeartRate::getPatientId, patientId);
         queryWrapper.orderByDesc(DetectHeartRate::getDetectDate);
         Page<DetectHeartRate> list = detectHeartRateService.page(page, queryWrapper);
         return result(list.getRecords());
@@ -138,11 +137,12 @@ public class DetectController extends BaseController {
     @ApiOperation("查询血脂检测检验")
     @GetMapping("/getDetectBloodLipidsList")
     public R getDetectBloodLipids(@RequestParam(name = "pageNum", defaultValue = "1") Integer pageNo,
-        @RequestParam(name = "pageSize", defaultValue = "10") Integer pageSize) {
+        @RequestParam(name = "pageSize", defaultValue = "10") Integer pageSize,
+        @ApiParam(value = "患者id") @RequestParam Integer patientId) {
         //设置当前页和页容量
         Page<DetectBloodLipids> page = new Page<>(pageNo, pageSize);
         LambdaQueryWrapper<DetectBloodLipids> queryWrapper = new LambdaQueryWrapper<>();
-        queryWrapper.eq(DetectBloodLipids::getPatientId, getCurrentUserId());
+        queryWrapper.eq(DetectBloodLipids::getPatientId, patientId);
         queryWrapper.orderByDesc(DetectBloodLipids::getDetectDate);
         Page<DetectBloodLipids> list = detectBloodLipidsService.page(page, queryWrapper);
         return result(list.getRecords());
@@ -173,11 +173,12 @@ public class DetectController extends BaseController {
     @ApiOperation("查询血糖检测检验")
     @GetMapping("/getDetectBloodSugarList")
     public R getDetectBloodSugar(@RequestParam(name = "pageNum", defaultValue = "1") Integer pageNo,
-        @RequestParam(name = "pageSize", defaultValue = "10") Integer pageSize) {
+        @RequestParam(name = "pageSize", defaultValue = "10") Integer pageSize,
+        @ApiParam(value = "患者id") @RequestParam Integer patientId) {
         //设置当前页和页容量
         Page<DetectBloodSugar> page = new Page<>(pageNo, pageSize);
         LambdaQueryWrapper<DetectBloodSugar> queryWrapper = new LambdaQueryWrapper<>();
-        queryWrapper.eq(DetectBloodSugar::getPatientId, getCurrentUserId());
+        queryWrapper.eq(DetectBloodSugar::getPatientId, patientId);
         queryWrapper.orderByDesc(DetectBloodSugar::getDetectDate);
         Page<DetectBloodSugar> list = detectBloodSugarService.page(page, queryWrapper);
         return result(list.getRecords());
@@ -208,11 +209,12 @@ public class DetectController extends BaseController {
     @ApiOperation("查询同型半胱氨酸检测检验")
     @GetMapping("/getDetectHomocysteineList")
     public R getDetectHomocysteine(@RequestParam(name = "pageNum", defaultValue = "1") Integer pageNo,
-        @RequestParam(name = "pageSize", defaultValue = "10") Integer pageSize) {
+        @RequestParam(name = "pageSize", defaultValue = "10") Integer pageSize,
+        @ApiParam(value = "患者id") @RequestParam Integer patientId) {
         //设置当前页和页容量
         Page<DetectHomocysteine> page = new Page<>(pageNo, pageSize);
         LambdaQueryWrapper<DetectHomocysteine> queryWrapper = new LambdaQueryWrapper<>();
-        queryWrapper.eq(DetectHomocysteine::getPatientId, getCurrentUserId());
+        queryWrapper.eq(DetectHomocysteine::getPatientId, patientId);
         queryWrapper.orderByDesc(DetectHomocysteine::getDetectDate);
         Page<DetectHomocysteine> list = detectHomocysteineService.page(page, queryWrapper);
         return result(list.getRecords());
@@ -243,11 +245,12 @@ public class DetectController extends BaseController {
     @ApiOperation("查询血尿酸检测检验")
     @GetMapping("/getDetectBloodUricAcidList")
     public R getDetectBloodUricAcid(@RequestParam(name = "pageNum", defaultValue = "1") Integer pageNo,
-        @RequestParam(name = "pageSize", defaultValue = "10") Integer pageSize) {
+        @RequestParam(name = "pageSize", defaultValue = "10") Integer pageSize,
+        @ApiParam(value = "患者id") @RequestParam Integer patientId) {
         //设置当前页和页容量
         Page<DetectBloodUricAcid> page = new Page<>(pageNo, pageSize);
         LambdaQueryWrapper<DetectBloodUricAcid> queryWrapper = new LambdaQueryWrapper<>();
-        queryWrapper.eq(DetectBloodUricAcid::getPatientId, getCurrentUserId());
+        queryWrapper.eq(DetectBloodUricAcid::getPatientId, patientId);
         queryWrapper.orderByDesc(DetectBloodUricAcid::getDetectDate);
         Page<DetectBloodUricAcid> list = detectBloodUricAcidService.page(page, queryWrapper);
         return result(list.getRecords());
@@ -278,11 +281,12 @@ public class DetectController extends BaseController {
     @ApiOperation("查询肝功能检测检验")
     @GetMapping("/getDetectLiverFunctionList")
     public R getDetectLiverFunction(@RequestParam(name = "pageNum", defaultValue = "1") Integer pageNo,
-        @RequestParam(name = "pageSize", defaultValue = "10") Integer pageSize) {
+        @RequestParam(name = "pageSize", defaultValue = "10") Integer pageSize,
+        @ApiParam(value = "患者id") @RequestParam Integer patientId) {
         //设置当前页和页容量
         Page<DetectLiverFunction> page = new Page<>(pageNo, pageSize);
         LambdaQueryWrapper<DetectLiverFunction> queryWrapper = new LambdaQueryWrapper<>();
-        queryWrapper.eq(DetectLiverFunction::getPatientId, getCurrentUserId());
+        queryWrapper.eq(DetectLiverFunction::getPatientId, patientId);
         queryWrapper.orderByDesc(DetectLiverFunction::getDetectDate);
         Page<DetectLiverFunction> list = detectLiverFunctionService.page(page, queryWrapper);
         return result(list.getRecords());
@@ -313,11 +317,12 @@ public class DetectController extends BaseController {
     @ApiOperation("查询肾功能检测检验")
     @GetMapping("/getDetectKidneyFunctionList")
     public R getDetectKidneyFunction(@RequestParam(name = "pageNum", defaultValue = "1") Integer pageNo,
-        @RequestParam(name = "pageSize", defaultValue = "10") Integer pageSize) {
+        @RequestParam(name = "pageSize", defaultValue = "10") Integer pageSize,
+        @ApiParam(value = "患者id") @RequestParam Integer patientId) {
         //设置当前页和页容量
         Page<DetectKidneyFunction> page = new Page<>(pageNo, pageSize);
         LambdaQueryWrapper<DetectKidneyFunction> queryWrapper = new LambdaQueryWrapper<>();
-        queryWrapper.eq(DetectKidneyFunction::getPatientId, getCurrentUserId());
+        queryWrapper.eq(DetectKidneyFunction::getPatientId, patientId);
         queryWrapper.orderByDesc(DetectKidneyFunction::getDetectDate);
         Page<DetectKidneyFunction> list = detectKidneyFunctionService.page(page, queryWrapper);
         return result(list.getRecords());
@@ -348,11 +353,12 @@ public class DetectController extends BaseController {
     @ApiOperation("查询电解质检测检验")
     @GetMapping("/getDetectElectrolyteList")
     public R getDetectElectrolyte(@RequestParam(name = "pageNum", defaultValue = "1") Integer pageNo,
-        @RequestParam(name = "pageSize", defaultValue = "10") Integer pageSize) {
+        @RequestParam(name = "pageSize", defaultValue = "10") Integer pageSize,
+        @ApiParam(value = "患者id") @RequestParam Integer patientId) {
         //设置当前页和页容量
         Page<DetectElectrolyte> page = new Page<>(pageNo, pageSize);
         LambdaQueryWrapper<DetectElectrolyte> queryWrapper = new LambdaQueryWrapper<>();
-        queryWrapper.eq(DetectElectrolyte::getPatientId, getCurrentUserId());
+        queryWrapper.eq(DetectElectrolyte::getPatientId, patientId);
         queryWrapper.orderByDesc(DetectElectrolyte::getDetectDate);
         Page<DetectElectrolyte> list = detectElectrolyteService.page(page, queryWrapper);
         return result(list.getRecords());
@@ -383,11 +389,12 @@ public class DetectController extends BaseController {
     @ApiOperation("查询其他检测检验")
     @GetMapping("/getDetectOtherList")
     public R getDetectOther(@RequestParam(name = "pageNum", defaultValue = "1") Integer pageNo,
-        @RequestParam(name = "pageSize", defaultValue = "10") Integer pageSize) {
+        @RequestParam(name = "pageSize", defaultValue = "10") Integer pageSize,
+        @ApiParam(value = "患者id") @RequestParam Integer patientId) {
         //设置当前页和页容量
         Page<DetectOther> page = new Page<>(pageNo, pageSize);
         LambdaQueryWrapper<DetectOther> queryWrapper = new LambdaQueryWrapper<>();
-        queryWrapper.eq(DetectOther::getPatientId, getCurrentUserId());
+        queryWrapper.eq(DetectOther::getPatientId, patientId);
         queryWrapper.orderByDesc(DetectOther::getDetectDate);
         Page<DetectOther> list = detectOtherService.page(page, queryWrapper);
         return result(list.getRecords());
@@ -419,12 +426,13 @@ public class DetectController extends BaseController {
     @ApiImplicitParams({@ApiImplicitParam(name = "startDate", value = "开始时间", dataType = "String", paramType = "query"),
         @ApiImplicitParam(name = "endDate", value = "结束时间", dataType = "String", paramType = "query")})
     @GetMapping("/getAllGraph")
-    public Result getAllGraph(String startDate, String endDate) {
+    public Result getAllGraph(String startDate, String endDate,
+        @ApiParam(value = "患者id") @RequestParam Integer patientId) {
         Map<String, Object> data = new HashMap<>();
         List<DetectBloodPressure> detectBloodPressureList =
-            detectBloodPressureService.list((Wrapper<DetectBloodPressure>)getQueryDate(startDate, endDate));
+            detectBloodPressureService.list((Wrapper<DetectBloodPressure>)getQueryDate(startDate, endDate, patientId));
         List<DetectHeartRate> detectHeartRateList =
-            detectHeartRateService.list((Wrapper<DetectHeartRate>)getQueryDate(startDate, endDate));
+            detectHeartRateService.list((Wrapper<DetectHeartRate>)getQueryDate(startDate, endDate, patientId));
         data.put("detectBloodPressureList", detectBloodPressureList);
         data.put("detectHeartRateList", detectHeartRateList);
         return Result.ok().data(data);
@@ -437,8 +445,8 @@ public class DetectController extends BaseController {
      * @param endDate
      * @return
      */
-    private QueryWrapper<?> getQueryDate(String startDate, String endDate) {
-        return new QueryWrapper<>().eq("patient_id", getCurrentUserId()).apply(StrUtil.isNotBlank(startDate),
+    private QueryWrapper<?> getQueryDate(String startDate, String endDate, Integer patientId) {
+        return new QueryWrapper<>().eq("patient_id", patientId).apply(StrUtil.isNotBlank(startDate),
             "date_format (detect_date,'%Y-%m-%d') >= date_format('" + startDate + "','%Y-%m-%d')")
             .apply(StrUtil.isNotBlank(endDate),
                 "date_format (detect_date,'%Y-%m-%d') <= date_format('" + endDate + "','%Y-%m-%d')");

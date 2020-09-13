@@ -172,15 +172,14 @@ public class AssessmentController extends BaseController {
         return BaseResult.<PastMedicalHistoryVO>success();
     }
 
-    @ApiOperation("保存既往手术史记录、肝损害、肾损害、过敏史、药物不良反应史选项")
-    @PostMapping("/save_damage")
-    public BaseResult<AssessmentInfoVO> saveLiverDamageAndKidneyDamage(@RequestBody AssessmentInfoVO assessmentInfoVO) {
-        Assessment assessment = dozenMapper.map(assessmentInfoVO, Assessment.class);
+    @ApiOperation("保存既往手术史记录")
+    @PostMapping("/save_past_surgical_histories")
+    public BaseResult<AssessmentInfoVO> savePastSurgicalHistories(@RequestBody AssessmentInfoVO assessmentInfoVO) {
         List<PastSurgicalHistory> pastSurgicalHistories = new ArrayList<>();
         //保存既往手术史记录
         PastSurgicalHistory pastSurgicalHistory = new PastSurgicalHistory();
-        pastSurgicalHistory.setAssessmentId(assessment.getAssessmentId());
-        pastSurgicalHistory.setPatientId(assessment.getPatientId());
+        pastSurgicalHistory.setAssessmentId(assessmentInfoVO.getAssessmentId());
+        pastSurgicalHistory.setPatientId(assessmentInfoVO.getPatientId());
         Arrays.stream(assessmentInfoVO.getSurgicalIds()).forEach(v -> {
             pastSurgicalHistory.setSurgicalHistoryId(v);
             pastSurgicalHistories.add(pastSurgicalHistory);
@@ -193,6 +192,29 @@ public class AssessmentController extends BaseController {
             pastSurgicalHistories.add(pastSurgicalHistory);
         });
         pastSurgicalHistoryService.saveBatch(pastSurgicalHistories);
+        return BaseResult.success();
+    }
+
+    @ApiOperation("保存肝损害")
+    @PostMapping("/save_liver_damage")
+    public BaseResult<AssessmentInfoVO> saveLiverDamage(@RequestBody AssessmentInfoVO assessmentInfoVO) {
+        Assessment assessment = dozenMapper.map(assessmentInfoVO, Assessment.class);
+        assessmentService.updateById(assessment);
+        return BaseResult.success();
+    }
+
+    @ApiOperation("保存肾损害")
+    @PostMapping("/save_kidney_damage")
+    public BaseResult<AssessmentInfoVO> saveKidneyDamage(@RequestBody AssessmentInfoVO assessmentInfoVO) {
+        Assessment assessment = dozenMapper.map(assessmentInfoVO, Assessment.class);
+        assessmentService.updateById(assessment);
+        return BaseResult.success();
+    }
+
+    @ApiOperation("保存过敏史")
+    @PostMapping("/save_allergy_history")
+    public BaseResult<AssessmentInfoVO> saveAllergyHistory(@RequestBody AssessmentInfoVO assessmentInfoVO) {
+        Assessment assessment = dozenMapper.map(assessmentInfoVO, Assessment.class);
         //保存过敏史
         if (!assessment.getAllergyHistory()) {
             assessmentInfoVO.getAllergyHistories().forEach(v -> {
@@ -205,6 +227,14 @@ public class AssessmentController extends BaseController {
                 allergyHistoryService.save(allergyHistory);
             });
         }
+        assessmentService.updateById(assessment);
+        return BaseResult.success();
+    }
+
+    @ApiOperation("保存药物不良反应史选项")
+    @PostMapping("/save_medication_side_effect_choose")
+    public BaseResult<AssessmentInfoVO> saveMedicationSideEffectChoose(@RequestBody AssessmentInfoVO assessmentInfoVO) {
+        Assessment assessment = dozenMapper.map(assessmentInfoVO, Assessment.class);
         assessmentService.updateById(assessment);
         return BaseResult.success();
     }
