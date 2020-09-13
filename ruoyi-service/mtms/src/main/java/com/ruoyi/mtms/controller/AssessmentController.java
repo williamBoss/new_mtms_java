@@ -131,6 +131,15 @@ public class AssessmentController extends BaseController {
         return BaseResult.<List<FamilyMedicalHistoryVO>>success().data(list);
     }
 
+    @DeleteMapping("/del_family_medical_history/{id}")
+    @ApiOperation("删除家族史记录")
+    public BaseResult<FamilyMedicalHistoryVO> delFamilyMedicalHistory(
+        @ApiParam(value = "家族史记录Id") @PathVariable String id) {
+        //家族病史
+        familyMedicalHistoryService.removeById(id);
+        return BaseResult.<FamilyMedicalHistoryVO>success();
+    }
+
     @PostMapping("/save_past_medical_history")
     @ApiOperation("新增既往病史记录")
     public BaseResult<PastMedicalHistoryVO> savePastMedicalHistory(
@@ -152,6 +161,15 @@ public class AssessmentController extends BaseController {
         //家族病史
         List<PastMedicalHistoryVO> list = pastMedicalHistoryService.selectPastMedicalHistory(patientId, assessmentId);
         return BaseResult.<List<PastMedicalHistoryVO>>success().data(list);
+    }
+
+    @DeleteMapping("/del_past_medical_history/{id}")
+    @ApiOperation("删除既往病史记录")
+    public BaseResult<PastMedicalHistoryVO> delPastMedicalHistory(
+        @ApiParam(value = "既往病史记录Id") @PathVariable String id) {
+        //家族病史
+        pastMedicalHistoryService.removeById(id);
+        return BaseResult.<PastMedicalHistoryVO>success();
     }
 
     @ApiOperation("保存既往手术史记录、肝损害、肾损害、过敏史、药物不良反应史选项")
@@ -236,6 +254,14 @@ public class AssessmentController extends BaseController {
         List<AssessmentDiagnosisVO> list =
             assessmentDiagnosisService.selectAssessmentDiagnosis(patientId, assessmentId);
         return BaseResult.<List<AssessmentDiagnosisVO>>success().data(list);
+    }
+
+    @DeleteMapping("/del_diagnosis/{id}")
+    @ApiOperation("删除现有症状-诊断记录")
+    public BaseResult<AssessmentDiagnosisVO> del_diagnosis(@ApiParam(value = "现有症状-诊断Id") @PathVariable String id) {
+        //家族病史
+        assessmentDiagnosisService.removeById(id);
+        return BaseResult.<AssessmentDiagnosisVO>success();
     }
 
     @PostMapping("/save_exist_symptoms")
