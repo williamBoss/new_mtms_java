@@ -1,10 +1,12 @@
 package com.ruoyi.mtms.vo;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 
-import java.util.Date;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 /**
  * 患者VO
@@ -28,22 +30,23 @@ public class PatientInfoVO {
     private String patientName;
 
     /**
-     * 年龄
+     * 手机号
      */
-    @ApiModelProperty(value = "年龄")
-    private Integer age;
+    @ApiModelProperty(value = "手机号")
+    private String phone;
+
+    /**
+     * 出生日期
+     */
+    @ApiModelProperty(value = "出生日期")
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy/MM/dd", timezone = "GMT+8")
+    private LocalDate birthday;
 
     /**
      * 性别 0.未知 1.男 2.女
      */
     @ApiModelProperty(value = "性别 0.未知 1.男 2.女")
     private Byte gender;
-
-    /**
-     * 手机号
-     */
-    @ApiModelProperty(value = "手机号")
-    private String phone;
 
     /**
      * 患者自定义id
@@ -94,15 +97,9 @@ public class PatientInfoVO {
     private Byte educationLevel;
 
     /**
-     * 接诊日期
+     * 婚姻状况 1.已婚 2.未婚 3.离异 4.丧偶
      */
-    @ApiModelProperty(value = "接诊日期")
-    private Date consultationDate;
-
-    /**
-     * 婚姻状况 1.已婚 2.未婚 3.离异
-     */
-    @ApiModelProperty(value = "婚姻状况 1.已婚 2.未婚 3.离异")
+    @ApiModelProperty(value = "婚姻状况 1.已婚 2.未婚 3.离异 4.丧偶")
     private Byte maritalStatus;
 
     /**
@@ -124,6 +121,13 @@ public class PatientInfoVO {
     private String company;
 
     /**
+     * 接诊日期
+     */
+    @ApiModelProperty(value = "接诊日期")
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy/MM/dd HH:mm:ss", timezone = "GMT+8")
+    private LocalDateTime consultationDate;
+
+    /**
      * 就诊后一年急诊/输液次数
      */
     @ApiModelProperty(value = "就诊后一年急诊/输液次数")
@@ -134,6 +138,18 @@ public class PatientInfoVO {
      */
     @ApiModelProperty(value = "就诊后一年住院次数")
     private Integer hospitalizationNum;
+
+    /**
+     * 接诊医师
+     */
+    @ApiModelProperty(value = "接诊医师")
+    private String physician;
+
+    /**
+     * 接诊医师科室
+     */
+    @ApiModelProperty(value = "接诊医师科室")
+    private String department;
 
 }
 

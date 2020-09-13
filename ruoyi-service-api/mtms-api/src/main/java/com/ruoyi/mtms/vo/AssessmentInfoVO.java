@@ -1,5 +1,6 @@
 package com.ruoyi.mtms.vo;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.ruoyi.mtms.domain.AllergyHistory;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
@@ -31,6 +32,7 @@ public class AssessmentInfoVO {
      * 评估填写时间
      */
     @ApiModelProperty(value = "评估填写时间")
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy/MM/dd HH:mm:ss", timezone = "GMT+8")
     private LocalDateTime fillDate;
 
     /**

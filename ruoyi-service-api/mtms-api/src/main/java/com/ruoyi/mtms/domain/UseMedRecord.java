@@ -4,6 +4,7 @@ import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.ruoyi.mtms.base.BaseEntity;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
@@ -53,6 +54,7 @@ public class UseMedRecord extends BaseEntity {
      */
     @TableField(value = "use_start_tIme")
     @ApiModelProperty(value = "开始时间")
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy/MM/dd HH:mm:ss", timezone = "GMT+8")
     private LocalDateTime useStartTime;
 
     /**
@@ -60,6 +62,7 @@ public class UseMedRecord extends BaseEntity {
      */
     @TableField(value = "use_end_time")
     @ApiModelProperty(value = "结束时间")
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy/MM/dd HH:mm:ss", timezone = "GMT+8")
     private LocalDateTime useEndTime;
 
     /**

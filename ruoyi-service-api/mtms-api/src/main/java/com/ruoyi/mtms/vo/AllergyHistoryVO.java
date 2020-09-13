@@ -1,5 +1,6 @@
 package com.ruoyi.mtms.vo;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
@@ -43,6 +44,7 @@ public class AllergyHistoryVO {
      * 过敏发生时间
      */
     @ApiModelProperty(value = "过敏发生时间")
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy/MM/dd HH:mm:ss", timezone = "GMT+8")
     private LocalDateTime allergyDatetime;
 
 }
