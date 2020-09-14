@@ -22,8 +22,6 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/evaluation_scale")
 public class EvaluationScaleController {
 
-    // TODO: 2020/9/9 缺少sf36问卷
-
     @Autowired
     private MoriskyService moriskyService;
 
@@ -38,6 +36,9 @@ public class EvaluationScaleController {
 
     @Autowired
     private ParService parService;
+
+    @Autowired
+    private Sf36Service sf36Service;
 
     @Autowired
     private Mapper dozerMapper;
@@ -130,7 +131,27 @@ public class EvaluationScaleController {
         return BaseResult.success();
     }
 
-    // ParVO
+    @ApiOperation("根据评估id或者患者id sf36查询")
+    @GetMapping("/sf36_info")
+    public BaseResult<Sf36VO> getSf36Info(@ApiParam(value = "评估Id") @RequestParam Integer assessmentId,
+        @ApiParam(value = "患者Id") @RequestParam Integer patientId) {
+        LambdaQueryWrapper<Sf36> queryWrapper = new LambdaQueryWrapper<>();
+        queryWrapper.eq(Sf36::getAssessmentId, assessmentId);
+        queryWrapper.eq(Sf36::getPatId, patientId);
+        Sf36 info = sf36Service.getOne(queryWrapper);
+        return BaseResult.<Sf36VO>success().data(dozerMapper.map(info, Sf36VO.class));
+    }
+
+    @ApiOperation("保存sf36")
+    @PostMapping("/save_sf36_info")
+    public BaseResult<Sf36VO> saveSf36Info(@RequestBody Sf36VO sf36VO) {
+        Sf36 sf36 = dozerMapper.map(sf36VO, Sf36.class);
+        LambdaQueryWrapper<Sf36> queryWrapper = new LambdaQueryWrapper<>();
+        queryWrapper.eq(Sf36::getAssessmentId, sf36VO.getAssessmentId());
+        sf36Service.remove(queryWrapper);
+        sf36Service.save(sf36);
+        return BaseResult.success();
+    }
 
     @ApiOperation("根据评估id或者患者id 心脑血管查询")
     @GetMapping("/par_info")

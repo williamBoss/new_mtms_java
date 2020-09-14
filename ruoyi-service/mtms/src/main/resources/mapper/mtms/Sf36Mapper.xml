@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.mtms.mapper.Sf36Mapper">
+  <resultMap id="BaseResultMap" type="com.ruoyi.mtms.domain.Sf36">
+    <!--@mbg.generated-->
+    <!--@Table mtms_sf36-->
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="assessment_id" jdbcType="INTEGER" property="assessmentId" />
+    <result column="pat_id" jdbcType="INTEGER" property="patId" />
+    <result column="sf36_1" jdbcType="TINYINT" property="sf361" />
+    <result column="sf36_2" jdbcType="TINYINT" property="sf362" />
+    <result column="sf36_3_1" jdbcType="TINYINT" property="sf3631" />
+    <result column="sf36_3_2" jdbcType="TINYINT" property="sf3632" />
+    <result column="sf36_3_3" jdbcType="TINYINT" property="sf3633" />
+    <result column="sf36_3_4" jdbcType="TINYINT" property="sf3634" />
+    <result column="sf36_3_5" jdbcType="TINYINT" property="sf3635" />
+    <result column="sf36_3_6" jdbcType="TINYINT" property="sf3636" />
+    <result column="sf36_3_7" jdbcType="TINYINT" property="sf3637" />
+    <result column="sf36_3_8" jdbcType="TINYINT" property="sf3638" />
+    <result column="sf36_3_9" jdbcType="TINYINT" property="sf3639" />
+    <result column="sf36_3_10" jdbcType="TINYINT" property="sf36310" />
+    <result column="sf36_4_1" jdbcType="TINYINT" property="sf3641" />
+    <result column="sf36_4_2" jdbcType="TINYINT" property="sf3642" />
+    <result column="sf36_4_3" jdbcType="TINYINT" property="sf3643" />
+    <result column="sf36_4_4" jdbcType="TINYINT" property="sf3644" />
+    <result column="sf36_5_1" jdbcType="TINYINT" property="sf3651" />
+    <result column="sf36_5_2" jdbcType="TINYINT" property="sf3652" />
+    <result column="sf36_5_3" jdbcType="TINYINT" property="sf3653" />
+    <result column="sf36_6" jdbcType="TINYINT" property="sf366" />
+    <result column="sf36_7" jdbcType="TINYINT" property="sf367" />
+    <result column="sf36_8" jdbcType="TINYINT" property="sf368" />
+    <result column="sf36_9_1" jdbcType="TINYINT" property="sf3691" />
+    <result column="sf36_9_2" jdbcType="TINYINT" property="sf3692" />
+    <result column="sf36_9_3" jdbcType="TINYINT" property="sf3693" />
+    <result column="sf36_9_4" jdbcType="TINYINT" property="sf3694" />
+    <result column="sf36_9_5" jdbcType="TINYINT" property="sf3695" />
+    <result column="sf36_9_6" jdbcType="TINYINT" property="sf3696" />
+    <result column="sf36_9_7" jdbcType="TINYINT" property="sf3697" />
+    <result column="sf36_9_8" jdbcType="TINYINT" property="sf3698" />
+    <result column="sf36_9_9" jdbcType="TINYINT" property="sf3699" />
+    <result column="sf36_9_10" jdbcType="TINYINT" property="sf36910" />
+    <result column="sf36_10_1" jdbcType="TINYINT" property="sf36101" />
+    <result column="sf36_10_2" jdbcType="TINYINT" property="sf36102" />
+    <result column="sf36_10_3" jdbcType="TINYINT" property="sf36103" />
+    <result column="sf36_10_4" jdbcType="TINYINT" property="sf36104" />
+    <result column="del_flag" jdbcType="BOOLEAN" property="delFlag" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+    <result column="create_user" jdbcType="INTEGER" property="createUser" />
+    <result column="update_user" jdbcType="INTEGER" property="updateUser" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    <!--@mbg.generated-->
+    id, assessment_id, pat_id, sf36_1, sf36_2, sf36_3_1, sf36_3_2, sf36_3_3, sf36_3_4, 
+    sf36_3_5, sf36_3_6, sf36_3_7, sf36_3_8, sf36_3_9, sf36_3_10, sf36_4_1, sf36_4_2, 
+    sf36_4_3, sf36_4_4, sf36_5_1, sf36_5_2, sf36_5_3, sf36_6, sf36_7, sf36_8, sf36_9_1, 
+    sf36_9_2, sf36_9_3, sf36_9_4, sf36_9_5, sf36_9_6, sf36_9_7, sf36_9_8, sf36_9_9, sf36_9_10, 
+    sf36_10_1, sf36_10_2, sf36_10_3, sf36_10_4, del_flag, create_time, update_time, create_user, 
+    update_user
+  </sql>
+</mapper>
