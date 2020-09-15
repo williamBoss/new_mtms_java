@@ -174,17 +174,18 @@ public class AssessmentController extends BaseController {
 
     @ApiOperation("保存既往手术史记录")
     @PostMapping("/save_past_surgical_histories")
-    public BaseResult<AssessmentInfoVO> savePastSurgicalHistories(@RequestBody AssessmentInfoVO assessmentInfoVO) {
+    public BaseResult<PastSurgicalHistoryVO> savePastSurgicalHistories(
+        @RequestBody PastSurgicalHistoryVO pastSurgicalHistoryVO) {
         List<PastSurgicalHistory> pastSurgicalHistories = new ArrayList<>();
         //保存既往手术史记录
         PastSurgicalHistory pastSurgicalHistory = new PastSurgicalHistory();
-        pastSurgicalHistory.setAssessmentId(assessmentInfoVO.getAssessmentId());
-        pastSurgicalHistory.setPatientId(assessmentInfoVO.getPatientId());
-        Arrays.stream(assessmentInfoVO.getSurgicalIds()).forEach(v -> {
+        pastSurgicalHistory.setAssessmentId(pastSurgicalHistoryVO.getAssessmentId());
+        pastSurgicalHistory.setPatientId(pastSurgicalHistoryVO.getPatientId());
+        Arrays.stream(pastSurgicalHistoryVO.getSurgicalIds()).forEach(v -> {
             pastSurgicalHistory.setSurgicalHistoryId(v);
             pastSurgicalHistories.add(pastSurgicalHistory);
         });
-        Arrays.stream(assessmentInfoVO.getSurgeryName().split("、")).forEach(v -> {
+        Arrays.stream(pastSurgicalHistoryVO.getSurgeryName().split("、")).forEach(v -> {
             SurgicalHistory surgicalHistory = new SurgicalHistory();
             surgicalHistory.setSurgeryName(v);
             surgicalHistoryService.save(surgicalHistory);
@@ -197,27 +198,27 @@ public class AssessmentController extends BaseController {
 
     @ApiOperation("保存肝损害")
     @PostMapping("/save_liver_damage")
-    public BaseResult<AssessmentInfoVO> saveLiverDamage(@RequestBody AssessmentInfoVO assessmentInfoVO) {
-        Assessment assessment = dozenMapper.map(assessmentInfoVO, Assessment.class);
+    public BaseResult<LiverDamageVO> saveLiverDamage(@RequestBody LiverDamageVO liverDamageVO) {
+        Assessment assessment = dozenMapper.map(liverDamageVO, Assessment.class);
         assessmentService.updateById(assessment);
         return BaseResult.success();
     }
 
     @ApiOperation("保存肾损害")
     @PostMapping("/save_kidney_damage")
-    public BaseResult<AssessmentInfoVO> saveKidneyDamage(@RequestBody AssessmentInfoVO assessmentInfoVO) {
-        Assessment assessment = dozenMapper.map(assessmentInfoVO, Assessment.class);
+    public BaseResult<KidneyDamageVO> saveKidneyDamage(@RequestBody KidneyDamageVO kidneyDamageVO) {
+        Assessment assessment = dozenMapper.map(kidneyDamageVO, Assessment.class);
         assessmentService.updateById(assessment);
         return BaseResult.success();
     }
 
     @ApiOperation("保存过敏史")
     @PostMapping("/save_allergy_history")
-    public BaseResult<AssessmentInfoVO> saveAllergyHistory(@RequestBody AssessmentInfoVO assessmentInfoVO) {
-        Assessment assessment = dozenMapper.map(assessmentInfoVO, Assessment.class);
+    public BaseResult<AllergyHistoriesVO> saveAllergyHistory(@RequestBody AllergyHistoriesVO allergyHistoriesVO) {
+        Assessment assessment = dozenMapper.map(allergyHistoriesVO, Assessment.class);
         //保存过敏史
-        if (!assessment.getAllergyHistory()) {
-            assessmentInfoVO.getAllergyHistories().forEach(v -> {
+        if (assessment.getAllergyHistory()) {
+            allergyHistoriesVO.getAllergyHistories().forEach(v -> {
                 AllergyHistory allergyHistory = new AllergyHistory();
                 allergyHistory.setAssessmentId(assessment.getAssessmentId());
                 allergyHistory.setPatientId(assessment.getPatientId());
@@ -233,8 +234,9 @@ public class AssessmentController extends BaseController {
 
     @ApiOperation("保存药物不良反应史选项")
     @PostMapping("/save_medication_side_effect_choose")
-    public BaseResult<AssessmentInfoVO> saveMedicationSideEffectChoose(@RequestBody AssessmentInfoVO assessmentInfoVO) {
-        Assessment assessment = dozenMapper.map(assessmentInfoVO, Assessment.class);
+    public BaseResult<MedicationSideEffectChooseVO> saveMedicationSideEffectChoose(
+        @RequestBody MedicationSideEffectChooseVO medicationSideEffectChooseVO) {
+        Assessment assessment = dozenMapper.map(medicationSideEffectChooseVO, Assessment.class);
         assessmentService.updateById(assessment);
         return BaseResult.success();
     }
