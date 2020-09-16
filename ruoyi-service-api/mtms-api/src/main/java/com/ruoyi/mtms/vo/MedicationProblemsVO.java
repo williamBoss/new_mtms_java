@@ -51,25 +51,25 @@ public class MedicationProblemsVO {
      * 适应症
      */
     @ApiModelProperty(value = "适应症")
-    private Integer indications;
+    private Integer[] indicationses;
 
     /**
      * 有效性
      */
     @ApiModelProperty(value = "有效性")
-    private Integer effectiveness;
+    private Integer[] effectivenessies;
 
     /**
      * 安全性
      */
     @ApiModelProperty(value = "安全性")
-    private Integer safety;
+    private Integer[] safeties;
 
     /**
      * 依从性
      */
     @ApiModelProperty(value = "依从性")
-    private Integer compliance;
+    private Integer[] compliances;
 
     /**
      * 具体问题

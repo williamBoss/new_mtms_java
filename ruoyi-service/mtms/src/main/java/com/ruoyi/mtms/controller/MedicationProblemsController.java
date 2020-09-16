@@ -14,6 +14,8 @@ import io.swagger.annotations.ApiParam;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Arrays;
+
 /**
  * 药物治疗问题
  *
@@ -33,8 +35,8 @@ public class MedicationProblemsController {
     @ApiOperation("药物治疗问题列表")
     @GetMapping("/")
     public BaseResult<PageResult<MedicationProblemsVO>> assessmentList(
-        @ApiParam(value = "页数") @RequestParam(name = "pageNum", defaultValue = "1") Integer pageNo,
-        @ApiParam(value = "每页条数") @RequestParam(name = "pageSize", defaultValue = "10") Integer pageSize,
+        @ApiParam(value = "页数") @RequestParam(name = "pageNum") Integer pageNo,
+        @ApiParam(value = "每页条数") @RequestParam(name = "pageSize") Integer pageSize,
         MedicationProblemsVO medicationProblemsVO) {
         Page<MedicationProblemsVO> medicationProblemsList = medicationProblemsService
             .selectMedProblemsPage(pageNo, pageSize, medicationProblemsVO.getAssessmentId(),
@@ -47,6 +49,14 @@ public class MedicationProblemsController {
     public BaseResult<MedicationProblems> saveMedicationProblems(
         @RequestBody MedicationProblemsVO medicationProblemsVO) {
         MedicationProblems medicationProblems = dozenMapper.map(medicationProblemsVO, MedicationProblems.class);
+        medicationProblems.setIndications(Arrays.stream(medicationProblemsVO.getIndicationses()).map(String::valueOf)
+            .reduce((currentValue, item) -> currentValue.concat(",").concat(item)).orElse(""));
+        medicationProblems.setEffectiveness(Arrays.stream(medicationProblemsVO.getEffectivenessies()).map(String::valueOf)
+            .reduce((currentValue, item) -> currentValue.concat(",").concat(item)).orElse(""));
+        medicationProblems.setSafety(Arrays.stream(medicationProblemsVO.getSafeties()).map(String::valueOf)
+            .reduce((currentValue, item) -> currentValue.concat(",").concat(item)).orElse(""));
+        medicationProblems.setCompliance(Arrays.stream(medicationProblemsVO.getCompliances()).map(String::valueOf)
+            .reduce((currentValue, item) -> currentValue.concat(",").concat(item)).orElse(""));
         medicationProblemsService.save(medicationProblems);
         return BaseResult.success();
     }

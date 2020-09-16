@@ -172,6 +172,17 @@ public class AssessmentController extends BaseController {
         return BaseResult.<PastMedicalHistoryVO>success();
     }
 
+    @GetMapping(value = "/all_surgical_history")
+    @ApiOperation(value = "获取所有手术名称")
+    public BaseResult<List<SurgicalHistoryVO>> queryAllSurgicalHistory() {
+        List<SurgicalHistory> list = surgicalHistoryService.list();
+        List<SurgicalHistoryVO> surgicalHistoryVOList = new ArrayList<>();
+        list.forEach(item -> {
+            surgicalHistoryVOList.add(dozenMapper.map(item, SurgicalHistoryVO.class));
+        });
+        return BaseResult.<List<SurgicalHistoryVO>>success().data(surgicalHistoryVOList);
+    }
+
     @ApiOperation("保存既往手术史记录")
     @PostMapping("/save_past_surgical_histories")
     public BaseResult<PastSurgicalHistoryVO> savePastSurgicalHistories(

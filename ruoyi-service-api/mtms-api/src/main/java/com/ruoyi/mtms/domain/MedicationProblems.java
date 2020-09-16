@@ -11,12 +11,11 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 
 /**
- * ${TODO}
- *
- * @author KING
- * @date 2020/9/9 9:47
- * @version V1.0
- */
+* ${TODO}
+* @author KING
+* @date 2020/9/16 10:43
+* @version V1.0
+*/
 
 /**
  * 药物治疗问题
@@ -55,6 +54,9 @@ public class MedicationProblems extends BaseEntity {
     @ApiModelProperty(value = "病种id")
     private Integer diseaseId;
 
+    @ApiModelProperty(value = "病种名称")
+    private transient String diseaseName;
+
     /**
      * 药物id
      */
@@ -62,33 +64,36 @@ public class MedicationProblems extends BaseEntity {
     @ApiModelProperty(value = "药物id")
     private Integer medId;
 
+    @ApiModelProperty(value = "药物名称")
+    private transient String medName;
+
     /**
      * 适应症
      */
     @TableField(value = "indications")
     @ApiModelProperty(value = "适应症")
-    private Integer indications;
+    private String indications;
 
     /**
      * 有效性
      */
     @TableField(value = "effectiveness")
     @ApiModelProperty(value = "有效性")
-    private Integer effectiveness;
+    private String effectiveness;
 
     /**
      * 安全性
      */
     @TableField(value = "safety")
     @ApiModelProperty(value = "安全性")
-    private Integer safety;
+    private String safety;
 
     /**
      * 依从性
      */
     @TableField(value = "compliance")
     @ApiModelProperty(value = "依从性")
-    private Integer compliance;
+    private String compliance;
 
     /**
      * 具体问题
@@ -109,7 +114,7 @@ public class MedicationProblems extends BaseEntity {
      */
     @TableField(value = "is_resolved")
     @ApiModelProperty(value = "是否解决：1.本次就诊解决 2.未解决 3.待解决")
-    private Boolean isResolved;
+    private Integer isResolved;
 
     /**
      * 改善详情
