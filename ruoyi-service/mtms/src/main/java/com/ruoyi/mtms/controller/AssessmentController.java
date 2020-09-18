@@ -124,8 +124,8 @@ public class AssessmentController extends BaseController {
     @GetMapping("/get_family_medical_history")
     @ApiOperation("获取家族史记录")
     public BaseResult<List<FamilyMedicalHistoryVO>> getFamilyMedicalHistory(
-        @ApiParam(value = "评估Id") @RequestParam Integer assessmentId,
-        @ApiParam(value = "患者Id") @RequestParam Integer patientId) {
+        @ApiParam(value = "评估Id") @RequestParam(required = false) Integer assessmentId,
+        @ApiParam(value = "患者Id") @RequestParam(required = false) Integer patientId) {
         //家族病史
         List<FamilyMedicalHistoryVO> list =
             familyMedicalHistoryService.selectFamilyMedicalHistory(patientId, assessmentId);
@@ -158,8 +158,8 @@ public class AssessmentController extends BaseController {
     @GetMapping("/get_past_medical_history")
     @ApiOperation("获取既往病史记录")
     public BaseResult<List<PastMedicalHistoryVO>> getPastMedicalHistory(
-        @ApiParam(value = "评估Id") @RequestParam Integer assessmentId,
-        @ApiParam(value = "患者Id") @RequestParam Integer patientId) {
+        @ApiParam(value = "评估Id") @RequestParam(required = false) Integer assessmentId,
+        @ApiParam(value = "患者Id") @RequestParam(required = false) Integer patientId) {
         //家族病史
         List<PastMedicalHistoryVO> list = pastMedicalHistoryService.selectPastMedicalHistory(patientId, assessmentId);
         return BaseResult.<List<PastMedicalHistoryVO>>success().data(list);
@@ -294,8 +294,8 @@ public class AssessmentController extends BaseController {
     @PostMapping("/get_diagnosis")
     @ApiOperation("获取现有症状-诊断记录")
     public BaseResult<List<AssessmentDiagnosisVO>> getDiagnosis(
-        @ApiParam(value = "评估Id") @RequestParam Integer assessmentId,
-        @ApiParam(value = "患者Id") @RequestParam Integer patientId) {
+        @ApiParam(value = "评估Id") @RequestParam(required = false) Integer assessmentId,
+        @ApiParam(value = "患者Id") @RequestParam(required = false) Integer patientId) {
         List<AssessmentDiagnosisVO> list =
             assessmentDiagnosisService.selectAssessmentDiagnosis(patientId, assessmentId);
         return BaseResult.<List<AssessmentDiagnosisVO>>success().data(list);
