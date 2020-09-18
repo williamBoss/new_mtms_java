@@ -11,14 +11,15 @@ import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 
 /**
-* ${TODO}
-* @author KING
-* @date 2020/9/6 19:52
-* @version V1.0
-*/
+ * ${TODO}
+ *
+ * @author KING
+ * @date 2020/9/18 15:53
+ * @version V1.0
+ */
 
 /**
  * 用药记录
@@ -52,18 +53,18 @@ public class UseMedRecord extends BaseEntity {
     /**
      * 开始时间
      */
-    @TableField(value = "use_start_tIme")
+    @TableField(value = "use_start_time")
     @ApiModelProperty(value = "开始时间")
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy/MM/dd HH:mm:ss", timezone = "GMT+8")
-    private LocalDateTime useStartTime;
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy/MM/dd", timezone = "GMT+8")
+    private LocalDate useStartTime;
 
     /**
      * 结束时间
      */
     @TableField(value = "use_end_time")
     @ApiModelProperty(value = "结束时间")
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy/MM/dd HH:mm:ss", timezone = "GMT+8")
-    private LocalDateTime useEndTime;
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy/MM/dd", timezone = "GMT+8")
+    private LocalDate useEndTime;
 
     /**
      * 药品id

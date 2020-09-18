@@ -5,15 +5,7 @@ import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 
-import java.time.LocalDateTime;
-
-/**
- * ${TODO}
- *
- * @author KING
- * @date 2020/8/31 16:38
- * @version V1.0
- */
+import java.time.LocalDate;
 
 /**
  * 用药记录
@@ -27,25 +19,31 @@ public class UseMedRecordVO extends MedicineInfoVO {
     @ApiModelProperty(value = "用药记录主键id")
     private Integer id;
 
+    /**
+     * 评估id
+     */
     @ApiModelProperty(value = "评估id")
     private Integer assessmentId;
 
+    /**
+     * 患者id
+     */
     @ApiModelProperty(value = "患者id")
     private Integer patientId;
 
     /**
      * 开始时间
      */
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy/MM/dd HH:mm:ss", timezone = "GMT+8")
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy/MM/dd", timezone = "GMT+8")
     @ApiModelProperty(value = "开始时间")
-    private LocalDateTime useStartTime;
+    private LocalDate useStartTime;
 
     /**
      * 结束时间
      */
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy/MM/dd HH:mm:ss", timezone = "GMT+8")
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy/MM/dd", timezone = "GMT+8")
     @ApiModelProperty(value = "结束时间")
-    private LocalDateTime useEndTime;
+    private LocalDate useEndTime;
 
     /**
      * 药品id
