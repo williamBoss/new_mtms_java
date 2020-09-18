@@ -75,6 +75,7 @@ public class PatientController extends BaseController {
         try {
             PatientInfo patientInfo = dozerMapper.map(patientInfoVO, PatientInfo.class);
             patientInfo.setDowntownAddress(StringUtils.join(patientInfoVO.getDowntownAddressArr(), ","));
+            // 保存之前先查询手机号是否已经存在
             patientInfoService.save(patientInfo);
             saveTreatmentHistory(patientInfo);
             return R.ok(ResponseConstants.RESPONSE_SUCCESS, "添加成功！");
