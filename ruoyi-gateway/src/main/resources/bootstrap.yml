@@ -36,8 +36,8 @@ spring:
             - Path=/auth/**
           filters:
             # 验证码处理
-            - CacheRequest
-            - ImgCodeFilter
+            #            - CacheRequest
+            #            - ImgCodeFilter
             - StripPrefix=1
         # dfs
         - id: ruoyi-dfs
@@ -74,7 +74,7 @@ spring:
 
 hystrix:
   command:
-    default:  #default全局有效，service id指定应用有效
+    default: #default全局有效，service id指定应用有效
       execution:
         timeout:
           enabled: true

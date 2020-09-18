@@ -114,6 +114,7 @@ public class AssessmentController extends BaseController {
         for (Integer diseaseId : familyMedicalHistoryVO.getFamilyMedicalHistoryDiseaseIds()) {
             FamilyMedicalHistory familyMedicalHistory = new FamilyMedicalHistory();
             familyMedicalHistory.setAssessmentId(familyMedicalHistoryVO.getAssessmentId());
+            familyMedicalHistory.setPatientId(familyMedicalHistoryVO.getPatientId());
             familyMedicalHistory.setDiseaseId(diseaseId);
             familyMedicalHistoryService.save(familyMedicalHistory);
         }
@@ -147,6 +148,7 @@ public class AssessmentController extends BaseController {
         for (Integer diseaseId : pastMedicalHistoryVO.getPastMedicalHistoryDiseaseIds()) {
             PastMedicalHistory pastMedicalHistory = new PastMedicalHistory();
             pastMedicalHistory.setAssessmentId(pastMedicalHistoryVO.getAssessmentId());
+            pastMedicalHistory.setPatientId(pastMedicalHistoryVO.getPatientId());
             pastMedicalHistory.setDiseaseId(diseaseId);
             pastMedicalHistoryService.save(pastMedicalHistory);
         }

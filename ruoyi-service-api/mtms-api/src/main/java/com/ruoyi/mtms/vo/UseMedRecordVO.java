@@ -36,14 +36,14 @@ public class UseMedRecordVO extends MedicineInfoVO {
     /**
      * 开始时间
      */
-    @JsonFormat(pattern = "yyyy/MM/dd HH:mm:ss", timezone = "GMT+8")
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy/MM/dd HH:mm:ss", timezone = "GMT+8")
     @ApiModelProperty(value = "开始时间")
     private LocalDateTime useStartTime;
 
     /**
      * 结束时间
      */
-    @JsonFormat(pattern = "yyyy/MM/dd HH:mm:ss", timezone = "GMT+8")
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy/MM/dd HH:mm:ss", timezone = "GMT+8")
     @ApiModelProperty(value = "结束时间")
     private LocalDateTime useEndTime;
 
