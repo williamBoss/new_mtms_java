@@ -14,6 +14,13 @@ import lombok.EqualsAndHashCode;
 import java.time.LocalDateTime;
 
 /**
+* ${TODO}
+* @author KING
+* @date 2020/9/18 22:21
+* @version V1.0
+*/
+
+/**
  * 患者评估记录表
  *
  * @author KING
@@ -93,4 +100,11 @@ public class Assessment extends BaseEntity {
     @TableField(value = "medication_side_effect")
     @ApiModelProperty(value = "药物不良反应史 0.无 1.有")
     private Boolean medicationSideEffect;
+
+    /**
+     * 转归详情
+     */
+    @TableField(value = "sequelae")
+    @ApiModelProperty(value = "转归详情")
+    private String sequelae;
 }

@@ -1,22 +1,15 @@
 package com.ruoyi.mtms.vo;
 
-import com.baomidou.mybatisplus.annotation.TableName;
+import com.fasterxml.jackson.annotation.JsonFormat;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 
-import java.util.Date;
+import java.time.LocalDate;
 
-/**
- * 药物不良反应史与评估关系表
- *
- * @author KING
- */
 @Data
 @ApiModel(value = "药物不良反应史")
-@TableName(value = "mtms_medication_side_effect")
 public class MedicationSideEffectVO {
-
     /**
      * 药物不良反应史id
      */
@@ -24,9 +17,9 @@ public class MedicationSideEffectVO {
     private Integer medicationSideEffectId;
 
     /**
-     * 患者id
+     * 评估患者id
      */
-    @ApiModelProperty(value = "患者id")
+    @ApiModelProperty(value = "评估患者id")
     private Integer patientId;
 
     /**
@@ -51,6 +44,7 @@ public class MedicationSideEffectVO {
      * 不良反应发生时间
      */
     @ApiModelProperty(value = "不良反应发生时间")
-    private Date occurrenceDatetime;
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy/MM/dd", timezone = "GMT+8")
+    private LocalDate occurrenceDatetime;
 
 }

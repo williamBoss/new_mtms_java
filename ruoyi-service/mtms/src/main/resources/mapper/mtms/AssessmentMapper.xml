@@ -14,6 +14,7 @@
     <result column="kidney_damage_desc" jdbcType="VARCHAR" property="kidneyDamageDesc" />
     <result column="allergy_history" jdbcType="BOOLEAN" property="allergyHistory" />
     <result column="medication_side_effect" jdbcType="BOOLEAN" property="medicationSideEffect" />
+    <result column="sequelae" jdbcType="VARCHAR" property="sequelae" />
     <result column="del_flag" jdbcType="BOOLEAN" property="delFlag" />
     <result column="create_by" jdbcType="VARCHAR" property="createBy" />
     <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
@@ -23,8 +24,8 @@
   <sql id="Base_Column_List">
     <!--@mbg.generated-->
     assessment_id, patient_id, fill_date, main_consult, liver_damage, liver_damage_desc, 
-    kidney_damage, kidney_damage_desc, allergy_history, medication_side_effect, del_flag, 
-    create_by, create_time, update_by, update_time
+    kidney_damage, kidney_damage_desc, allergy_history, medication_side_effect, sequelae, 
+    del_flag, create_by, create_time, update_by, update_time
   </sql>
     <resultMap id="AssessmentListMap" type="com.ruoyi.mtms.vo.AssessmentVO">
         <id column="assessment_id" jdbcType="INTEGER" property="assessmentId" />
@@ -34,7 +35,7 @@
         <association javaType="com.ruoyi.mtms.vo.PatientInfoVO" property="patientInfoVO">
             <id column="patient_id" jdbcType="INTEGER" property="patientId" />
             <result column="patient_name" jdbcType="VARCHAR" property="patientName" />
-            <result column="birthday" jdbcType="INTEGER" property="age" />
+            <result column="birthday" jdbcType="INTEGER" property="birthday" />
             <result column="gender" jdbcType="TINYINT" property="gender" />
             <result column="phone" jdbcType="VARCHAR" property="phone" />
             <result column="id_card_num" jdbcType="VARCHAR" property="idCardNum" />

@@ -15,7 +15,7 @@ import com.ruoyi.mtms.vo.MedicationProblemsVO;
 public interface MedicationProblemsService extends IService<MedicationProblems> {
 
     Page<MedicationProblemsVO> selectMedProblemsPage(Integer pageNo, Integer pageSize, Integer assessmentId,
-        Integer patientId);
+        Integer patientId, Integer isResolved);
 
 }
 

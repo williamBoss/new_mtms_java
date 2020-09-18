@@ -358,6 +358,18 @@ public class AssessmentController extends BaseController {
         return BaseResult.success();
     }
 
+    @PostMapping("/save_sequelae")
+    @ApiOperation("保存评估记录转归详情")
+    public BaseResult<AssessmentVO> saveSequelae(@ApiParam(value = "转归详情") @RequestParam String sequelae,
+        @RequestParam Integer assessmentId) {
+        Assessment assessment = new Assessment();
+        assessment.setSequelae(sequelae);
+        LambdaQueryWrapper<Assessment> updateWrapper = new LambdaQueryWrapper<>();
+        updateWrapper.eq(Assessment::getAssessmentId, assessmentId);
+        assessmentService.update(assessment, updateWrapper);
+        return BaseResult.success();
+    }
+
     @PostMapping("/getUseMedRecordList")
     @ApiOperation("获取用药记录列表")
     public R getUseMedRecordList(@RequestBody UseMedRecordVO useMedRecordVO,

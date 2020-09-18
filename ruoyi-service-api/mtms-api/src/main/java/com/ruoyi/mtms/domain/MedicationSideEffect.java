@@ -11,17 +11,17 @@ import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 
 /**
 * ${TODO}
 * @author KING
-* @date 2020/9/6 19:52
+* @date 2020/9/18 22:55
 * @version V1.0
 */
 
 /**
- * 药物不良反应史与评估关系表
+ * 药物不良反应史与患者关系表
  */
 @ApiModel(value = "com-ruoyi-mtms-domain-MedicationSideEffect")
 @Data
@@ -61,6 +61,6 @@ public class MedicationSideEffect extends BaseEntity {
      */
     @TableField(value = "occurrence_datetime")
     @ApiModelProperty(value = "不良反应发生时间")
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy/MM/dd HH:mm:ss", timezone = "GMT+8")
-    private LocalDateTime occurrenceDatetime;
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy/MM/dd", timezone = "GMT+8")
+    private LocalDate occurrenceDatetime;
 }

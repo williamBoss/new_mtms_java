@@ -34,10 +34,10 @@ public class MedicationProblemsServiceImpl extends ServiceImpl<MedicationProblem
 
     @Override
     public Page<MedicationProblemsVO> selectMedProblemsPage(Integer pageNo, Integer pageSize, Integer assessmentId,
-        Integer patientId) {
+        Integer patientId, Integer isResolved) {
         Page<MedicationProblemsVO> page = new Page<>(pageNo, pageSize);
         List<MedicationProblems> medicationProblemsList =
-            medicationProblemsMapper.selectMedProblemsPage(page, assessmentId, patientId);
+            medicationProblemsMapper.selectMedProblemsPage(page, assessmentId, patientId, isResolved);
         List<MedicationProblemsVO> list = new ArrayList<>();
         medicationProblemsList.forEach(v -> {
             MedicationProblemsVO info = dozerMapper.map(v, MedicationProblemsVO.class);

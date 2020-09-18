@@ -20,8 +20,9 @@ public interface MedicationProblemsMapper extends BaseMapper<MedicationProblems>
      *
      * @param assessmentId
      * @param patientId
+     * @param isResolved
      * @return
      */
     List<MedicationProblems> selectMedProblemsPage(Page page, @Param("assessmentId") Integer assessmentId,
-        @Param("patientId") Integer patientId);
+        @Param("patientId") Integer patientId, @Param("isResolved") Integer isResolved);
 }

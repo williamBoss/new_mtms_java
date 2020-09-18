@@ -49,14 +49,30 @@ public class MedicationProblemsController {
         MedicationProblemsVO medicationProblemsVO) {
         Page<MedicationProblemsVO> medicationProblemsList = medicationProblemsService
             .selectMedProblemsPage(pageNo, pageSize, medicationProblemsVO.getAssessmentId(),
-                medicationProblemsVO.getPatientId());
+                medicationProblemsVO.getPatientId(), medicationProblemsVO.getIsResolved());
         return DataResult.result(medicationProblemsList, medicationProblemsList.getRecords());
     }
 
     @ApiOperation("保存药物治疗问题")
     @PostMapping("/")
-    public BaseResult<MedicationProblems> saveMedicationProblems(
+    public BaseResult<MedicationProblemsVO> saveMedicationProblems(
         @RequestBody MedicationProblemsVO medicationProblemsVO) {
+        MedicationProblems medicationProblems = setMedProblemId(medicationProblemsVO);
+        medicationProblemsService.save(medicationProblems);
+        return BaseResult.success();
+    }
+
+    @ApiOperation("修改药物治疗问题")
+    @PutMapping("/")
+    public BaseResult<MedicationProblemsVO> updateMedicationProblems(
+        @RequestBody MedicationProblemsVO medicationProblemsVO) {
+        setMedProblemId(medicationProblemsVO);
+        MedicationProblems medicationProblems = setMedProblemId(medicationProblemsVO);
+        medicationProblemsService.updateById(medicationProblems);
+        return BaseResult.success();
+    }
+
+    private MedicationProblems setMedProblemId(@RequestBody MedicationProblemsVO medicationProblemsVO) {
         MedicationProblems medicationProblems = dozenMapper.map(medicationProblemsVO, MedicationProblems.class);
         medicationProblems.setIndications(Arrays.stream(medicationProblemsVO.getIndicationses()).map(String::valueOf)
             .reduce((currentValue, item) -> currentValue.concat(",").concat(item)).orElse(""));
@@ -67,17 +83,7 @@ public class MedicationProblemsController {
             .reduce((currentValue, item) -> currentValue.concat(",").concat(item)).orElse(""));
         medicationProblems.setCompliance(Arrays.stream(medicationProblemsVO.getCompliances()).map(String::valueOf)
             .reduce((currentValue, item) -> currentValue.concat(",").concat(item)).orElse(""));
-        medicationProblemsService.save(medicationProblems);
-        return BaseResult.success();
-    }
-
-    @ApiOperation("修改药物治疗问题")
-    @PutMapping("/")
-    public BaseResult<MedicationProblems> updateMedicationProblems(
-        @RequestBody MedicationProblemsVO medicationProblemsVO) {
-        MedicationProblems medicationProblems = dozenMapper.map(medicationProblemsVO, MedicationProblems.class);
-        medicationProblemsService.updateById(medicationProblems);
-        return BaseResult.success();
+        return medicationProblems;
     }
 
     @ApiOperation("获取药物治疗问题字典")
