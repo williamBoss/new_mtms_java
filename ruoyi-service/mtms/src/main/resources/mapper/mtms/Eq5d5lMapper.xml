@@ -13,15 +13,15 @@
     <result column="pain_q" jdbcType="TINYINT" property="painQ" />
     <result column="anxiety_q" jdbcType="TINYINT" property="anxietyQ" />
     <result column="eq5d5l_score" jdbcType="VARCHAR" property="eq5d5lScore" />
-    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
-    <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
     <result column="del_flag" jdbcType="BOOLEAN" property="delFlag" />
-    <result column="create_user" jdbcType="INTEGER" property="createUser" />
-    <result column="update_user" jdbcType="INTEGER" property="updateUser" />
+    <result column="create_by" jdbcType="VARCHAR" property="createBy" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="update_by" jdbcType="VARCHAR" property="updateBy" />
+    <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
   </resultMap>
   <sql id="Base_Column_List">
     <!--@mbg.generated-->
     eq_5d_5l_id, assessment_id, pat_id, action_q, look_after_self_q, daily_act_q, pain_q, 
-    anxiety_q, eq5d5l_score, create_time, update_time, del_flag, create_user, update_user
+    anxiety_q, eq5d5l_score, del_flag, create_by, create_time, update_by, update_time
   </sql>
 </mapper>

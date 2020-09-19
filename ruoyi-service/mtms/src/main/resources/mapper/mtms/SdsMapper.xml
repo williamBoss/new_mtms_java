@@ -29,16 +29,16 @@
     <result column="sds_q_2_0" jdbcType="TINYINT" property="sdsQ20" />
     <result column="sds_score" jdbcType="VARCHAR" property="sdsScore" />
     <result column="del_flag" jdbcType="BOOLEAN" property="delFlag" />
+    <result column="create_by" jdbcType="VARCHAR" property="createBy" />
     <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="update_by" jdbcType="VARCHAR" property="updateBy" />
     <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
-    <result column="create_user" jdbcType="INTEGER" property="createUser" />
-    <result column="update_user" jdbcType="INTEGER" property="updateUser" />
   </resultMap>
   <sql id="Base_Column_List">
     <!--@mbg.generated-->
     sds_id, assessment_id, pat_id, sds_q_1, sds_q_2, sds_q_3, sds_q_4, sds_q_5, sds_q_6, 
     sds_q_7, sds_q_8, sds_q_9, sds_q_1_0, sds_q_1_1, sds_q_1_2, sds_q_1_3, sds_q_1_4, 
     sds_q_1_5, sds_q_1_6, sds_q_1_7, sds_q_1_8, sds_q_1_9, sds_q_2_0, sds_score, del_flag, 
-    create_time, update_time, create_user, update_user
+    create_by, create_time, update_by, update_time
   </sql>
 </mapper>

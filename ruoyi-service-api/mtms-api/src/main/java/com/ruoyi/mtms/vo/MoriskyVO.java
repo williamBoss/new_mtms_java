@@ -10,7 +10,6 @@ import lombok.Data;
 @Data
 @ApiModel(value = "MoriskyVO")
 public class MoriskyVO {
-
     /**
      * 主键id
      */

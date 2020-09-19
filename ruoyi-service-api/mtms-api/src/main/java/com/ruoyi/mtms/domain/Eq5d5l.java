@@ -13,7 +13,7 @@ import lombok.EqualsAndHashCode;
 /**
 * ${TODO}
 * @author KING
-* @date 2020/9/19 12:37
+* @date 2020/9/19 18:18
 * @version V1.0
 */
 
@@ -87,12 +87,4 @@ public class Eq5d5l extends BaseEntity {
     @TableField(value = "eq5d5l_score")
     @ApiModelProperty(value = "分数")
     private String eq5d5lScore;
-
-    @TableField(value = "create_user")
-    @ApiModelProperty(value = "")
-    private Integer createUser;
-
-    @TableField(value = "update_user")
-    @ApiModelProperty(value = "")
-    private Integer updateUser;
 }
