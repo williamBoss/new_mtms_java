@@ -44,8 +44,8 @@ public class MedicationProblemsController {
     @ApiOperation("药物治疗问题列表")
     @GetMapping("/")
     public BaseResult<PageResult<MedicationProblemsVO>> assessmentList(
-        @ApiParam(value = "页数") @RequestParam(name = "pageNum") Integer pageNo,
-        @ApiParam(value = "每页条数") @RequestParam(name = "pageSize") Integer pageSize,
+        @ApiParam(value = "页数") @RequestParam(name = "pageNum", defaultValue = "1") Integer pageNo,
+        @ApiParam(value = "每页条数") @RequestParam(name = "pageSize", defaultValue = "100000") Integer pageSize,
         MedicationProblemsVO medicationProblemsVO) {
         Page<MedicationProblemsVO> medicationProblemsList = medicationProblemsService
             .selectMedProblemsPage(pageNo, pageSize, medicationProblemsVO.getAssessmentId(),

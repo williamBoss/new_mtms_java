@@ -59,7 +59,7 @@ public class Eq5d5lVO {
      * 分数
      */
     @ApiModelProperty(value = "分数")
-    private String eq5d3lScore;
+    private String eq5d5lScore;
 
 }
 

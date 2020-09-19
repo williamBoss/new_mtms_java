@@ -4,7 +4,11 @@ import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.ruoyi.mtms.domain.MedicationSideEffect;
 import com.ruoyi.mtms.mapper.MedicationSideEffectMapper;
 import com.ruoyi.mtms.service.MedicationSideEffectService;
+import com.ruoyi.mtms.vo.MedicationSideEffectVO;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 /**
  * @author KING
@@ -19,5 +23,12 @@ import org.springframework.stereotype.Service;
 public class MedicationSideEffectServiceImpl extends ServiceImpl<MedicationSideEffectMapper, MedicationSideEffect>
     implements MedicationSideEffectService {
 
+    @Autowired
+    private MedicationSideEffectMapper medicationSideEffectMapper;
+
+    @Override
+    public List<MedicationSideEffectVO> selectAllByPatientId(Integer patientId) {
+        return medicationSideEffectMapper.selectAllByPatientId(patientId);
+    }
 }
 

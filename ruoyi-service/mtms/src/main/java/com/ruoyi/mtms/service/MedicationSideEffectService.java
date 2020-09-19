@@ -1,7 +1,10 @@
 package com.ruoyi.mtms.service;
 
-import com.ruoyi.mtms.domain.MedicationSideEffect;
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.ruoyi.mtms.domain.MedicationSideEffect;
+import com.ruoyi.mtms.vo.MedicationSideEffectVO;
+
+import java.util.List;
 
 /**
  * @author KING
@@ -13,6 +16,8 @@ import com.baomidou.mybatisplus.extension.service.IService;
  */
 
 public interface MedicationSideEffectService extends IService<MedicationSideEffect> {
+
+    List<MedicationSideEffectVO> selectAllByPatientId(Integer patientId);
 
 }
 

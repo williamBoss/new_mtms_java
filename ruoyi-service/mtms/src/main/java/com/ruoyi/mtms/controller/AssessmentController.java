@@ -13,7 +13,6 @@ import com.ruoyi.mtms.domain.*;
 import com.ruoyi.mtms.service.*;
 import com.ruoyi.mtms.vo.*;
 import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
 import lombok.extern.slf4j.Slf4j;
@@ -96,14 +95,12 @@ public class AssessmentController extends BaseController {
     }
 
     @PostMapping("/saveAssessment")
-    @ApiOperation("新增评估记录，获取Id")
-    @ApiImplicitParam(name = "patientId", value = "患者id", required = true)
-    public Result saveAssessment(Integer patientId) {
+    @ApiOperation("获取评估Id")
+    public Result saveAssessment() {
         //评估记录
         Assessment assessment = new Assessment();
-        assessment.setPatientId(patientId);
         assessmentService.save(assessment);
-        return Result.ok().data("assessment", assessment);
+        return Result.ok().data("assessmentId", assessment.getAssessmentId());
     }
 
     @PostMapping("/save_family_medical_history")
@@ -194,17 +191,21 @@ public class AssessmentController extends BaseController {
         PastSurgicalHistory pastSurgicalHistory = new PastSurgicalHistory();
         pastSurgicalHistory.setAssessmentId(pastSurgicalHistoryVO.getAssessmentId());
         pastSurgicalHistory.setPatientId(pastSurgicalHistoryVO.getPatientId());
-        Arrays.stream(pastSurgicalHistoryVO.getSurgicalIds()).forEach(v -> {
-            pastSurgicalHistory.setSurgicalHistoryId(v);
-            pastSurgicalHistories.add(pastSurgicalHistory);
-        });
-        Arrays.stream(pastSurgicalHistoryVO.getSurgeryName().split("、")).forEach(v -> {
-            SurgicalHistory surgicalHistory = new SurgicalHistory();
-            surgicalHistory.setSurgeryName(v);
-            surgicalHistoryService.save(surgicalHistory);
-            pastSurgicalHistory.setSurgicalHistoryId(surgicalHistory.getSurgicalHistoryId());
-            pastSurgicalHistories.add(pastSurgicalHistory);
-        });
+        if (pastSurgicalHistoryVO.getSurgicalIds() != null) {
+            Arrays.stream(pastSurgicalHistoryVO.getSurgicalIds()).forEach(v -> {
+                pastSurgicalHistory.setSurgicalHistoryId(v);
+                pastSurgicalHistories.add(pastSurgicalHistory);
+            });
+        }
+        if (StringUtils.isNotBlank(pastSurgicalHistoryVO.getSurgeryName())) {
+            Arrays.stream(pastSurgicalHistoryVO.getSurgeryName().split("、")).forEach(v -> {
+                SurgicalHistory surgicalHistory = new SurgicalHistory();
+                surgicalHistory.setSurgeryName(v);
+                surgicalHistoryService.save(surgicalHistory);
+                pastSurgicalHistory.setSurgicalHistoryId(surgicalHistory.getSurgicalHistoryId());
+                pastSurgicalHistories.add(pastSurgicalHistory);
+            });
+        }
         pastSurgicalHistoryService.saveBatch(pastSurgicalHistories);
         return BaseResult.success();
     }
@@ -270,12 +271,10 @@ public class AssessmentController extends BaseController {
 
     @GetMapping("/getMedicationSideEffectList")
     @ApiOperation("获取药物不良反应记录列表")
-    public BaseResult<List<MedicationSideEffect>> getMedicationSideEffect(
+    public BaseResult<List<MedicationSideEffectVO>> getMedicationSideEffect(
         @ApiParam(value = "患者Id") @RequestParam Integer patientId) {
-        LambdaQueryWrapper<MedicationSideEffect> queryWrapper = new LambdaQueryWrapper<>();
-        queryWrapper.eq(MedicationSideEffect::getPatientId, patientId);
-        List<MedicationSideEffect> list = medicationSideEffectService.list(queryWrapper);
-        return BaseResult.<List<MedicationSideEffect>>success().data(list);
+        List<MedicationSideEffectVO> list = medicationSideEffectService.selectAllByPatientId(patientId);
+        return BaseResult.<List<MedicationSideEffectVO>>success().data(list);
     }
 
     @PostMapping("/save_diagnosis")
