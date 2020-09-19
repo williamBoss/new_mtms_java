@@ -61,8 +61,13 @@ public class EvaluationScaleController {
         LambdaQueryWrapper<Morisky> queryWrapper = new LambdaQueryWrapper<>();
         queryWrapper.eq(Morisky::getAssessmentId, moriskyVO.getAssessmentId());
         moriskyService.remove(queryWrapper);
+        morisky.setMorCountScore(calculationMoriskyScore(morisky));
         moriskyService.save(morisky);
         return BaseResult.success();
+    }
+
+    private String calculationMoriskyScore(Morisky morisky) {
+        return null;
     }
 
     @ApiOperation("根据评估id或者患者id Eq5d3l查询")

@@ -182,6 +182,16 @@ public class AssessmentController extends BaseController {
         return BaseResult.<List<SurgicalHistoryVO>>success().data(surgicalHistoryVOList);
     }
 
+    @ApiOperation("获取既往手术史记录")
+    @GetMapping("/get_past_surgical_histories")
+    public BaseResult<List<PastSurgicalHistoryVO>> getPastSurgicalHistories(
+        @ApiParam(value = "评估Id") @RequestParam(required = false) Integer assessmentId,
+        @ApiParam(value = "患者Id") @RequestParam(required = false) Integer patientId) {
+        List<PastSurgicalHistoryVO> list =
+            pastSurgicalHistoryService.selectPastSurgicalHistories(patientId, assessmentId);
+        return BaseResult.<List<PastSurgicalHistoryVO>>success().data(list);
+    }
+
     @ApiOperation("保存既往手术史记录")
     @PostMapping("/save_past_surgical_histories")
     public BaseResult<PastSurgicalHistoryVO> savePastSurgicalHistories(

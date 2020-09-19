@@ -1,7 +1,10 @@
 package com.ruoyi.mtms.service;
 
-import com.ruoyi.mtms.domain.PastSurgicalHistory;
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.ruoyi.mtms.domain.PastSurgicalHistory;
+import com.ruoyi.mtms.vo.PastSurgicalHistoryVO;
+
+import java.util.List;
 
 /**
  * @author KING
@@ -13,6 +16,8 @@ import com.baomidou.mybatisplus.extension.service.IService;
  */
 
 public interface PastSurgicalHistoryService extends IService<PastSurgicalHistory> {
+
+    public List<PastSurgicalHistoryVO> selectPastSurgicalHistories(Integer patientId, Integer assessmentId);
 
 }
 
