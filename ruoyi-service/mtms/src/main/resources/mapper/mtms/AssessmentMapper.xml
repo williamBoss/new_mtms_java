@@ -1,49 +1,49 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.ruoyi.mtms.mapper.AssessmentMapper">
-  <resultMap id="BaseResultMap" type="com.ruoyi.mtms.domain.Assessment">
-    <!--@mbg.generated-->
-    <!--@Table mtms_assessment-->
-    <id column="assessment_id" jdbcType="INTEGER" property="assessmentId" />
-    <result column="patient_id" jdbcType="INTEGER" property="patientId" />
-    <result column="fill_date" jdbcType="TIMESTAMP" property="fillDate" />
-    <result column="main_consult" jdbcType="LONGVARCHAR" property="mainConsult" />
-    <result column="liver_damage" jdbcType="BOOLEAN" property="liverDamage" />
-    <result column="liver_damage_desc" jdbcType="VARCHAR" property="liverDamageDesc" />
-    <result column="kidney_damage" jdbcType="BOOLEAN" property="kidneyDamage" />
-    <result column="kidney_damage_desc" jdbcType="VARCHAR" property="kidneyDamageDesc" />
-    <result column="allergy_history" jdbcType="BOOLEAN" property="allergyHistory" />
-    <result column="medication_side_effect" jdbcType="BOOLEAN" property="medicationSideEffect" />
-    <result column="sequelae" jdbcType="VARCHAR" property="sequelae" />
-    <result column="del_flag" jdbcType="BOOLEAN" property="delFlag" />
-    <result column="create_by" jdbcType="VARCHAR" property="createBy" />
-    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
-    <result column="update_by" jdbcType="VARCHAR" property="updateBy" />
-    <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
-  </resultMap>
-  <sql id="Base_Column_List">
-    <!--@mbg.generated-->
-    assessment_id, patient_id, fill_date, main_consult, liver_damage, liver_damage_desc, 
-    kidney_damage, kidney_damage_desc, allergy_history, medication_side_effect, sequelae, 
-    del_flag, create_by, create_time, update_by, update_time
-  </sql>
+    <resultMap id="BaseResultMap" type="com.ruoyi.mtms.domain.Assessment">
+        <!--@mbg.generated-->
+        <!--@Table mtms_assessment-->
+        <id column="assessment_id" jdbcType="INTEGER" property="assessmentId"/>
+        <result column="patient_id" jdbcType="INTEGER" property="patientId"/>
+        <result column="fill_date" jdbcType="TIMESTAMP" property="fillDate"/>
+        <result column="main_consult" jdbcType="LONGVARCHAR" property="mainConsult"/>
+        <result column="liver_damage" jdbcType="BOOLEAN" property="liverDamage"/>
+        <result column="liver_damage_desc" jdbcType="VARCHAR" property="liverDamageDesc"/>
+        <result column="kidney_damage" jdbcType="BOOLEAN" property="kidneyDamage"/>
+        <result column="kidney_damage_desc" jdbcType="VARCHAR" property="kidneyDamageDesc"/>
+        <result column="allergy_history" jdbcType="BOOLEAN" property="allergyHistory"/>
+        <result column="medication_side_effect" jdbcType="BOOLEAN" property="medicationSideEffect"/>
+        <result column="sequelae" jdbcType="VARCHAR" property="sequelae"/>
+        <result column="del_flag" jdbcType="BOOLEAN" property="delFlag"/>
+        <result column="create_by" jdbcType="VARCHAR" property="createBy"/>
+        <result column="create_time" jdbcType="TIMESTAMP" property="createTime"/>
+        <result column="update_by" jdbcType="VARCHAR" property="updateBy"/>
+        <result column="update_time" jdbcType="TIMESTAMP" property="updateTime"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+        <!--@mbg.generated-->
+        assessment_id, patient_id, fill_date, main_consult, liver_damage, liver_damage_desc,
+        kidney_damage, kidney_damage_desc, allergy_history, medication_side_effect, sequelae,
+        del_flag, create_by, create_time, update_by, update_time
+    </sql>
     <resultMap id="AssessmentListMap" type="com.ruoyi.mtms.vo.AssessmentVO">
-        <id column="assessment_id" jdbcType="INTEGER" property="assessmentId" />
-        <result column="fill_date" jdbcType="TIMESTAMP" property="fillDate" />
-        <result column="user_name" jdbcType="VARCHAR" property="userName" />
-        <result column="main_consult" jdbcType="LONGNVARCHAR" property="mainConsult" />
+        <id column="assessment_id" jdbcType="INTEGER" property="assessmentId"/>
+        <result column="fill_date" jdbcType="TIMESTAMP" property="fillDate"/>
+        <result column="user_name" jdbcType="VARCHAR" property="userName"/>
+        <result column="main_consult" jdbcType="LONGNVARCHAR" property="mainConsult"/>
         <association javaType="com.ruoyi.mtms.vo.PatientInfoVO" property="patientInfoVO">
-            <id column="patient_id" jdbcType="INTEGER" property="patientId" />
-            <result column="patient_name" jdbcType="VARCHAR" property="patientName" />
-            <result column="birthday" jdbcType="INTEGER" property="birthday" />
-            <result column="gender" jdbcType="TINYINT" property="gender" />
-            <result column="phone" jdbcType="VARCHAR" property="phone" />
-            <result column="id_card_num" jdbcType="VARCHAR" property="idCardNum" />
+            <id column="patient_id" jdbcType="INTEGER" property="patientId"/>
+            <result column="patient_name" jdbcType="VARCHAR" property="patientName"/>
+            <result column="birthday" jdbcType="INTEGER" property="birthday"/>
+            <result column="gender" jdbcType="TINYINT" property="gender"/>
+            <result column="phone" jdbcType="VARCHAR" property="phone"/>
+            <result column="id_card_num" jdbcType="VARCHAR" property="idCardNum"/>
         </association>
         <collection ofType="com.ruoyi.mtms.vo.DiseaseVO" property="diseaseVOS">
-            <id column="disease_id" jdbcType="INTEGER" property="diseaseId" />
-            <result column="disease_name" jdbcType="VARCHAR" property="diseaseName" />
-            <result column="disease_key" jdbcType="VARCHAR" property="diseaseKey" />
+            <id column="disease_id" jdbcType="INTEGER" property="diseaseId"/>
+            <result column="disease_name" jdbcType="VARCHAR" property="diseaseName"/>
+            <result column="disease_key" jdbcType="VARCHAR" property="diseaseKey"/>
         </collection>
     </resultMap>
     <select id="selectAssessmentPage" resultMap="AssessmentListMap">
@@ -75,15 +75,15 @@
             and #{fillDateEnd} >= ma.fill_date
         </if>
         <if test="assessmentDTO.patientName != null and assessmentDTO.patientName != ''">
-            <bind name="patientName" value="'%' + assessmentDTO.patientName + '%'" />
+            <bind name="patientName" value="'%' + assessmentDTO.patientName + '%'"/>
             and mpi.patient_name like #{patientName}
         </if>
         <if test="assessmentDTO.phone != null and assessmentDTO.phone != ''">
-            <bind name="phone" value="'%' + assessmentDTO.phone + '%'" />
+            <bind name="phone" value="'%' + assessmentDTO.phone + '%'"/>
             and mpi.phone like #{phone}
         </if>
         <if test="assessmentDTO.idCardNum != null and assessmentDTO.idCardNum != ''">
-            <bind name="idCardNum" value="'%' + assessmentDTO.idCardNum + '%'" />
+            <bind name="idCardNum" value="'%' + assessmentDTO.idCardNum + '%'"/>
             and mpi.id_card_num like #{idCardNum}
         </if>
         <if test="diseaseIds != null and diseaseIds != '' and diseaseIds.length != 0">
@@ -105,9 +105,15 @@
     </select>
 
     <select id="selectUseMedRecordList" resultType="com.ruoyi.mtms.vo.UseMedRecordVO">
-        select umr.use_start_tIme,
+        select umr.id,
+               umr.assessment_id,
+               umr.patient_id,
+               umr.use_start_time,
                umr.use_end_time,
                umr.med_id,
+               umr.`usage`,
+               umr.dosage_monthly,
+               umr.remark,
                mmi.med_id,
                mmi.med_name,
                mmi.med_spec,

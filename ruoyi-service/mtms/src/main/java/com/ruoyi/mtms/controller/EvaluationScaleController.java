@@ -48,10 +48,11 @@ public class EvaluationScaleController {
     public BaseResult<MoriskyVO> getMoriskyInfo(@ApiParam(value = "评估Id") @RequestParam Integer assessmentId,
         @ApiParam(value = "患者Id") @RequestParam Integer patientId) {
         LambdaQueryWrapper<Morisky> queryWrapper = new LambdaQueryWrapper<>();
-        queryWrapper.eq(Morisky::getAssessmentId, assessmentId);
-        queryWrapper.eq(Morisky::getPatId, patientId);
+        queryWrapper.eq(assessmentId != null, Morisky::getAssessmentId, assessmentId);
+        queryWrapper.eq(patientId != null, Morisky::getPatId, patientId);
         Morisky info = moriskyService.getOne(queryWrapper);
-        return BaseResult.<MoriskyVO>success().data(dozerMapper.map(info, MoriskyVO.class));
+        return BaseResult.<MoriskyVO>success()
+            .data(info != null ? dozerMapper.map(info, MoriskyVO.class) : new MoriskyVO());
     }
 
     @ApiOperation("保存用药依从性")
