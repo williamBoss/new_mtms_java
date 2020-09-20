@@ -9,7 +9,7 @@
     <result column="patient_id" jdbcType="INTEGER" property="patientId" />
     <result column="allergen" jdbcType="VARCHAR" property="allergen" />
     <result column="allergy_symptoms" jdbcType="VARCHAR" property="allergySymptoms" />
-    <result column="allergy_datetime" jdbcType="TIMESTAMP" property="allergyDatetime" />
+    <result column="allergy_datetime" jdbcType="DATE" property="allergyDatetime" />
     <result column="del_flag" jdbcType="BOOLEAN" property="delFlag" />
     <result column="create_by" jdbcType="VARCHAR" property="createBy" />
     <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />

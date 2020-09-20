@@ -11,55 +11,56 @@ import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 
 /**
 * ${TODO}
 * @author KING
-* @date 2020/9/9 20:24
+* @date 2020/9/20 21:54
 * @version V1.0
 */
+
 /**
-    * 过敏史与评估关系
-    */
-@ApiModel(value="com-ruoyi-mtms-domain-AllergyHistory")
+ * 过敏史与评估关系
+ */
+@ApiModel(value = "com-ruoyi-mtms-domain-AllergyHistory")
 @Data
-@EqualsAndHashCode(callSuper=true)
+@EqualsAndHashCode(callSuper = true)
 @TableName(value = "mtms_allergy_history")
 public class AllergyHistory extends BaseEntity {
     /**
      * 主键id
      */
     @TableId(value = "id", type = IdType.AUTO)
-    @ApiModelProperty(value="主键id")
+    @ApiModelProperty(value = "主键id")
     private Integer id;
 
     /**
      * 评估id
      */
     @TableField(value = "assessment_id")
-    @ApiModelProperty(value="评估id")
+    @ApiModelProperty(value = "评估id")
     private Integer assessmentId;
 
     /**
      * 患者id
      */
     @TableField(value = "patient_id")
-    @ApiModelProperty(value="患者id")
+    @ApiModelProperty(value = "患者id")
     private Integer patientId;
 
     /**
      * 过敏原
      */
     @TableField(value = "allergen")
-    @ApiModelProperty(value="过敏原")
+    @ApiModelProperty(value = "过敏原")
     private String allergen;
 
     /**
      * 过敏症状
      */
     @TableField(value = "allergy_symptoms")
-    @ApiModelProperty(value="过敏症状")
+    @ApiModelProperty(value = "过敏症状")
     private String allergySymptoms;
 
     /**
@@ -67,6 +68,6 @@ public class AllergyHistory extends BaseEntity {
      */
     @TableField(value = "allergy_datetime")
     @ApiModelProperty(value="过敏发生时间")
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy/MM/dd HH:mm:ss", timezone = "GMT+8")
-    private LocalDateTime allergyDatetime;
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy/MM/dd", timezone = "GMT+8")
+    private LocalDate allergyDatetime;
 }

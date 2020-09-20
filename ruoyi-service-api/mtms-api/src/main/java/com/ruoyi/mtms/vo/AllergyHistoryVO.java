@@ -5,7 +5,7 @@ import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 
 @Data
 @ApiModel(value = "AllergyHistoryVO")
@@ -44,8 +44,8 @@ public class AllergyHistoryVO {
      * 过敏发生时间
      */
     @ApiModelProperty(value = "过敏发生时间")
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy/MM/dd HH:mm:ss", timezone = "GMT+8")
-    private LocalDateTime allergyDatetime;
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy/MM/dd", timezone = "GMT+8")
+    private LocalDate allergyDatetime;
 
 }
 

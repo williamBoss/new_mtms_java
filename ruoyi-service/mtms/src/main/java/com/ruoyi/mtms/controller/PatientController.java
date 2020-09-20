@@ -4,6 +4,7 @@ import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.github.dozermapper.core.Mapper;
 import com.ruoyi.common.constant.ResponseConstants;
 import com.ruoyi.common.core.controller.BaseController;
+import com.ruoyi.common.core.domain.BaseResult;
 import com.ruoyi.common.core.domain.R;
 import com.ruoyi.mtms.domain.PatientInfo;
 import com.ruoyi.mtms.domain.PatientTreatmentHistory;
@@ -71,17 +72,17 @@ public class PatientController extends BaseController {
 
     @PostMapping("/")
     @ApiOperation(value = "保存患者信息")
-    public R savePatientInfo(@RequestBody PatientInfoVO patientInfoVO) {
+    public BaseResult<PatientInfo> savePatientInfo(@RequestBody PatientInfoVO patientInfoVO) {
         try {
             PatientInfo patientInfo = dozerMapper.map(patientInfoVO, PatientInfo.class);
             patientInfo.setDowntownAddress(StringUtils.join(patientInfoVO.getDowntownAddressArr(), ","));
             // 保存之前先查询手机号是否已经存在
             patientInfoService.save(patientInfo);
             saveTreatmentHistory(patientInfo);
-            return R.ok(ResponseConstants.RESPONSE_SUCCESS, "添加成功！");
+            return BaseResult.<PatientInfo>success().data(patientInfo);
         } catch (Exception e) {
             log.error(e.getMessage(), e);
-            return R.error();
+            return BaseResult.failure();
         }
     }
 
