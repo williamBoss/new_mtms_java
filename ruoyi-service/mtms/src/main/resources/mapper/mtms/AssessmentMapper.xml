@@ -40,10 +40,8 @@
             <result column="phone" jdbcType="VARCHAR" property="phone"/>
             <result column="id_card_num" jdbcType="VARCHAR" property="idCardNum"/>
         </association>
-        <collection ofType="com.ruoyi.mtms.vo.DiseaseVO" property="diseaseVOS">
-            <id column="disease_id" jdbcType="INTEGER" property="diseaseId"/>
-            <result column="disease_name" jdbcType="VARCHAR" property="diseaseName"/>
-            <result column="disease_key" jdbcType="VARCHAR" property="diseaseKey"/>
+        <collection ofType="com.ruoyi.mtms.vo.DiseaseVO" select="com.ruoyi.mtms.mapper.DiseaseMapper.getDiseaseVoList"
+                    column="assessment_id" property="diseaseVOS">
         </collection>
     </resultMap>
     <select id="selectAssessmentPage" resultMap="AssessmentListMap">
@@ -55,17 +53,13 @@
                mpi.gender,
                mpi.phone,
                mpi.id_card_num,
-               md.disease_id,
-               md.disease_name,
-               md.disease_key,
                su.user_name
         from mtms_assessment ma
                      left join mtms_patient_info mpi
                 on ma.patient_id = mpi.patient_id and mpi.del_flag = 0
-                     left join mtms_assessment_diagnosis mad on ma.assessment_id = mad.assessment_id
-                     left join mtms_disease md on mad.disease_id = md.disease_id and md.del_flag = 0
                      left join sys_user su on su.user_id = ma.create_by
                 where ma.del_flag = 0
+                  and ma.patient_id is not null
         <if test="assessmentDTO.fillDateStart != null and assessmentDTO.fillDateStart != ''">
             <bind name="fillDateStart" value="assessmentDTO.fillDateStart + ' 00:00:00'"/>
             and ma.fill_date >= #{fillDateStart}

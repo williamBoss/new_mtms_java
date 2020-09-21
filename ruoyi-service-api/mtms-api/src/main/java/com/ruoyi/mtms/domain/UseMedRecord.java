@@ -86,4 +86,12 @@ public class UseMedRecord extends BaseEntity {
     @TableField(value = "dosage_monthly")
     @ApiModelProperty(value = "月用药量（盒）")
     private String dosageMonthly;
+
+    /**
+     * 备注（新增/停用）
+     */
+    @TableField(value = "remark")
+    @ApiModelProperty(value = "备注（新增/停用）")
+    private String remark;
+
 }
