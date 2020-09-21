@@ -14,7 +14,7 @@
     <result column="Morisky_question_5" jdbcType="TINYINT" property="moriskyQuestion5" />
     <result column="Morisky_question_6" jdbcType="TINYINT" property="moriskyQuestion6" />
     <result column="Morisky_question_7" jdbcType="TINYINT" property="moriskyQuestion7" />
-    <result column="Morisky_question_8" jdbcType="VARCHAR" property="moriskyQuestion8" />
+    <result column="Morisky_question_8" jdbcType="TINYINT" property="moriskyQuestion8" />
     <result column="mor_count_score" jdbcType="VARCHAR" property="morCountScore" />
     <result column="del_flag" jdbcType="BOOLEAN" property="delFlag" />
     <result column="create_by" jdbcType="VARCHAR" property="createBy" />

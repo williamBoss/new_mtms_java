@@ -80,7 +80,7 @@ public class EvaluationScaleController {
     private String calculationMoriskyScore(Morisky morisky) {
         double score = 0;
         for (int i = 1; i < 9; i++) {
-            Integer choose = ReflectUtils.invokeGetter(morisky, "getMoriskyQuestion" + i);
+            Integer choose = ReflectUtils.invokeGetter(morisky, "MoriskyQuestion" + i);
             if (choose == null) {
                 score += 0;
             } else if (i <= 7 && i != 5) {
@@ -318,8 +318,10 @@ public class EvaluationScaleController {
     private String calculationSdsScore(Sds sds) {
         double score = 0;
         for (int i = 1; i < 21; i++) {
-            Integer choose = ReflectUtils.invokeGetter(sds, "getMoriskyQuestion" + i);
-            if (i == 2 || i == 5 || i == 6 || i == 11 || i == 12 || i == 14 || i == 16 || i == 17 || i == 18
+            Integer choose = ReflectUtils.invokeGetter(sds, "SdsQ" + i);
+            if (choose == null) {
+                score += 0;
+            } else if (i == 2 || i == 5 || i == 6 || i == 11 || i == 12 || i == 14 || i == 16 || i == 17 || i == 18
                 || i == 20) {
                 switch (choose) {
                     case 1:
@@ -356,8 +358,8 @@ public class EvaluationScaleController {
                 }
             }
         }
-        score = Math.floor(score * 1.25);
-        return String.valueOf(score);
+        score *= 1.25;
+        return String.valueOf(Math.floor(score));
     }
 
     @ApiOperation("根据评估id或者患者id sf36查询")

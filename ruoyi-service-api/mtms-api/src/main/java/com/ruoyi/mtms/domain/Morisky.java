@@ -13,7 +13,7 @@ import lombok.EqualsAndHashCode;
 /**
 * ${TODO}
 * @author KING
-* @date 2020/9/19 18:19
+* @date 2020/9/21 18:32
 * @version V1.0
 */
 
@@ -100,7 +100,7 @@ public class Morisky extends BaseEntity {
      */
     @TableField(value = "Morisky_question_8")
     @ApiModelProperty(value = "您觉得要记住按时按量服药很难吗 1.从不 2.偶尔 3.有时 4.经常 5.所有时间")
-    private String moriskyQuestion8;
+    private Integer moriskyQuestion8;
 
     /**
      * Morisky服药依从性问卷总分

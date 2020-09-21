@@ -8,7 +8,7 @@ import com.ruoyi.mtms.domain.Morisky;
  *
  * @author KING
  * @version V1.0
- * @date 2020/9/19 18:19
+ * @date 2020/9/21 18:32
  */
 public interface MoriskyMapper extends BaseMapper<Morisky> {
 }
