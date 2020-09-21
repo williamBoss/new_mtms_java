@@ -93,7 +93,7 @@
                                            group by assessment_id) diagnosis
                                      where locate(#{diseaseIds}, diagnosis_id))
         </if>
-        order by ma.fill_date desc
+        order by ma.fill_date desc, ma.create_time desc
     </select>
     <select id="selectAssessmentByPatientId" resultMap="AssessmentListMap">
         select ma.assessment_id, ma.patient_id, ma.fill_date, ma.main_consult, su.user_name

@@ -20,6 +20,7 @@ import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -99,6 +100,7 @@ public class AssessmentController extends BaseController {
     public Result saveAssessment() {
         //评估记录
         Assessment assessment = new Assessment();
+        assessment.setFillDate(LocalDateTime.now());
         assessmentService.save(assessment);
         return Result.ok().data("assessmentId", assessment.getAssessmentId());
     }
@@ -186,7 +188,7 @@ public class AssessmentController extends BaseController {
     @GetMapping("/get_past_surgical_histories")
     public BaseResult<List<PastSurgicalHistoryVO>> getPastSurgicalHistories(
         @ApiParam(value = "评估Id") @RequestParam(required = false) Integer assessmentId,
-        @ApiParam(value = "患者Id") @RequestParam(required = false) Integer patientId) {
+        @ApiParam(value = "患者Id") @RequestParam Integer patientId) {
         List<PastSurgicalHistoryVO> list =
             pastSurgicalHistoryService.selectPastSurgicalHistories(patientId, assessmentId);
         return BaseResult.<List<PastSurgicalHistoryVO>>success().data(list);

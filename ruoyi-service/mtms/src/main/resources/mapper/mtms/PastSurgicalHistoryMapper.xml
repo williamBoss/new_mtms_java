@@ -29,6 +29,9 @@
         from mtms_past_surgical_history mpsh
                      left join mtms_surgical_history msh on mpsh.surgical_history_id = msh.surgical_history_id
                 where mpsh.del_flag = 0
+        <if test="assessmentId != null">
+            and mpsh.assessment_id = #{assessmentId,jdbcType=INTEGER}
+        </if>
         <if test="patientId != null">
             and mpsh.patient_id = #{patientId,jdbcType=INTEGER}
         </if>
