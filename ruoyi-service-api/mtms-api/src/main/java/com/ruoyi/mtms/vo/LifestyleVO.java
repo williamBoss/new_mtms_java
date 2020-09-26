@@ -56,7 +56,7 @@ public class LifestyleVO {
      * 是否抽烟 1.是 2.否 3.已戒烟
      */
     @ApiModelProperty(value = "是否抽烟 1.是 2.否 3.已戒烟")
-    private Boolean isSmorker;
+    private Integer isSmorker;
 
     /**
      * 吸烟量
@@ -80,7 +80,7 @@ public class LifestyleVO {
      * 是否饮酒 1.是 2.否
      */
     @ApiModelProperty(value = "是否饮酒 1.是 2.否")
-    private Boolean isDrinking;
+    private Integer isDrinking;
 
     /**
      * 饮酒量
@@ -110,7 +110,7 @@ public class LifestyleVO {
      * 是否运动 1.是 2.否
      */
     @ApiModelProperty(value = "是否运动 1.是 2.否")
-    private Boolean isExercise;
+    private Integer isExercise;
 
     /**
      * 通常的运动项目

@@ -390,10 +390,20 @@ public class AssessmentController extends BaseController {
         return BaseResult.success();
     }
 
+    @ApiOperation("获取生活方式")
+    @GetMapping("/get_lifestyle")
+    public BaseResult<LifestyleVO> getLifestyle(@ApiParam(value = "评估Id") @RequestParam Integer assessmentId) {
+        LambdaQueryWrapper<Lifestyle> queryWrapper = new LambdaQueryWrapper<>();
+        queryWrapper.eq(Lifestyle::getAssessmentId, assessmentId);
+        Lifestyle info = lifestyleService.getOne(queryWrapper);
+        return BaseResult.<LifestyleVO>success().data(dozenMapper.map(info, LifestyleVO.class));
+    }
+
     @PostMapping("/save_sequelae")
     @ApiOperation("保存评估记录转归详情")
     public BaseResult<AssessmentVO> saveSequelae(@ApiParam(value = "转归详情") @RequestParam String sequelae,
         @RequestParam Integer assessmentId) {
+
         Assessment assessment = new Assessment();
         assessment.setSequelae(sequelae);
         LambdaQueryWrapper<Assessment> updateWrapper = new LambdaQueryWrapper<>();
