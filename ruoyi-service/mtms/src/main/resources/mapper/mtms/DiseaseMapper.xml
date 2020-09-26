@@ -24,5 +24,6 @@
                      left join mtms_assessment_diagnosis mad on md.disease_id = mad.disease_id
         where md.del_flag = 0
           and mad.assessment_id = #{assessmentId,jdbcType=INTEGER}
+        group by md.disease_id
     </select>
 </mapper>

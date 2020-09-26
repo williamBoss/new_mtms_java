@@ -21,9 +21,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+import java.util.*;
+import java.util.stream.Collectors;
 
 /**
  * @author KING
@@ -200,11 +199,11 @@ public class AssessmentController extends BaseController {
         @RequestBody PastSurgicalHistoryVO pastSurgicalHistoryVO) {
         List<PastSurgicalHistory> pastSurgicalHistories = new ArrayList<>();
         //保存既往手术史记录
-        PastSurgicalHistory pastSurgicalHistory = new PastSurgicalHistory();
-        pastSurgicalHistory.setAssessmentId(pastSurgicalHistoryVO.getAssessmentId());
-        pastSurgicalHistory.setPatientId(pastSurgicalHistoryVO.getPatientId());
         if (pastSurgicalHistoryVO.getSurgicalIds() != null) {
             Arrays.stream(pastSurgicalHistoryVO.getSurgicalIds()).forEach(v -> {
+                PastSurgicalHistory pastSurgicalHistory = new PastSurgicalHistory();
+                pastSurgicalHistory.setAssessmentId(pastSurgicalHistoryVO.getAssessmentId());
+                pastSurgicalHistory.setPatientId(pastSurgicalHistoryVO.getPatientId());
                 pastSurgicalHistory.setSurgicalHistoryId(v);
                 pastSurgicalHistories.add(pastSurgicalHistory);
             });
@@ -214,11 +213,21 @@ public class AssessmentController extends BaseController {
                 SurgicalHistory surgicalHistory = new SurgicalHistory();
                 surgicalHistory.setSurgeryName(v);
                 surgicalHistoryService.save(surgicalHistory);
+                PastSurgicalHistory pastSurgicalHistory = new PastSurgicalHistory();
+                pastSurgicalHistory.setAssessmentId(pastSurgicalHistoryVO.getAssessmentId());
+                pastSurgicalHistory.setPatientId(pastSurgicalHistoryVO.getPatientId());
                 pastSurgicalHistory.setSurgicalHistoryId(surgicalHistory.getSurgicalHistoryId());
                 pastSurgicalHistories.add(pastSurgicalHistory);
             });
         }
-        pastSurgicalHistoryService.saveBatch(pastSurgicalHistories);
+        //去重
+        LambdaQueryWrapper<PastSurgicalHistory> queryWrapper = new LambdaQueryWrapper<>();
+        queryWrapper.eq(PastSurgicalHistory::getPatientId, pastSurgicalHistoryVO.getPatientId());
+        pastSurgicalHistoryService.remove(queryWrapper);
+        pastSurgicalHistoryService.saveBatch(pastSurgicalHistories.stream().collect(Collectors.collectingAndThen(
+            Collectors
+                .toCollection(() -> new TreeSet<>(Comparator.comparing(PastSurgicalHistory::getSurgicalHistoryId))),
+            ArrayList::new)));
         return BaseResult.success();
     }
 
