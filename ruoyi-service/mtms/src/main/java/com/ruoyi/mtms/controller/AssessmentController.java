@@ -323,7 +323,7 @@ public class AssessmentController extends BaseController {
         return BaseResult.success();
     }
 
-    @PostMapping("/get_diagnosis")
+    @GetMapping("/get_diagnosis")
     @ApiOperation("获取现有症状-诊断记录")
     public BaseResult<List<AssessmentDiagnosisVO>> getDiagnosis(
         @ApiParam(value = "评估Id") @RequestParam(required = false) Integer assessmentId,
@@ -368,6 +368,37 @@ public class AssessmentController extends BaseController {
 
         symptomDescriptionService.save(symptomDescription);
         return BaseResult.success();
+    }
+
+    @ApiOperation("获取现有症状记录")
+    @GetMapping("/get_existing_symptoms")
+    public BaseResult<ExistingSymptomsVO> getExistingSymptoms(
+        @ApiParam(value = "评估Id") @RequestParam Integer assessmentId) {
+        ExistingSymptomsVO existingSymptomsVO = new ExistingSymptomsVO();
+        Assessment assessmentInfo = assessmentService.getById(assessmentId);
+        // 当前症状描述
+        LambdaQueryWrapper<SymptomDescription> queryWrapper = new LambdaQueryWrapper<>();
+        queryWrapper.eq(SymptomDescription::getAssessmentId, assessmentId);
+        SymptomDescription symptomDescriptionInfo = symptomDescriptionService.getOne(queryWrapper);
+        existingSymptomsVO = dozenMapper.map(symptomDescriptionInfo, ExistingSymptomsVO.class);
+        existingSymptomsVO.setPhysiques(existingSymptomsVO.getPhysique().split("、"));
+        existingSymptomsVO.setFacialFeaturess(existingSymptomsVO.getFacialFeatures().split("、"));
+        existingSymptomsVO.setEndocrines(existingSymptomsVO.getEndocrine().split("、"));
+        existingSymptomsVO.setRespiratorySystems(existingSymptomsVO.getRespiratorySystem().split("、"));
+        existingSymptomsVO.setCardiovasculars(existingSymptomsVO.getCardiovascular().split("、"));
+        existingSymptomsVO.setDigestiveSystems(existingSymptomsVO.getDigestiveSystem().split("、"));
+        existingSymptomsVO.setUrogenitalSystems(existingSymptomsVO.getUrogenitalSystem().split("、"));
+        existingSymptomsVO.setMusculoskeletalSystems(existingSymptomsVO.getMusculoskeletalSystem().split("、"));
+        existingSymptomsVO.setNervousSystems(existingSymptomsVO.getNervousSystem().split("、"));
+        existingSymptomsVO.setHemolymphSystems(existingSymptomsVO.getHemolymphSystem().split("、"));
+        existingSymptomsVO.setImmuneSystems(existingSymptomsVO.getImmuneSystem().split("、"));
+        existingSymptomsVO.setPsychologicals(existingSymptomsVO.getPsychological().split("、"));
+        // 主诉
+        existingSymptomsVO.setMainConsult(assessmentInfo.getMainConsult());
+        // 诊断
+        List<AssessmentDiagnosisVO> list = assessmentDiagnosisService.selectAssessmentDiagnosis(null, assessmentId);
+        existingSymptomsVO.setAssessmentDiagnosisList(list);
+        return BaseResult.<ExistingSymptomsVO>success().data(existingSymptomsVO);
     }
 
     @PostMapping("/saveLifestyle")
