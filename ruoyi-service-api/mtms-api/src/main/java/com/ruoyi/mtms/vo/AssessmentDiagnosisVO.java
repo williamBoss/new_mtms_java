@@ -35,5 +35,5 @@ public class AssessmentDiagnosisVO {
     private Integer[] diagnosisDiseaseIds;
 
     @ApiModelProperty(value = "诊断病种名称")
-    private Integer diseaseName;
+    private String diseaseName;
 }

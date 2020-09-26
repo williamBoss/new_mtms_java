@@ -89,7 +89,7 @@ public class MedicationProblemsController {
     @ApiOperation("获取药物治疗问题字典")
     @GetMapping("/medication_problems_dict")
     public BaseResult<List<MedicationProblemsDictVO>> getMedicationProblemsDict(
-        @ApiParam(value = "问题类型 1.适应症 2.有效性 3.安全性 4.依从性 ") @RequestParam(name = "problemType") Integer problemType) {
+        @ApiParam(value = "问题类型 1.适应症 2.有效性 3.安全性 4.依从性 ") @RequestParam(name = "problemType", required = false) Integer problemType) {
         List<MedicationProblemsDictVO> list = getMedProblemDict(problemType, 0);
         list.forEach(item -> {
             List<MedicationProblemsDictVO> childList = getMedProblemDict(problemType, item.getId());
@@ -112,7 +112,7 @@ public class MedicationProblemsController {
         LambdaQueryWrapper<MedicationProblemsDict> queryWrapper = new LambdaQueryWrapper<>();
         queryWrapper.select(MedicationProblemsDict::getId, MedicationProblemsDict::getProblemType,
             MedicationProblemsDict::getMedicationProblems);
-        queryWrapper.eq(MedicationProblemsDict::getProblemType, problemType);
+        queryWrapper.eq(problemType != null, MedicationProblemsDict::getProblemType, problemType);
         queryWrapper.eq(MedicationProblemsDict::getParentId, parentId);
         List<MedicationProblemsDictVO> list = new ArrayList<>();
         medicationProblemsDictService.list(queryWrapper).forEach(item -> {

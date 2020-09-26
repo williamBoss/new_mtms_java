@@ -243,7 +243,7 @@ public class AssessmentController extends BaseController {
     public BaseResult<AllergyHistoriesVO> saveAllergyHistory(@RequestBody AllergyHistoriesVO allergyHistoriesVO) {
         Assessment assessment = dozenMapper.map(allergyHistoriesVO, Assessment.class);
         //保存过敏史
-        if (assessment.getAllergyHistory()) {
+        if (assessment.getAllergyHistory() == 1) {
             allergyHistoriesVO.getAllergyHistories().forEach(v -> {
                 AllergyHistory allergyHistory = new AllergyHistory();
                 allergyHistory.setAssessmentId(assessment.getAssessmentId());
@@ -258,10 +258,31 @@ public class AssessmentController extends BaseController {
         return BaseResult.success();
     }
 
+    @ApiOperation("查询评估记录")
+    @GetMapping("/get_assessment_info")
+    public BaseResult<AssessmentInfoVO> getAllergyHistory(
+        @ApiParam(value = "评估Id") @RequestParam Integer assessmentId) {
+        // 查询过敏史、肝损害、肾损害
+        Assessment assessmentInfo = assessmentService.getById(assessmentId);
+        AssessmentInfoVO assessmentInfoVO = dozenMapper.map(assessmentInfo, AssessmentInfoVO.class);
+        if (assessmentInfo.getAllergyHistory() != null && assessmentInfo.getAllergyHistory() == 1) {
+            // 查询过敏史
+            LambdaQueryWrapper<AllergyHistory> queryWrapper = new LambdaQueryWrapper<>();
+            queryWrapper.eq(AllergyHistory::getAssessmentId, assessmentId);
+            List<AllergyHistoryVO> list = new ArrayList<>();
+            allergyHistoryService.list(queryWrapper).forEach(item -> {
+                list.add(dozenMapper.map(item, AllergyHistoryVO.class));
+            });
+            assessmentInfoVO.setAllergyHistories(list);
+        }
+        return BaseResult.<AssessmentInfoVO>success().data(assessmentInfoVO);
+    }
+
     @ApiOperation("保存药物不良反应史选项")
     @PostMapping("/save_medication_side_effect_choose")
     public BaseResult<MedicationSideEffectChooseVO> saveMedicationSideEffectChoose(
         @RequestBody MedicationSideEffectChooseVO medicationSideEffectChooseVO) {
+
         Assessment assessment = dozenMapper.map(medicationSideEffectChooseVO, Assessment.class);
         assessmentService.updateById(assessment);
         return BaseResult.success();

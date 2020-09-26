@@ -8,12 +8,12 @@
         <result column="patient_id" jdbcType="INTEGER" property="patientId"/>
         <result column="fill_date" jdbcType="TIMESTAMP" property="fillDate"/>
         <result column="main_consult" jdbcType="LONGVARCHAR" property="mainConsult"/>
-        <result column="liver_damage" jdbcType="BOOLEAN" property="liverDamage"/>
+        <result column="liver_damage" jdbcType="INTEGER" property="liverDamage"/>
         <result column="liver_damage_desc" jdbcType="VARCHAR" property="liverDamageDesc"/>
-        <result column="kidney_damage" jdbcType="BOOLEAN" property="kidneyDamage"/>
+        <result column="kidney_damage" jdbcType="INTEGER" property="kidneyDamage"/>
         <result column="kidney_damage_desc" jdbcType="VARCHAR" property="kidneyDamageDesc"/>
-        <result column="allergy_history" jdbcType="BOOLEAN" property="allergyHistory"/>
-        <result column="medication_side_effect" jdbcType="BOOLEAN" property="medicationSideEffect"/>
+        <result column="allergy_history" jdbcType="INTEGER" property="allergyHistory"/>
+        <result column="medication_side_effect" jdbcType="INTEGER" property="medicationSideEffect"/>
         <result column="sequelae" jdbcType="VARCHAR" property="sequelae"/>
         <result column="del_flag" jdbcType="BOOLEAN" property="delFlag"/>
         <result column="create_by" jdbcType="VARCHAR" property="createBy"/>
