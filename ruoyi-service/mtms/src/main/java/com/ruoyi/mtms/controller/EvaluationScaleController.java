@@ -120,6 +120,9 @@ public class EvaluationScaleController {
         queryWrapper.eq(Eq5d3l::getAssessmentId, assessmentId);
         queryWrapper.eq(Eq5d3l::getPatId, patientId);
         Eq5d3l info = eq5d3lService.getOne(queryWrapper);
+        if (info == null) {
+            return BaseResult.<Eq5d3lVO>success().data(null);
+        }
         return BaseResult.<Eq5d3lVO>success().data(dozerMapper.map(info, Eq5d3lVO.class));
     }
 

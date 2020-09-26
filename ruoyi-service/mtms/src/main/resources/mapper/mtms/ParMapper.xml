@@ -8,10 +8,10 @@
     <result column="assessment_id" jdbcType="INTEGER" property="assessmentId" />
     <result column="pat_id" jdbcType="INTEGER" property="patId" />
     <result column="risk_ten_year" jdbcType="VARCHAR" property="riskTenYear" />
-    <result column="risk_ten_year_level" jdbcType="BOOLEAN" property="riskTenYearLevel" />
+    <result column="risk_ten_year_level" jdbcType="INTEGER" property="riskTenYearLevel" />
     <result column="estimated_risk_ten_year" jdbcType="VARCHAR" property="estimatedRiskTenYear" />
     <result column="risk_lifetime" jdbcType="VARCHAR" property="riskLifetime" />
-    <result column="risk_lifetime_level" jdbcType="BOOLEAN" property="riskLifetimeLevel" />
+    <result column="risk_lifetime_level" jdbcType="INTEGER" property="riskLifetimeLevel" />
     <result column="estimated_risk_lifetime" jdbcType="VARCHAR" property="estimatedRiskLifetime" />
     <result column="del_flag" jdbcType="BOOLEAN" property="delFlag" />
     <result column="create_by" jdbcType="VARCHAR" property="createBy" />
