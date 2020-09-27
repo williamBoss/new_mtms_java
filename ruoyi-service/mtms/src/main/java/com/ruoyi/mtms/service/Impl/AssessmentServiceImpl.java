@@ -16,6 +16,7 @@ import com.ruoyi.mtms.vo.UseMedRecordVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.util.List;
 
 /**
@@ -51,6 +52,9 @@ public class AssessmentServiceImpl extends ServiceImpl<AssessmentMapper, Assessm
         AssessmentDTO assessmentDTO = dozerBeanMapper.map(assessmentVO, AssessmentDTO.class);
         Page<AssessmentVO> page = new Page<>(pageNo, pageSize);
         List<AssessmentVO> assessmentVOList = assessmentMapper.selectAssessmentPage(page, assessmentDTO, diseaseIds);
+        assessmentVOList.forEach(item -> {
+            item.getPatientInfoVO().setAge(item.getPatientInfoVO().getBirthday().until(LocalDate.now()).getYears());
+        });
         page.setRecords(assessmentVOList);
         return page;
     }

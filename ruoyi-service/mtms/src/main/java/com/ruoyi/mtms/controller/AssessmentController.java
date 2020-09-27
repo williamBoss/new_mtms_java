@@ -414,6 +414,9 @@ public class AssessmentController extends BaseController {
     @ApiOperation("新增生活方式记录")
     public Result saveLifestyle(@RequestBody LifestyleVO lifestyleVO) {
         Lifestyle lifeStyle = dozenMapper.map(lifestyleVO, Lifestyle.class);
+        LambdaQueryWrapper<Lifestyle> queryWrapper = new LambdaQueryWrapper<>();
+        queryWrapper.eq(Lifestyle::getAssessmentId, lifestyleVO.getAssessmentId());
+        lifestyleService.remove(queryWrapper);
         lifestyleService.save(lifeStyle);
         return Result.ok();
     }

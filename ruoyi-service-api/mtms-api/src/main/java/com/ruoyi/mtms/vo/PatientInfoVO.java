@@ -42,6 +42,9 @@ public class PatientInfoVO {
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy/MM/dd", timezone = "GMT+8")
     private LocalDate birthday;
 
+    @ApiModelProperty(value = "年龄")
+    private Integer age;
+
     /**
      * 性别 0.未知 1.男 2.女
      */
