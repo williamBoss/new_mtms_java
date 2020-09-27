@@ -295,7 +295,7 @@ public class EvaluationScaleController {
         queryWrapper.eq(Sds::getAssessmentId, assessmentId);
         queryWrapper.eq(Sds::getPatId, patientId);
         Sds info = sdsService.getOne(queryWrapper);
-        return BaseResult.<SdsVO>success().data(dozerMapper.map(info, SdsVO.class));
+        return BaseResult.<SdsVO>success().data(info != null ? dozerMapper.map(info, SdsVO.class) : null);
     }
 
     @ApiOperation("保存Sds")

@@ -329,13 +329,18 @@ public class AssessmentController extends BaseController {
     @PostMapping("/save_diagnosis")
     @ApiOperation("新增现有症状-诊断记录")
     public BaseResult<AssessmentDiagnosisVO> saveDiagnosis(@RequestBody AssessmentDiagnosisVO assessmentDiagnosisVO) {
-        Arrays.stream(assessmentDiagnosisVO.getDiagnosisDiseaseIds()).forEach(v -> {
-            AssessmentDiagnosis assessmentDiagnosis = new AssessmentDiagnosis();
-            assessmentDiagnosis.setAssessmentId(assessmentDiagnosisVO.getAssessmentId());
-            assessmentDiagnosis.setPatientId(assessmentDiagnosisVO.getPatientId());
-            assessmentDiagnosis.setDiseaseId(v);
-            assessmentDiagnosisService.save(assessmentDiagnosis);
-        });
+        //去重
+        LambdaQueryWrapper<AssessmentDiagnosis> queryWrapper = new LambdaQueryWrapper<>();
+        queryWrapper.eq(AssessmentDiagnosis::getAssessmentId, assessmentDiagnosisVO.getPatientId());
+        assessmentDiagnosisService.remove(queryWrapper);
+        Arrays.stream(assessmentDiagnosisVO.getDiagnosisDiseaseIds()).distinct().collect(Collectors.toList())
+            .forEach(v -> {
+                AssessmentDiagnosis assessmentDiagnosis = new AssessmentDiagnosis();
+                assessmentDiagnosis.setAssessmentId(assessmentDiagnosisVO.getAssessmentId());
+                assessmentDiagnosis.setPatientId(assessmentDiagnosisVO.getPatientId());
+                assessmentDiagnosis.setDiseaseId(v);
+                assessmentDiagnosisService.save(assessmentDiagnosis);
+            });
         return BaseResult.success();
     }
 
@@ -396,19 +401,21 @@ public class AssessmentController extends BaseController {
         LambdaQueryWrapper<SymptomDescription> queryWrapper = new LambdaQueryWrapper<>();
         queryWrapper.eq(SymptomDescription::getAssessmentId, assessmentId);
         SymptomDescription symptomDescriptionInfo = symptomDescriptionService.getOne(queryWrapper);
-        existingSymptomsVO = dozenMapper.map(symptomDescriptionInfo, ExistingSymptomsVO.class);
-        existingSymptomsVO.setPhysiques(existingSymptomsVO.getPhysique().split("、"));
-        existingSymptomsVO.setFacialFeaturess(existingSymptomsVO.getFacialFeatures().split("、"));
-        existingSymptomsVO.setEndocrines(existingSymptomsVO.getEndocrine().split("、"));
-        existingSymptomsVO.setRespiratorySystems(existingSymptomsVO.getRespiratorySystem().split("、"));
-        existingSymptomsVO.setCardiovasculars(existingSymptomsVO.getCardiovascular().split("、"));
-        existingSymptomsVO.setDigestiveSystems(existingSymptomsVO.getDigestiveSystem().split("、"));
-        existingSymptomsVO.setUrogenitalSystems(existingSymptomsVO.getUrogenitalSystem().split("、"));
-        existingSymptomsVO.setMusculoskeletalSystems(existingSymptomsVO.getMusculoskeletalSystem().split("、"));
-        existingSymptomsVO.setNervousSystems(existingSymptomsVO.getNervousSystem().split("、"));
-        existingSymptomsVO.setHemolymphSystems(existingSymptomsVO.getHemolymphSystem().split("、"));
-        existingSymptomsVO.setImmuneSystems(existingSymptomsVO.getImmuneSystem().split("、"));
-        existingSymptomsVO.setPsychologicals(existingSymptomsVO.getPsychological().split("、"));
+        if (symptomDescriptionInfo != null) {
+            existingSymptomsVO = dozenMapper.map(symptomDescriptionInfo, ExistingSymptomsVO.class);
+            existingSymptomsVO.setPhysiques(existingSymptomsVO.getPhysique().split("、"));
+            existingSymptomsVO.setFacialFeaturess(existingSymptomsVO.getFacialFeatures().split("、"));
+            existingSymptomsVO.setEndocrines(existingSymptomsVO.getEndocrine().split("、"));
+            existingSymptomsVO.setRespiratorySystems(existingSymptomsVO.getRespiratorySystem().split("、"));
+            existingSymptomsVO.setCardiovasculars(existingSymptomsVO.getCardiovascular().split("、"));
+            existingSymptomsVO.setDigestiveSystems(existingSymptomsVO.getDigestiveSystem().split("、"));
+            existingSymptomsVO.setUrogenitalSystems(existingSymptomsVO.getUrogenitalSystem().split("、"));
+            existingSymptomsVO.setMusculoskeletalSystems(existingSymptomsVO.getMusculoskeletalSystem().split("、"));
+            existingSymptomsVO.setNervousSystems(existingSymptomsVO.getNervousSystem().split("、"));
+            existingSymptomsVO.setHemolymphSystems(existingSymptomsVO.getHemolymphSystem().split("、"));
+            existingSymptomsVO.setImmuneSystems(existingSymptomsVO.getImmuneSystem().split("、"));
+            existingSymptomsVO.setPsychologicals(existingSymptomsVO.getPsychological().split("、"));
+        }
         // 主诉
         existingSymptomsVO.setMainConsult(assessmentInfo.getMainConsult());
         // 诊断
@@ -446,7 +453,7 @@ public class AssessmentController extends BaseController {
         LambdaQueryWrapper<Lifestyle> queryWrapper = new LambdaQueryWrapper<>();
         queryWrapper.eq(Lifestyle::getAssessmentId, assessmentId);
         Lifestyle info = lifestyleService.getOne(queryWrapper);
-        return BaseResult.<LifestyleVO>success().data(dozenMapper.map(info, LifestyleVO.class));
+        return BaseResult.<LifestyleVO>success().data(info != null ? dozenMapper.map(info, LifestyleVO.class) : null);
     }
 
     @PostMapping("/save_sequelae")
