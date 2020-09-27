@@ -94,6 +94,13 @@ public class AssessmentController extends BaseController {
         return R.ok(ResponseConstants.RESPONSE_SUCCESS, "获取成功", assessmentVOList);
     }
 
+    @DeleteMapping("/del_assessment/{id}")
+    @ApiOperation("删除评估记录")
+    public BaseResult<AssessmentVO> delAssessment(@ApiParam(value = "评估记录Id") @PathVariable String id) {
+        assessmentService.removeById(id);
+        return BaseResult.<AssessmentVO>success();
+    }
+
     @PostMapping("/saveAssessment")
     @ApiOperation("获取评估Id")
     public Result saveAssessment() {
