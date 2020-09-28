@@ -8,8 +8,10 @@ import com.ruoyi.common.core.domain.DataResult;
 import com.ruoyi.common.core.domain.PageResult;
 import com.ruoyi.mtms.domain.MedicationProblems;
 import com.ruoyi.mtms.domain.MedicationProblemsDict;
+import com.ruoyi.mtms.domain.MedicineInfo;
 import com.ruoyi.mtms.service.MedicationProblemsDictService;
 import com.ruoyi.mtms.service.MedicationProblemsService;
+import com.ruoyi.mtms.service.MedicineInfoService;
 import com.ruoyi.mtms.vo.MedicationProblemsDictVO;
 import com.ruoyi.mtms.vo.MedicationProblemsVO;
 import io.swagger.annotations.Api;
@@ -39,6 +41,9 @@ public class MedicationProblemsController {
     private MedicationProblemsDictService medicationProblemsDictService;
 
     @Autowired
+    private MedicineInfoService medicineInfoService;
+
+    @Autowired
     private Mapper dozenMapper;
 
     @ApiOperation("药物治疗问题列表")
@@ -58,6 +63,12 @@ public class MedicationProblemsController {
     public BaseResult<MedicationProblemsVO> saveMedicationProblems(
         @RequestBody MedicationProblemsVO medicationProblemsVO) {
         MedicationProblems medicationProblems = setMedProblemId(medicationProblemsVO);
+        if (medicationProblemsVO.getMedId() == null) {
+            MedicineInfo medicineInfo = new MedicineInfo();
+            medicineInfo.setMedName(medicationProblemsVO.getMedName());
+            medicineInfoService.save(medicineInfo);
+            medicationProblems.setMedId(medicineInfo.getMedId());
+        }
         medicationProblemsService.save(medicationProblems);
         return BaseResult.success();
     }
@@ -66,8 +77,13 @@ public class MedicationProblemsController {
     @PutMapping("/")
     public BaseResult<MedicationProblemsVO> updateMedicationProblems(
         @RequestBody MedicationProblemsVO medicationProblemsVO) {
-        setMedProblemId(medicationProblemsVO);
         MedicationProblems medicationProblems = setMedProblemId(medicationProblemsVO);
+        if (medicationProblemsVO.getMedId() == null) {
+            MedicineInfo medicineInfo = new MedicineInfo();
+            medicineInfo.setMedName(medicationProblemsVO.getMedName());
+            medicineInfoService.save(medicineInfo);
+            medicationProblems.setMedId(medicineInfo.getMedId());
+        }
         medicationProblemsService.updateById(medicationProblems);
         return BaseResult.success();
     }
