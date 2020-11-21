@@ -9,8 +9,10 @@
     <result column="patient_id" jdbcType="INTEGER" property="patientId" />
     <result column="detect_date" jdbcType="DATE" property="detectDate" />
     <result column="fasting_blood_glucose" jdbcType="VARCHAR" property="fastingBloodGlucose" />
-    <result column="glycated_hemoglobin" jdbcType="VARCHAR" property="glycatedHemoglobin" />
     <result column="two_hours_postprandial" jdbcType="VARCHAR" property="twoHoursPostprandial" />
+    <result column="glycated_hemoglobin" jdbcType="VARCHAR" property="glycatedHemoglobin" />
+    <result column="c_peptide" jdbcType="VARCHAR" property="cPeptide" />
+    <result column="random_blood_sugar" jdbcType="VARCHAR" property="randomBloodSugar" />
     <result column="urine_microalbumin" jdbcType="VARCHAR" property="urineMicroalbumin" />
     <result column="del_flag" jdbcType="BOOLEAN" property="delFlag" />
     <result column="create_by" jdbcType="VARCHAR" property="createBy" />
@@ -20,8 +22,8 @@
   </resultMap>
   <sql id="Base_Column_List">
     <!--@mbg.generated-->
-    id, assessment_id, patient_id, detect_date, fasting_blood_glucose, glycated_hemoglobin, 
-    two_hours_postprandial, urine_microalbumin, del_flag, create_by, create_time, update_by, 
-    update_time
+    id, assessment_id, patient_id, detect_date, fasting_blood_glucose, two_hours_postprandial, 
+    glycated_hemoglobin, c_peptide, random_blood_sugar, urine_microalbumin, del_flag, 
+    create_by, create_time, update_by, update_time
   </sql>
 </mapper>

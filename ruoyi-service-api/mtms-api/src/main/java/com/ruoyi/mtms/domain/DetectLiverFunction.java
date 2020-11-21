@@ -14,15 +14,8 @@ import lombok.EqualsAndHashCode;
 import java.time.LocalDate;
 
 /**
- * ${TODO}
- *
- * @author KING
- * @date 2020/9/13 18:37
- * @version V1.0
- */
-
-/**
  * 肝功能检测检验
+ *
  * @author KING
  */
 @ApiModel(value = "com-ruoyi-mtms-domain-DetectLiverFunction")
@@ -72,4 +65,25 @@ public class DetectLiverFunction extends BaseEntity {
     @TableField(value = "AST")
     @ApiModelProperty(value = "谷草转氨酶")
     private String ast;
+
+    /**
+     * 总胆红素
+     */
+    @TableField(value = "total_bilirubin")
+    @ApiModelProperty(value = "总胆红素")
+    private String totalBilirubin;
+
+    /**
+     * 直接胆红素
+     */
+    @TableField(value = "direct_bilirubin")
+    @ApiModelProperty(value = "直接胆红素")
+    private String directBilirubin;
+
+    /**
+     * 间接胆红素
+     */
+    @TableField(value = "indirect_bilirubin")
+    @ApiModelProperty(value = "间接胆红素")
+    private String indirectBilirubin;
 }

@@ -10,6 +10,9 @@
     <result column="detect_date" jdbcType="DATE" property="detectDate" />
     <result column="ALT" jdbcType="VARCHAR" property="alt" />
     <result column="AST" jdbcType="VARCHAR" property="ast" />
+    <result column="total_bilirubin" jdbcType="VARCHAR" property="totalBilirubin" />
+    <result column="direct_bilirubin" jdbcType="VARCHAR" property="directBilirubin" />
+    <result column="indirect_bilirubin" jdbcType="VARCHAR" property="indirectBilirubin" />
     <result column="del_flag" jdbcType="BOOLEAN" property="delFlag" />
     <result column="create_by" jdbcType="VARCHAR" property="createBy" />
     <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
@@ -18,7 +21,7 @@
   </resultMap>
   <sql id="Base_Column_List">
     <!--@mbg.generated-->
-    id, assessment_id, patient_id, detect_date, ALT, AST, del_flag, create_by, create_time, 
-    update_by, update_time
+    id, assessment_id, patient_id, detect_date, ALT, AST, total_bilirubin, direct_bilirubin, 
+    indirect_bilirubin, del_flag, create_by, create_time, update_by, update_time
   </sql>
 </mapper>

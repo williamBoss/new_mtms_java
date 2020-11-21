@@ -10,10 +10,11 @@
     <result column="detect_date" jdbcType="DATE" property="detectDate" />
     <result column="TC" jdbcType="VARCHAR" property="tc" />
     <result column="LDL" jdbcType="VARCHAR" property="ldl" />
+    <result column="HDL_C" jdbcType="VARCHAR" property="hdlC" />
     <result column="TG" jdbcType="VARCHAR" property="tg" />
     <result column="LP_A" jdbcType="VARCHAR" property="lpA" />
-    <result column="HDL_C" jdbcType="VARCHAR" property="hdlC" />
-    <result column="LDL_C" jdbcType="VARCHAR" property="ldlC" />
+    <result column="blood_uric_acid" jdbcType="VARCHAR" property="bloodUricAcid" />
+    <result column="creatine_kinase" jdbcType="VARCHAR" property="creatineKinase" />
     <result column="del_flag" jdbcType="BOOLEAN" property="delFlag" />
     <result column="create_by" jdbcType="VARCHAR" property="createBy" />
     <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
@@ -22,7 +23,7 @@
   </resultMap>
   <sql id="Base_Column_List">
     <!--@mbg.generated-->
-    id, assessment_id, patient_id, detect_date, TC, LDL, TG, LP_A, HDL_C, LDL_C, del_flag, 
-    create_by, create_time, update_by, update_time
+    id, assessment_id, patient_id, detect_date, TC, LDL, HDL_C, TG, LP_A, blood_uric_acid, 
+    creatine_kinase, del_flag, create_by, create_time, update_by, update_time
   </sql>
 </mapper>

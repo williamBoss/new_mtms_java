@@ -48,6 +48,12 @@ public class DetectBloodLipidsVO {
     private String ldl;
 
     /**
+     * 高密度脂蛋白HDL-C（mmol/L）
+     */
+    @ApiModelProperty(value = "高密度脂蛋白HDL-C（mmol/L）")
+    private String hdlC;
+
+    /**
      * 甘油三酯TG(mmol/L)
      */
     @ApiModelProperty(value = "甘油三酯TG(mmol/L)")
@@ -60,16 +66,16 @@ public class DetectBloodLipidsVO {
     private String lpA;
 
     /**
-     * 高密度脂蛋白HDL-C（mmol/L）
+     * 血尿酸
      */
-    @ApiModelProperty(value = "高密度脂蛋白HDL-C（mmol/L）")
-    private String hdlC;
+    @ApiModelProperty(value = "血尿酸")
+    private String bloodUricAcid;
 
     /**
-     * 低密度脂蛋白胆固醇
+     * 肌酸激酶CK
      */
-    @ApiModelProperty(value = "低密度脂蛋白胆固醇")
-    private String ldlC;
+    @ApiModelProperty(value = "肌酸激酶CK")
+    private String creatineKinase;
 
 }
 

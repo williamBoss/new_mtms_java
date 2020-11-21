@@ -42,22 +42,32 @@ public class DetectBloodSugarVO {
     private String fastingBloodGlucose;
 
     /**
-     * 糖化血红蛋白(%)
-     */
-    @ApiModelProperty(value = "糖化血红蛋白(%)")
-    private String glycatedHemoglobin;
-
-    /**
      * 餐后2小时血糖（mmol/L）
      */
     @ApiModelProperty(value = "餐后2小时血糖（mmol/L）")
     private String twoHoursPostprandial;
 
     /**
+     * 糖化血红蛋白(%)
+     */
+    @ApiModelProperty(value = "糖化血红蛋白(%)")
+    private String glycatedHemoglobin;
+
+    /**
+     * C肽
+     */
+    @ApiModelProperty(value = "C肽")
+    private String cpeptide;
+
+    /**
+     * 随机血糖
+     */
+    @ApiModelProperty(value = "随机血糖")
+    private String randomBloodSugar;
+
+    /**
      * 尿微量白蛋白（mg/L）
      */
     @ApiModelProperty(value = "尿微量白蛋白（mg/L）")
     private String urineMicroalbumin;
-
 }
-

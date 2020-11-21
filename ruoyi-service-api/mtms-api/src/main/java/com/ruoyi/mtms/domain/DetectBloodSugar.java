@@ -61,6 +61,13 @@ public class DetectBloodSugar extends BaseEntity {
     private String fastingBloodGlucose;
 
     /**
+     * 餐后2小时血糖（mmol/L）
+     */
+    @TableField(value = "two_hours_postprandial")
+    @ApiModelProperty(value = "餐后2小时血糖（mmol/L）")
+    private String twoHoursPostprandial;
+
+    /**
      * 糖化血红蛋白(%)
      */
     @TableField(value = "glycated_hemoglobin")
@@ -68,11 +75,18 @@ public class DetectBloodSugar extends BaseEntity {
     private String glycatedHemoglobin;
 
     /**
-     * 餐后2小时血糖（mmol/L）
+     * C肽
      */
-    @TableField(value = "two_hours_postprandial")
-    @ApiModelProperty(value = "餐后2小时血糖（mmol/L）")
-    private String twoHoursPostprandial;
+    @TableField(value = "c_peptide")
+    @ApiModelProperty(value = "C肽")
+    private String cpeptide;
+
+    /**
+     * 随机血糖
+     */
+    @TableField(value = "random_blood_sugar")
+    @ApiModelProperty(value = "随机血糖")
+    private String randomBloodSugar;
 
     /**
      * 尿微量白蛋白（mg/L）

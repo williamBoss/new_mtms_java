@@ -8,7 +8,7 @@ import com.ruoyi.mtms.domain.DetectBloodLipids;
  *
  * @author KING
  * @version V1.0
- * @date 2020/9/13 18:37
+ * @date 2020/11/20 14:26
  */
 public interface DetectBloodLipidsMapper extends BaseMapper<DetectBloodLipids> {
 }

@@ -209,7 +209,9 @@ public class DetectController extends BaseController {
     @ApiOperation("保存血糖检验检测")
     @PostMapping("/saveDetectBloodSugar")
     public Result saveDetectBloodSugar(@RequestBody DetectBloodSugarVO detectBloodSugarVO) {
+        log.debug(detectBloodSugarVO.toString());
         DetectBloodSugar detectBloodSugar = dozenMapper.map(detectBloodSugarVO, DetectBloodSugar.class);
+        log.debug(detectBloodSugar.toString());
         try {
             detectBloodSugarService.save(detectBloodSugar);
         } catch (Exception e) {

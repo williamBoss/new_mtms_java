@@ -209,6 +209,12 @@ public class LifestyleVO {
     private BigDecimal afterTwelveMonthsTreatmentMonthlyMedicalExpenses;
 
     /**
+     * 费用备注
+     */
+    @ApiModelProperty(value = "费用备注")
+    private String treatmentTotalRemark;
+
+    /**
      * 生活方式 评估报告 总结
      */
     @ApiModelProperty(value = "生活方式 评估报告 总结")

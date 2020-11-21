@@ -37,6 +37,7 @@
     <result column="after_six_months_treatment_monthly_medical_expenses" jdbcType="DECIMAL" property="afterSixMonthsTreatmentMonthlyMedicalExpenses" />
     <result column="after_twelve_months_treatment_monthly_total" jdbcType="DECIMAL" property="afterTwelveMonthsTreatmentMonthlyTotal" />
     <result column="after_twelve_months_treatment_monthly_medical_expenses" jdbcType="DECIMAL" property="afterTwelveMonthsTreatmentMonthlyMedicalExpenses" />
+    <result column="treatment_total_remark" jdbcType="VARCHAR" property="treatmentTotalRemark"/>
     <result column="lifestyle_summary" jdbcType="VARCHAR" property="lifestyleSummary" />
     <result column="del_flag" jdbcType="BOOLEAN" property="delFlag" />
     <result column="create_by" jdbcType="VARCHAR" property="createBy" />
@@ -46,15 +47,15 @@
   </resultMap>
   <sql id="Base_Column_List">
     <!--@mbg.generated-->
-    lifestyle_id, assessment_id, patient_id, weight_change_type, weight_change_value, 
-    daily_basic_food_amount, daily_salt_amount, is_smorker, smoking_num, smoking_year, 
-    quit_smoking_time, is_drinking, drinking_num, drinking_year, daily_fat_amount, daily_vegetable_fruit_amount, 
-    is_exercise, usual_sports, each_exercise_time, weekly_exercise_frequency, weekly_exercise_time, 
-    is_sleep_disorder, sleep_disorder_amount, is_fall, fall_reason, before_treatment_monthly_total, 
-    before_treatment_monthly_medical_expenses, after_three_months_treatment_monthly_total, 
-    after_three_months_treatment_monthly_medical_expenses, after_six_months_treatment_monthly_total, 
-    after_six_months_treatment_monthly_medical_expenses, after_twelve_months_treatment_monthly_total, 
-    after_twelve_months_treatment_monthly_medical_expenses, lifestyle_summary, del_flag, 
+    lifestyle_id, assessment_id, patient_id, weight_change_type, weight_change_value,
+    daily_basic_food_amount, daily_salt_amount, is_smorker, smoking_num, smoking_year,
+    quit_smoking_time, is_drinking, drinking_num, drinking_year, daily_fat_amount, daily_vegetable_fruit_amount,
+    is_exercise, usual_sports, each_exercise_time, weekly_exercise_frequency, weekly_exercise_time,
+    is_sleep_disorder, sleep_disorder_amount, is_fall, fall_reason, before_treatment_monthly_total,
+    before_treatment_monthly_medical_expenses, after_three_months_treatment_monthly_total,
+    after_three_months_treatment_monthly_medical_expenses, after_six_months_treatment_monthly_total,
+    after_six_months_treatment_monthly_medical_expenses, after_twelve_months_treatment_monthly_total,
+    after_twelve_months_treatment_monthly_medical_expenses, treatment_total_remark, lifestyle_summary, del_flag,
     create_by, create_time, update_by, update_time
   </sql>
 </mapper>

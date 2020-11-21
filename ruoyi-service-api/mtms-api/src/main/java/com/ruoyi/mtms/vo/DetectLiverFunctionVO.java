@@ -47,5 +47,23 @@ public class DetectLiverFunctionVO {
     @ApiModelProperty(value = "谷草转氨酶")
     private String ast;
 
+    /**
+     * 总胆红素
+     */
+    @ApiModelProperty(value = "总胆红素")
+    private String totalBilirubin;
+
+    /**
+     * 直接胆红素
+     */
+    @ApiModelProperty(value = "直接胆红素")
+    private String directBilirubin;
+
+    /**
+     * 间接胆红素
+     */
+    @ApiModelProperty(value = "间接胆红素")
+    private String indirectBilirubin;
+
 }
 

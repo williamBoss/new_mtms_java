@@ -13,11 +13,12 @@ import lombok.EqualsAndHashCode;
 import java.math.BigDecimal;
 
 /**
-* ${TODO}
-* @author KING
-* @date 2020/9/9 19:39
-* @version V1.0
-*/
+ * ${TODO}
+ *
+ * @author KING
+ * @date 2020/9/9 19:39
+ * @version V1.0
+ */
 
 /**
  * 生活方式与评估表
@@ -257,6 +258,13 @@ public class Lifestyle extends BaseEntity {
     @TableField(value = "after_twelve_months_treatment_monthly_medical_expenses")
     @ApiModelProperty(value = "就诊12个月后每月药费")
     private BigDecimal afterTwelveMonthsTreatmentMonthlyMedicalExpenses;
+
+    /**
+     * 费用备注
+     */
+    @TableField(value = "treatment_total_remark")
+    @ApiModelProperty(value = "费用备注")
+    private String treatmentTotalRemark;
 
     /**
      * 生活方式 评估报告 总结

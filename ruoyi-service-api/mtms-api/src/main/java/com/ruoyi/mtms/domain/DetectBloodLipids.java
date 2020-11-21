@@ -65,6 +65,11 @@ public class DetectBloodLipids extends BaseEntity {
     private String ldl;
 
     /**
+     * 高密度脂蛋白HDL-C（mmol/L）
+     */
+    private String hdlC;
+
+    /**
      * 甘油三酯TG(mmol/L)
      */
     @TableField(value = "TG")
@@ -79,16 +84,17 @@ public class DetectBloodLipids extends BaseEntity {
     private String lpA;
 
     /**
-     * 高密度脂蛋白HDL-C（mmol/L）
+     * 血尿酸
      */
-    @TableField(value = "HDL_C")
-    @ApiModelProperty(value = "高密度脂蛋白HDL-C（mmol/L）")
-    private String hdlC;
+    @TableField(value = "blood_uric_acid")
+    @ApiModelProperty(value = "血尿酸")
+    private String bloodUricAcid;
 
     /**
-     * 低密度脂蛋白胆固醇
+     * 肌酸激酶CK
      */
-    @TableField(value = "LDL_C")
-    @ApiModelProperty(value = "低密度脂蛋白胆固醇")
-    private String ldlC;
+    @TableField(value = "creatine_kinase")
+    @ApiModelProperty(value = "肌酸激酶CK")
+    private String creatineKinase;
+
 }
