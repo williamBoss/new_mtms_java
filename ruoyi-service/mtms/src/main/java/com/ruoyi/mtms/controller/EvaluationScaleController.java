@@ -146,8 +146,8 @@ public class EvaluationScaleController {
      * @param eq5d3l
      * @return
      */
-    private String calculationEq5d3lScore(Eq5d3l eq5d3l) {
-        double score = 0;
+    private static String calculationEq5d3lScore(Eq5d3l eq5d3l) {
+        float score = 0;
         Integer actionQ = eq5d3l.getActionQ();
         if (actionQ == null) {
             score += 0;
@@ -222,8 +222,8 @@ public class EvaluationScaleController {
      * @param eq5d5l
      * @return
      */
-    private String calculationEq5d5lScore(Eq5d5l eq5d5l) {
-        double score = 0;
+    private static String calculationEq5d5lScore(Eq5d5l eq5d5l) {
+        float score = 0;
         Integer actionQ = eq5d5l.getActionQ();
         if (actionQ == null) {
             score += 0;
