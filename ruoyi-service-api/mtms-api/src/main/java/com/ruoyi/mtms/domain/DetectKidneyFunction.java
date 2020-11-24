@@ -86,11 +86,4 @@ public class DetectKidneyFunction extends BaseEntity {
     @TableField(value = "creatinine_clearance_rate")
     @ApiModelProperty(value = "肌酐清除率（ml/min）")
     private String creatinineClearanceRate;
-
-    /**
-     * 肌酸激酶CK
-     */
-    @TableField(value = "creatine_kinase")
-    @ApiModelProperty(value = "肌酸激酶CK")
-    private String creatineKinase;
 }

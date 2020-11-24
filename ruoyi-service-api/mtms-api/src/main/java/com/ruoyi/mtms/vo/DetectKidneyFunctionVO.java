@@ -59,11 +59,5 @@ public class DetectKidneyFunctionVO {
     @ApiModelProperty(value = "肌酐清除率（ml/min）")
     private String creatinineClearanceRate;
 
-    /**
-     * 肌酸激酶CK
-     */
-    @ApiModelProperty(value = "肌酸激酶CK")
-    private String creatineKinase;
-
 }
 
