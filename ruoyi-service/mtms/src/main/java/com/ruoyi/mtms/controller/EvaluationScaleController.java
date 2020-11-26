@@ -10,6 +10,7 @@ import com.ruoyi.mtms.vo.*;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -40,6 +41,12 @@ public class EvaluationScaleController {
 
     @Autowired
     private Sf36Service sf36Service;
+
+    @Autowired
+    private VasService vasService;
+
+    @Autowired
+    private CapriniService capriniService;
 
     @Autowired
     private Mapper dozerMapper;
@@ -407,6 +414,69 @@ public class EvaluationScaleController {
         parService.remove(queryWrapper);
         parService.save(par);
         return BaseResult.success();
+    }
+
+    @ApiOperation("根据评估id或者患者id VAS查询")
+    @GetMapping("/vas_info")
+    public BaseResult<Vas> getVasInfo(@ApiParam(value = "评估Id") @RequestParam Integer assessmentId,
+        @ApiParam(value = "患者Id") @RequestParam Integer patientId) {
+        LambdaQueryWrapper<Vas> queryWrapper = new LambdaQueryWrapper<>();
+        queryWrapper.eq(Vas::getAssessmentId, assessmentId);
+        queryWrapper.eq(Vas::getPatId, patientId);
+        queryWrapper.eq(Vas::getDelFlag, 0);
+        Vas info = vasService.getOne(queryWrapper);
+        return BaseResult.<Vas>success().data(info);
+    }
+
+    @ApiOperation("保存VAS量表")
+    @PostMapping("/save_vas_info")
+    public BaseResult<Vas> saveVasInfo(@RequestBody Vas vas) {
+        LambdaQueryWrapper<Vas> queryWrapper = new LambdaQueryWrapper<>();
+        queryWrapper.eq(Vas::getAssessmentId, vas.getAssessmentId());
+        vasService.remove(queryWrapper);
+        vasService.save(vas);
+        return BaseResult.success();
+    }
+
+    @ApiOperation("根据评估id或者患者id caprini查询")
+    @GetMapping("/caprini_info")
+    public BaseResult<Caprini> getCapriniInfo(@ApiParam(value = "评估Id") @RequestParam Integer assessmentId,
+        @ApiParam(value = "患者Id") @RequestParam Integer patientId) {
+        LambdaQueryWrapper<Caprini> queryWrapper = new LambdaQueryWrapper<>();
+        queryWrapper.eq(Caprini::getAssessmentId, assessmentId);
+        queryWrapper.eq(Caprini::getPatId, patientId);
+        Caprini info = capriniService.getOne(queryWrapper);
+        info.setCapriniChooseArr(info.getCapriniChoose().split(","));
+        return BaseResult.<Caprini>success().data(info);
+    }
+
+    @ApiOperation("保存caprini量表")
+    @PostMapping("/save_caprini_info")
+    public BaseResult<Caprini> saveCapriniInfo(@RequestBody Caprini caprini) {
+        LambdaQueryWrapper<Caprini> queryWrapper = new LambdaQueryWrapper<>();
+        queryWrapper.eq(Caprini::getAssessmentId, caprini.getAssessmentId());
+        capriniService.remove(queryWrapper);
+        caprini.setCapriniChoose(StringUtils.join(caprini.getCapriniChooseArr(), ","));
+        caprini.setCapriniScore(calculationCapriniScore(caprini));
+        capriniService.save(caprini);
+        return BaseResult.success();
+    }
+
+    private String calculationCapriniScore(Caprini caprini) {
+        int score = 0;
+        for (String choose : caprini.getCapriniChooseArr()) {
+            int v = Integer.parseInt(choose);
+            if (v <= 16) {
+                score += 1;
+            } else if (v <= 24) {
+                score += 2;
+            } else if (v <= 34) {
+                score += 3;
+            } else if (v <= 39) {
+                score += 5;
+            }
+        }
+        return Integer.toString(score);
     }
 
 }
